@@ -1,7 +1,7 @@
 fs = require('fs')
-dom = require("dom-lite")
 _ = require("underscore")
 
+dom = require("./vendor/dom-lite")
 Element = require("./node")
 document = require("./document")
 

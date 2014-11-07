@@ -1,6 +1,6 @@
-dom = require("dom-lite")
 htmlparser = require('htmlparser2')
 
+dom = require("./vendor/dom-lite")
 document = require("./document")
 Node = dom.Node
 

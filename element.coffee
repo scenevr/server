@@ -1,5 +1,5 @@
-dom = require("dom-lite")
 UUID = require("uuid")
+dom = require("./vendor/dom-lite")
 Vector = require("./vector")
 
 Element = dom.HTMLElement

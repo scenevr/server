@@ -1,4 +1,4 @@
-dom = require("dom-lite")
+dom = require("./vendor/dom-lite")
 UUID = require("uuid")
 
 Script = require("./elements/script")

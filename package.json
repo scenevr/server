@@ -1,16 +1,13 @@
 {
-  "name": "packetize",
-  "version": "0.0.0",
+  "name": "scene-server",
+  "version": "0.0.1",
   "dependencies": {
-    "msgpack": "0.2.2",
-    "xmldom": "0.1.19",
-    "xpath": "0.0.6",
     "websocket": "1.0.8",
     "three": "0.66.2",
-    "micro-dom": "0.0.15",
     "uuid": "~2.0.1",
     "color": "~0.7.3",
-    "underscore": "~1.7.0"
+    "underscore": "~1.7.0",
+    "htmlparser2": "~3.8.2"
   },
   "devDependencies": {
     "jasmine-node": "1.14.3"
