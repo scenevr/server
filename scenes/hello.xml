@@ -1,86 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
  
 <scene>
-
-  <box name="my-box" position='0 0 0' rotation='0 1.57 0' scale='20 20 20'>
-
-    <!--script>
-      {
-        tick : function(self){
-          var t = new Date().getTime() / 10000.0
-
-          self.setPosition(new THREE.Vector3(
-            Math.sin(t * 11) * 100,
-            10,
-            Math.cos(t * 7) * 100
-          ));
-        }
-      }
-    </script-->
-  </box>
-
-  <model id="543a" position="16.820506998630677 20 121.71118892299373" rotation="0 -1.5707963267948966 0" scale="40 40 40" src="public/models/homer.js"> 
-
-    <script>
-      {
-        tick : function(self){
-          var t = new Date().getTime() / 10000.0
-
-          self.setPosition(new THREE.Vector3(
-            Math.sin(t * 11) * 100,
-            0,
-            Math.cos(t * 7) * 100
-          ));
-
-          self.setRotation(new THREE.Euler(0,t * 10,0));
-        }
-      }
-    </script>
-
-  </model>
-
-  <!--model position="0 0 0" rotation="0 0 0" scale="40 40 40" src="//localhost:8090/models/model-ef4b.js">
-    <script>
-      {
-        tick : function(self){
-        }
-      }
-    </script>
-  </model-->
-  
-  <box position='50 5 0' rotation='0 10 0' scale='20 20 20' />
-  <box position='100 5 0' rotation='0 20 0' scale='20 20 20' />
-  <box position='150 5 0' rotation='0 30 0' scale='20 20 20'>
-    <script>
-      {
-        tick : function(self){
-          var t = new Date().getTime() / 10000.0 - 500;
-
-          self.setPosition(new THREE.Vector3(
-            Math.sin(t * 13) * 100,
-            10,
-            Math.cos(t * 11) * 100
-          ));
-        }
-      }
-    </script>
-  </box>
-
-  <box position='0 0 0' rotation='0 30 0' scale='20 20 20'>
-
-    <script>
-      {
-        tick : function(self){
-          var t = new Date().getTime() / 10000.0
-
-          self.setPosition(new THREE.Vector3(
-            Math.sin(t * 13) * 100,
-            10,
-            Math.cos(t * 11) * 100
-          ));
-        }
-      }
-    </script>
-
-  </box>
+  <box id="home" color="#ff00aa" position='0 10 0' />
+  <box id="two" color="#0033aa" position='0 20 0' />
+  <script>
+    scene.addEventListener("ready", function(event) {
+      console.log("Color of #home is: " + scene.getElementById("home").getAttribute("color"));
+      // scene.close();
+    });
+  </script>
 </scene>

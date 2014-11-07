@@ -1,14 +1,31 @@
 fs = require('fs')
 dom = require("dom-lite")
+_ = require("underscore")
 
 Element = require("./node")
 document = require("./document")
 
 Scene = dom.HTMLElement
 
-Scene.prototype.addEventListener = (event, callback) ->
-  callback()
-  
+Scene.eventTargets = {}
+
+_.extend Scene.prototype, {
+  addEventListener: (event, callback) ->
+    (Scene.eventTargets[event] ||= []).push callback
+
+  removeEventListener: (event) ->
+    Scene.eventTargets[event] = for e in (Scene.eventTargets[event] || []) when event != e
+      e
+
+  dispatchEvent: (event) ->
+    for handler in Scene.eventTargets[event]
+      handler()
+
+  close: ->
+    console.log "Terminating scene server due to scene#close"
+    process.exit()
+}
+
 Scene.load = (filename, callback) ->
   doc = new Element "document"
   doc.innerXML = fs.readFileSync(filename).toString()
@@ -19,6 +36,8 @@ Scene.load = (filename, callback) ->
   for script in scene.getElementsByTagName("script")
     # lol
     eval(script.textContent)
+
+  scene.dispatchEvent("ready")
 
   callback(scene)
 
