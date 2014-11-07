@@ -6,7 +6,7 @@ WebsocketServer = require './lib/websocket_server'
 class Server
   constructor: (filename, port) ->
     # Load the scene from the supplied filename
-    @scene = new SceneLoader().load(filename)
+    @scene = Scene.load(filename)
 
     # The reflector handles sending updates to the scene to observers
     @reflector = new Reflector(@scene)

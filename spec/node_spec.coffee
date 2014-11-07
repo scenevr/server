@@ -22,7 +22,7 @@ describe 'innerXML', ->
     n.innerXML = "<box id='dave' />"
     n.firstChild.id = 'mary'
     n.firstChild.setAttribute 'class', 'nothing'
-    expect(n.innerXML).toMatch /<box id="mary" class="nothing".+/
+    expect(n.innerXML).toMatch /<box uuid\S+ id="mary" class="nothing".+/
 
 describe 'attributes', ->
   it 'should ignore underscored attributes', ->
@@ -31,4 +31,4 @@ describe 'attributes', ->
     n.firstChild._position = {
       toString: -> "1 2 3"
     }
-    expect(n.innerXML).toMatch /<box position="1 2 3"><.box>/
+    expect(n.innerXML).toMatch /<box uuid\S+ position="1 2 3"><.box>/
