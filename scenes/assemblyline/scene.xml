@@ -8,32 +8,30 @@
 
 <scene>
 
-  <spawn position="0 0 100" rotation="0 1.62 0" />
-
   <script>
     var boxes = [],
-      startPosition = new Vector3(0,0,0),
-      i;
+      startPosition = new Vector(20,0,0);
 
     function addBox(index){
       var el = scene.createElement("box");
 
-      el.setPosition(startPosition.add(new Vector3(0,0,index * 10)));
-      el.setScale(new Vector3(1,1,1));
-      el.setColor("#ccc");
+      el.position = startPosition.add(new Vector3(0,0,index * 10));
+      el.color = "#00ff00";
 
       scene.appendChild(el);
     }
+
+    var i;
 
     for(i=0;i<10;i++){
       addBox(i);
     }
 
-    var speed = 1.0;
+    var speed = 1.0 / 10;
 
     setInterval(function(){
       boxes.forEach(function(box){
-        box.setPosition(box.getPosition().add(0, 0, speed));
+        box.position.z += speed;
       })
     }, 1000 / 10);
 
