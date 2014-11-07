@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+ <!--
+
+    Scene with an animated row of boxes.
+
+-->
+
+<scene>
+
+  <spawn position="0 0 100" rotation="0 1.62 0" />
+
+  <script>
+    var boxes = [],
+      startPosition = new Vector3(0,0,0),
+      i;
+
+    function addBox(index){
+      var el = scene.createElement("box");
+
+      el.setPosition(startPosition.add(new Vector3(0,0,index * 10)));
+      el.setScale(new Vector3(1,1,1));
+      el.setColor("#ccc");
+
+      scene.appendChild(el);
+    }
+
+    for(i=0;i<10;i++){
+      addBox(i);
+    }
+
+    var speed = 1.0;
+
+    setInterval(function(){
+      boxes.forEach(function(box){
+        box.setPosition(box.getPosition().add(0, 0, speed));
+      })
+    }, 1000 / 10);
+
+    setInterval(function(){
+      boxes.unshift().remove();
+      addBox(0);
+    }, 1000 * 2)
+  </script>
+
+</scene>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+<scene>
+  <box id="home" color="#ff00aa" position='0 0 0' />
+  <box id="two" color="#0033aa" position='0 20 0' />
+  <script>
+    document.addEventListener("load", function(event) {
+      console.log("Color of #home is: " + document.getElementById("home").getAttribute("color"));
+    });
+  </script>
+</scene>

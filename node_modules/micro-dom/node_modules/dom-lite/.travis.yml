@@ -1,0 +1,9 @@
+language: node_js
+node_js:
+  - "0.8"
+  - "0.10"
+before_script:
+  - npm install istanbul coveralls
+  - npm install --dev
+script: npm run travis-test
+
