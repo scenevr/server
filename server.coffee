@@ -1,3 +1,4 @@
+_ = require 'underscore'
 
 Reflector = require './lib/reflector'
 WebsocketServer = require './lib/websocket_server'
@@ -5,6 +6,7 @@ Scene = require './scene'
 
 class Server
   constructor: (@filename, @port) ->
+    console.log "Loading '#{@filename}'..."
     Scene.load(@filename, @onLoaded)
 
   onLoaded: (scene) =>
@@ -20,4 +22,4 @@ class Server
     # Set an interval to send world state out to clients
     @reflector.startTicking()
 
-new Server("scenes/hello.xml", 8080)
+new Server(_.last(process.argv), 8080)
