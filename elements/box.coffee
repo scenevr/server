@@ -1,14 +1,15 @@
 Color = require("color")
 Element = require("../element")
 
+# fixme *properly*
+Color.prototype.toString = ->
+  @hexString()
+
 class Box extends Element
   constructor: ->
     super "box"
 
   reflect: true
-
-  things: ->
-    "blah"
 
 Object.defineProperties Box.prototype, {
   color : {
