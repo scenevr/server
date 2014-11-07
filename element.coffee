@@ -31,25 +31,4 @@ Object.defineProperties Element.prototype, {
   }
 }
 
-module.exports = Element # dom.HTMLElement
-
-# class Element extends Element
-#   constructor: ->
-#     @_uuid = UUID.v4()
-#     @_position = new Vector
-
-# Element.prototype.onChanged = ->
-#   @ownerDocument.onChanged(this)
-
-# Element.prototype.setAttribute = (name, value) ->
-#   if name == 'position'
-#     @_position = (new Vector).fromArray(value.split(' ').map(parseFloat))
-#   else
-#     @[name] = "" + value
-
-# console.log 
-#class Element extends Node
-  # constructor: ->
-  #   @_uuid = UUID.v4()
-  #   @_position = new Vector
-  #   super()
+module.exports = Element

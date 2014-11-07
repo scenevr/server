@@ -16,7 +16,7 @@ class Reflector
     packets = []
 
     for element in @scene.childNodes when element.reflect
-      packets << element.outerHTML
+      packets.push element.outerHTML
 
     for observer in @observers
       observer.socket.send(JSON.stringify(packets))
