@@ -6,15 +6,19 @@
 
 <scene>
   <box id="my-box" position='0 0 0' color="#0ff" />
+  <box id="other-box" position='0 0 0' color="#f0f" />
 
   <script>
     scene.addEventListener("ready", function(event) {
       setInterval(function(){
-        var t = new Date().getTime() / 30000.0
+        var t = new Date().getTime() / 10000.0
 
-        scene.getElementById("my-box").position = new Vector(
-          Math.sin(t * 11) * 20, 0.5, Math.cos(t * 7) * 20
+        var v = new Vector(
+          Math.sin(t * 11) * 10, 0, Math.cos(t * 7) * 10
         );
+
+        scene.getElementById("my-box").position = v.setY(0.5);
+        scene.getElementById("other-box").position = v.negate().setY(0.5);
       }, 1000 / 10);
     });
   </script>
