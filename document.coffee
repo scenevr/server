@@ -7,6 +7,9 @@ Box = require("./elements/box")
 document = dom.document
 HTMLElement = dom.HTMLElement
 
+document.markAsDead = (uuid) ->
+  @deadNodes[uuid] = (new Date).valueOf()
+
 document.createElement = (tag) ->
   if tag == "script"
     node = new Script
@@ -25,6 +28,7 @@ document.createElement = (tag) ->
 
   node
 
+document.deadNodes = {}
 document.nodeMap = {}
 
 module.exports = document

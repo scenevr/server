@@ -121,8 +121,13 @@ Node.prototype = {
     , index = self.childNodes.indexOf(el)
     if (index == -1) throw new Error("NOT_FOUND_ERR")
 
+    if(el.reflect){
+      self.ownerDocument.markAsDead(el.uuid);
+    }
+
     self.childNodes.splice(index, 1)
     el.parentNode = null
+
     return el
   },
   replaceChild: function(el, ref) {

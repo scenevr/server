@@ -2,8 +2,9 @@ UUID = require("uuid")
 dom = require("./vendor/dom-lite")
 Vector = require("./vector")
 
-Element = dom.HTMLElement
-
+class Element extends dom.HTMLElement
+  removeChild: ->
+    
 Object.defineProperties Element.prototype, {
   uuid : {
     get: -> @_uuid

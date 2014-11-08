@@ -20,11 +20,10 @@
         el.color = "#00ff00";
 
         scene.appendChild(el);
-
         boxes.push(el);
       }
 
-      var speed = 10.0 / 10;
+      var speed = 5.0 / 10;
 
       setInterval(function(){
         boxes.forEach(function(box){
@@ -33,7 +32,7 @@
       }, 1000 / 10);
 
       setInterval(function(){
-        if(boxes.length>10){
+        if(boxes.length>9){
           var box = boxes.shift();
           box.parentNode.removeChild(box);
         }

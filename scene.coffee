@@ -24,7 +24,7 @@ _.extend Scene.prototype, {
 
   createElement: (tag) ->
     document.createElement tag
-    
+
   close: ->
     console.log "Terminating scene server due to scene#close"
     process.exit()
