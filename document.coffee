@@ -16,9 +16,12 @@ document.createElement = (tag) ->
     node = new HTMLElement(tag)
   
   # Fixme - use less bits
-  node.uuid = UUID.v4()
+
+  if node.reflect
+    node.uuid = UUID.v4()
+    @nodeMap[node.uuid] = node
+
   node.ownerDocument = this
-  this.nodeMap[node.uuid] = node
 
   node
 

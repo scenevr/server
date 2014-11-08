@@ -18,9 +18,13 @@ _.extend Scene.prototype, {
       e
 
   dispatchEvent: (event) ->
-    for handler in Scene.eventTargets[event]
-      handler()
+    if Scene.eventTargets[event]
+      for handler in Scene.eventTargets[event]
+        handler()
 
+  createElement: (tag) ->
+    document.createElement tag
+    
   close: ->
     console.log "Terminating scene server due to scene#close"
     process.exit()

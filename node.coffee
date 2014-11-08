@@ -8,7 +8,7 @@ Script = require("./elements/script")
 
 addChildren = (root, nodes) ->
   for node in nodes
-    # console.log node.type, node.name
+    # console.log node.type, node.data
     if node.type == 'text'
       el = document.createTextNode(node.data)
     else if node.type == 'comment'
