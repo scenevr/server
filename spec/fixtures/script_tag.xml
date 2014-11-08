@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+<scene>
+  <!-- hello this is a comment -->
+
+  <script>
+    function test(){
+      if(10 < 20){
+        console.log("Success");
+      }
+    }
+  </script>
+</scene>

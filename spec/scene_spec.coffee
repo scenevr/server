@@ -9,8 +9,8 @@ describe 'constructor', ->
     expect(s instanceof Scene).toBeTruthy()
     expect(s.nodeName).toEqual 'scene'
 
-describe 'element', ->
-  it 'should create', ->
+describe 'scene', ->
+  it 'should load scene', ->
     Scene.load process.cwd() + '/spec/fixtures/hello.xml', (scene) ->
       expect(scene.childNodes.length).toEqual(7)
 
@@ -22,3 +22,12 @@ describe 'element', ->
 
       script = scene.childNodes[5]
       expect(script instanceof Script).toBeTruthy()
+
+  it 'should load scene with <script /> tags', ->
+    Scene.load process.cwd() + '/spec/fixtures/script_tag.xml', (scene) ->
+      expect(scene.childNodes.length).toEqual(5)
+
+      script = scene.childNodes[3]
+      expect(script instanceof Script).toBeTruthy()
+      expect(script.textContent).toMatch /10 < 20/
+
