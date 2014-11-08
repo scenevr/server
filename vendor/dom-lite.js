@@ -41,6 +41,8 @@ Node.prototype = {
   parentNode:      null,
   ownerDocument:   null,
   childNodes:      null,
+  eventTargets:    null,
+
   get textContent() {
     return this.hasChildNodes() ? this.childNodes.map(function(child){
       return child[ child.nodeType == 3 ? "data" : "textContent" ]

@@ -25,6 +25,7 @@ document.createElement = (tag) ->
     @nodeMap[node.uuid] = node
 
   node.ownerDocument = this
+  node.eventTargets = {}
 
   node
 

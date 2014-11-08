@@ -7,27 +7,22 @@ document = require("./document")
 
 Scene = dom.HTMLElement
 
-Scene.eventTargets = {}
-
+# fixme - these are added to all instances of htmlelement, not just the Scene
 _.extend Scene.prototype, {
   addEventListener: (event, callback) ->
-    (Scene.eventTargets[event] ||= []).push callback
+    (@eventTargets[event] ||= []).push callback
 
   removeEventListener: (event) ->
-    Scene.eventTargets[event] = for e in (Scene.eventTargets[event] || []) when event != e
+    @eventTargets[event] = for e in (@eventTargets[event] || []) when event != e
       e
 
   dispatchEvent: (event) ->
-    if Scene.eventTargets[event]
-      for handler in Scene.eventTargets[event]
+    if @eventTargets[event]
+      for handler in @eventTargets[event]
         handler()
 
   createElement: (tag) ->
     document.createElement tag
-
-  close: ->
-    console.log "Terminating scene server due to scene#close"
-    process.exit()
 }
 
 Scene.load = (filename, callback) ->
