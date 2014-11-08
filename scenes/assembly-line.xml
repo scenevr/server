@@ -13,11 +13,15 @@
       var boxes = [],
         startPosition = new Vector(0,0,0);
 
+      function randomColor(){
+        return '#' + (0x100000 + ~~(Math.random() * 0xEFFFFF)).toString(16);
+      }
+
       function addBox(index){
         var el = scene.createElement("box");
 
         el.position = new Vector(0,0.5,-index * 5).add(startPosition);
-        el.color = "#00ff00";
+        el.color = randomColor();
 
         scene.appendChild(el);
         boxes.push(el);
