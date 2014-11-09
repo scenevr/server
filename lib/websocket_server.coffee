@@ -36,8 +36,8 @@ class WebsocketServer
     @reflector.addObserver(observer)
 
     connection.on "message", (message) =>
-      if message.type != "utf8"
-        observer.recieveMessage(JSON.parse(packets))
+      if message.type is "utf8"
+        observer.recieveMessage(message.utf8Data)
 
     connection.on "close", (reasonCode, description) =>
       debug "Peer " + connection.remoteAddress + " disconnected."

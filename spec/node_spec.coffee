@@ -1,4 +1,5 @@
 Node = require('../node')
+HTMLElement = require("../vendor/dom-lite").HTMLElement
 
 describe 'constructor', ->
   it 'should create', ->
@@ -32,3 +33,12 @@ describe 'attributes', ->
       toString: -> "1 2 3"
     }
     expect(n.innerXML).toMatch /<box uuid\S+ position="1 2 3"><.box>/
+
+describe 'packetParser', ->
+  it 'should parse packets', ->
+    n = Node.packetParser "<packet><event name='boop' /><player position='1 2 3' /></packet>"
+    expect(n instanceof HTMLElement).toBeTruthy()
+    expect(n.nodeName).toEqual("packet")
+    expect(n.childNodes.length).toEqual(2)
+    expect(n.firstChild.nodeName).toEqual('event')
+    expect(n.firstChild.getAttribute('name')).toEqual('boop')

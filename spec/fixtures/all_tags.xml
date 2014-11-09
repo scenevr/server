@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+<scene>
+  <spawn position="10 10 10" />
+  <box id="home" color="#ff00aa" position='0 10 0' />
+  <script>
+    scene.addEventListener("ready", function(event) {
+      console.log("Hello world");
+    });
+  </script>
+</scene>
