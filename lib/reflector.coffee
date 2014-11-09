@@ -28,7 +28,7 @@ class Reflector
         delete @scene.ownerDocument.deadNodes[uuid]
 
     for observer in @observers
-      observer.socket.send(JSON.stringify(packets))
+      observer.socket.send("<packet>" + packets.join("\n") + "</packet>")
 
     null
 

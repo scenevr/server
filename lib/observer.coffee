@@ -19,4 +19,7 @@ class Observer
     console.log "Recieved message..."
     console.log "  " + JSON.stringify(packets)
 
+  sendMessage: (xml) ->
+    @socket.send("<packet>#{xml}</packet>")
+
 module.exports = Observer
