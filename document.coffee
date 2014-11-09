@@ -3,6 +3,7 @@ UUID = require("uuid")
 
 Script = require("./elements/script")
 Box = require("./elements/box")
+Spawn = require("./elements/spawn")
 
 document = dom.document
 HTMLElement = dom.HTMLElement
@@ -15,10 +16,12 @@ document.createElement = (tag) ->
     node = new Script
   else if tag == "box"
     node = new Box
+  else if tag == "spawn"
+    node = new Spawn
   else
     node = new HTMLElement(tag)
   
-  # Fixme - use less bits
+  # Fixme - use less bits (maybe an autoincrementing counter?)
 
   if node.reflect
     node.uuid = UUID.v4()

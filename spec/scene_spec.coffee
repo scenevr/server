@@ -2,6 +2,7 @@ Scene = require('../scene.coffee')
 
 Script = require('../elements/script.coffee')
 Box = require('../elements/box.coffee')
+Spawn = require('../elements/spawn.coffee')
 
 describe 'constructor', ->
   it 'should create', ->
@@ -30,4 +31,13 @@ describe 'scene', ->
       script = scene.childNodes[3]
       expect(script instanceof Script).toBeTruthy()
       expect(script.textContent).toMatch /10 < 20/
+
+
+describe 'all_tags', ->
+  it 'should load', ->
+    Scene.load process.cwd() + '/spec/fixtures/all_tags.xml', (scene) ->
+      expect(scene.childNodes.length).toBeGreaterThan 3
+
+      expect(scene.getElementsByTagName("spawn").length).toEqual 1
+      expect(scene.getElementsByTagName("spawn")[0] instanceof Spawn).toBeTruthy()
 

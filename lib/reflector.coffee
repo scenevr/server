@@ -5,6 +5,9 @@ class Reflector
   addObserver: (o) ->
     @observers.push(o)
 
+    o.player = @scene.createElement "player"
+    o.sendMessage "<event name=\"ready\" uuid=\"#{o.player.uuid}\" />"
+
   removeObserver: (o) ->
     @observers = for observer in @observers when observer != o
       observer
