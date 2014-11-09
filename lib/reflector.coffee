@@ -6,9 +6,14 @@ class Reflector
     @observers.push(o)
 
     o.player = @scene.createElement "player"
+    @scene.appendChild(o.player)
+
     o.sendMessage "<event name=\"ready\" uuid=\"#{o.player.uuid}\" />"
 
   removeObserver: (o) ->
+    if o.player
+      @scene.removeChild o.player
+
     @observers = for observer in @observers when observer != o
       observer
 
@@ -29,6 +34,8 @@ class Reflector
       # Remove tombstones more than 2 seconds old
       if(timestamp < now - 2 * 1000)
         delete @scene.ownerDocument.deadNodes[uuid]
+
+    # console.log "<packet>" + packets.join("\n") + "</packet>"
 
     for observer in @observers
       observer.socket.send("<packet>" + packets.join("\n") + "</packet>")

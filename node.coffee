@@ -60,7 +60,6 @@ Node.packetParser = (xml) ->
       throw err
 
     for node in nodes
-      console.log node.name
       el = new HTMLElement(node.name.toLowerCase())
       addChildren(el, node.children)
   ), { xmlMode : true })
