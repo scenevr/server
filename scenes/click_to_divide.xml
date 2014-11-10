@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+  A box that sub divides when you click it.
+-->
+
+<scene>
+  <spawn position="0 0 10" />
+  <box id="scaredy" color="#ff00aa" position='0 0.5 0' />
+  <script>
+    function addHandler(el){
+      el.addEventListener("click", function(e){
+        var vector = e.player.position.clone().sub(el.position).normalize();
+        vector.setY(0);
+
+        var sidewaysVector = vector.clone();
+        sidewaysVector.applyAxisAngle(new Vector(0,1,0), Math.PI / 2).multiplyScalar(2.0);
+
+        vector.multiplyScalar(-5.0);
+
+        var newEl = document.createElement("box");
+        newEl.position = el.position;
+        newEl.color = "#ff00aa";
+        scene.appendChild(newEl);
+        addHandler(newEl);
+
+        el.position.add(vector).add(sidewaysVector);
+        newEl.position.add(vector).sub(sidewaysVector);
+      });
+    }
+
+    scene.addEventListener("ready", function(event) {
+      addHandler(scene.getElementById("scaredy"));
+    });
+  </script>
+</scene>

@@ -1,3 +1,5 @@
+Quaternion = require("three").Quaternion
+
 /**
  * @author mrdoob / http://mrdoob.com/
  * @author *kile / http://kile.stravaganza.org/
