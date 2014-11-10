@@ -1,4 +1,6 @@
 Node = require("../node")
+Vector = require("../vector.js")
+document = require("../document")
 
 class Observer
   constructor: (@socket, @reflector) ->
@@ -14,6 +16,18 @@ class Observer
     for element in Node.packetParser(xml).childNodes
       if element.nodeName == "player"
         @player.position = element.getAttribute("position")
+      else if element.nodeName == "event"
+        if element.getAttribute("name") == "click"
+          document.getElementByUUID(element.getAttribute("uuid")).dispatchEvent 'click', {
+            player : @player
+            point : Vector.fromString(element.getAttribute("point"))
+          }
+        else
+          console.log "Unrecognized event element"
+          console.log "  " + element.toString()
+      else
+        console.log "Unrecognized packet element"
+        console.log "  " + element.toString()
 
   sendMessage: (xml) ->
     @socket.send("<packet>#{xml}</packet>")

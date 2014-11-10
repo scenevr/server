@@ -11,6 +11,10 @@ HTMLElement = dom.HTMLElement
 
 document.markAsDead = (uuid) ->
   @deadNodes[uuid] = (new Date).valueOf()
+  delete @nodeMap[uuid]
+
+document.getElementByUUID = (uuid) ->
+  @nodeMap[uuid]
 
 document.createElement = (tag) ->
   if tag == "script"

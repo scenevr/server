@@ -16,10 +16,10 @@ _.extend Scene.prototype, {
     @eventTargets[event] = for e in (@eventTargets[event] || []) when event != e
       e
 
-  dispatchEvent: (event) ->
+  dispatchEvent: (event, arg) ->
     if @eventTargets[event]
       for handler in @eventTargets[event]
-        handler()
+        handler(arg)
 
   createElement: (tag) ->
     document.createElement tag
