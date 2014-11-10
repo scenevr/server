@@ -8,6 +8,8 @@
 
 <scene>
 
+  <spawn position="10 0 0" />
+  
   <script>
     scene.addEventListener("ready", function(event) {
       var boxes = [],

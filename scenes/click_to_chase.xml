@@ -5,8 +5,8 @@
 -->
 
 <scene>
-  <spawn position="0 0 -10" />
-  <box id="scaredy" color="#ff00aa" position='0.5 0.5 -10.5' />
+  <spawn position="0 0 10" />
+  <box id="scaredy" color="#ff00aa" position='0 0.5 0' />
   <script>
     scene.addEventListener("ready", function(event) {
       var el = scene.getElementById("scaredy");
