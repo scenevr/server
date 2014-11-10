@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
  
 <scene>
+  <spawn position="5 0 10" />
   <box id="home" color="#ff00aa" position='0.5 0.5 -10.5' />
   <box id="two" color="#0033aa" position='0.5 0.5 -20.5' />
-
-  <spawn position="5 0 10" />
-
   <script>
     function randomColor(){
       return (0x100000 + ~~(Math.random() * 0xEFFFFF)).toString(16);
