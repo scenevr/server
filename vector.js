@@ -45,6 +45,16 @@ Vector = function ( x, y, z ) {
 
 };
 
+Vector.fromString = function(value){
+  var v = (new Vector).fromArray(value.split(' ').map(parseFloat));
+
+  if(!isFinite(v.length())){
+    throw "Invalid argument";
+  }
+
+  return v;
+}
+
 Vector.prototype = {
 
   constructor: Vector,

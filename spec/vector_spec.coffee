@@ -21,3 +21,7 @@ describe 'vector', ->
     v.x += 100
     expect(v.onChanged).toHaveBeenCalled()
 
+
+  it 'should parse', ->
+    v = Vector.fromString("1 2 3")
+    expect(v.z).toEqual(3)
