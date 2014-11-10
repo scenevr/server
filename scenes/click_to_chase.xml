@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+  A box that runs away from you when you click on it.
+-->
+
+<scene>
+  <spawn position="0 0 -10" />
+  <box id="scaredy" color="#ff00aa" position='0.5 0.5 -10.5' />
+  <script>
+    scene.addEventListener("ready", function(event) {
+      var el = scene.getElementById("scaredy");
+
+      el.addEventListener("click", function(e){
+        var vector = e.player.position.clone().sub(el.position).normalize().multiplyScalar(-5.0);
+        vector.setY(0);
+        el.position.add(vector);
+      });
+    });
+  </script>
+</scene>
