@@ -18,7 +18,7 @@ class Reflector
       observer
 
   startTicking: ->
-    setInterval(@tick, 1000 / 2)
+    setInterval(@tick, 1000 / 5)
 
   tick: =>
     packets = []
