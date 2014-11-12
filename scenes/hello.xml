@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
  
 <scene>
+  <spawn position="0 0 0" />
   <box id="home" color="#ff00aa" position='0.5 0.5 -10.5' />
-  <box id="two" color="#0033aa" position='0.5 0.5 -20.5' />
+  <box id="two" color="#00aaff" position='0.5 0.5 -20.5' />
+
+  <billboard position="0 1 3">
+    <![CDATA[
+      <h1>Welcome to scenevr...</h1>
+
+      <p>
+        There are two boxes for you to enjoy. One is pink and one is aqua.
+      </p>
+    ]]>
+  </billboard>
 
   <script>
     scene.addEventListener("ready", function(event) {
       console.log("Color of #home is: " + scene.getElementById("home").getAttribute("color"));
-      // scene.close();
     });
   </script>
 </scene>

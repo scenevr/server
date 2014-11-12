@@ -38,6 +38,14 @@ describe 'all_tags', ->
     Scene.load process.cwd() + '/spec/fixtures/all_tags.xml', (scene) ->
       expect(scene.childNodes.length).toBeGreaterThan 3
 
+  it 'should parse spawn', ->
+    Scene.load process.cwd() + '/spec/fixtures/all_tags.xml', (scene) ->
       expect(scene.getElementsByTagName("spawn").length).toEqual 1
       expect(scene.getElementsByTagName("spawn")[0] instanceof Spawn).toBeTruthy()
+
+  it 'should parse billboard', ->
+    Scene.load process.cwd() + '/spec/fixtures/all_tags.xml', (scene) ->
+      expect(scene.getElementsByTagName("billboard").length).toEqual 1
+      expect(scene.getElementsByTagName("billboard")[0].innerHTML).toMatch /<h1>Welcome/
+      expect(scene.getElementsByTagName("billboard")[0].innerHTML).toMatch /stuff and things/
 

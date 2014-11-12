@@ -15,8 +15,11 @@ Object.defineProperty Node.prototype, 'innerXML', {
     addChildren = (root, nodes) ->
       for node in nodes
         # console.log node.type, node.data
+
         if node.type == 'text'
           el = document.createTextNode(node.data)
+        else if node.type == 'cdata'
+          el = document.createTextNode(node.children[0].data)
         else if node.type == 'comment'
           el = document.createComment(node.data)
         else if node.type == 'tag' || node.type == "script"

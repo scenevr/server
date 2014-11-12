@@ -5,6 +5,7 @@ Script = require("./elements/script")
 Box = require("./elements/box")
 Spawn = require("./elements/spawn")
 Player = require("./elements/player")
+Billboard = require("./elements/billboard")
 
 document = dom.document
 HTMLElement = dom.HTMLElement
@@ -23,6 +24,8 @@ document.createElement = (tag) ->
     node = new Box
   else if tag == "player"
     node = new Player
+  else if tag == "billboard"
+    node = new Billboard
   else if tag == "spawn"
     node = new Spawn
   else

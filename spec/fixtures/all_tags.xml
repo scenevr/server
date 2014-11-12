@@ -5,7 +5,16 @@
   <box id="home" color="#ff00aa" position='0 10 0' />
   <script>
     scene.addEventListener("ready", function(event) {
-      console.log("Hello world");
+      "Hello world";
     });
   </script>
+  <billboard>
+    <![CDATA[
+      <h1>Welcome to scenevr</h1>
+
+      <p>
+        This is stuff and things.
+      </p>
+    ]]>
+  </billboard>
 </scene>
