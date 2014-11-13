@@ -30,7 +30,11 @@ class WebsocketServer
 
   onRequest: (request) =>
     # todo - check request.origin maybe?
-    connection = request.accept("scenevr", request.origin)
+    try
+      connection = request.accept("scenevr", request.origin)
+    catch 
+      # doesnt want scenevr - drop the client
+      return
     
     observer = new Observer(connection, @reflector)
     @reflector.addObserver(observer)
