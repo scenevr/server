@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+<scene>
+  <spawn position="0 0 0" />
+  <box id="orange" color="#f70" position='0.5 0.5 -5' />
+  <box id="pink" color="#f0a" position='-0.5 0.5 -10' />
+
+  <billboard position="0 1 2.5">
+    <![CDATA[
+      <h1>The Challenge</h1>
+
+      <p>
+        Click the <span style="color:#f70">orange</span> box, then the  <span style="color: #f0a">pink</span>
+        box, to unveil a message.
+      </p>
+    ]]>
+  </billboard>
+
+  <script>
+    scene.addEventListener("ready", function(event) {
+      var clicks = {};
+
+      scene.getElementById("orange").addEventListener("click", function(){
+        clicks['orange'] = true;
+        if(Object.keys(clicks).length == 2){
+          showResult()
+        }
+      });
+
+      scene.getElementById("pink").addEventListener("click", function(){
+        clicks['pink'] = true;
+        if(Object.keys(clicks).length == 2){
+          showResult()
+        }
+      });
+
+      var b;
+
+      function showResult(){
+        if(!b){
+          b = document.createElement("billboard");
+          b.position = "0 1 -15";
+          b.innerXML = "Congratulations you pressed both the boxes! :)";
+          scene.appendChild(b);
+
+          setTimeout(function(){
+            scene.removeChild(b);
+            b = null;
+            clicks= {};
+          }, 5000);
+        }
+      }
+    });
+  </script>
+</scene>
