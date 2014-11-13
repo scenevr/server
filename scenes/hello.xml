@@ -10,8 +10,15 @@
       <h1>Welcome to scenevr...</h1>
 
       <p>
-        There are two boxes for you to enjoy. One is pink and one is aqua.
+        There are two boxes for you to enjoy. One is <span style="color:#f0a">pink</span> and one is <span style="color: #0af">aqua</span>.
       </p>
+
+      <center>
+        Enjoy 
+        <span style="background: #333; padding: 5px; display: inline-block; color: #f70">VR</span>
+        !
+      </center>
+
     ]]>
   </billboard>
 

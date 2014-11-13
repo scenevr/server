@@ -12,7 +12,7 @@
       var el = scene.getElementById("scaredy");
 
       el.addEventListener("click", function(e){
-        var vector = e.player.position.clone().sub(el.position).normalize().multiplyScalar(-5.0);
+        var vector = e.player.position.clone().sub(el.position).normalize().multiplyScalar(-1.0);
         vector.setY(0);
         el.position.add(vector);
       });
