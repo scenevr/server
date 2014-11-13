@@ -1,6 +1,7 @@
 @charset "utf-8";
 
 $width: 920px;
+$radius: 2px;
 
 html,body{
   margin: 0;
@@ -8,7 +9,7 @@ html,body{
 }
 
 body {
-  background: #eee;
+  background: #111;
   font-family: sans-serif;
   font-size: 0.9em;
   color: #555;
@@ -16,8 +17,14 @@ body {
 
 h1,h2,h3,h4,h5{
   font-family: 'helvetica neue', sans-serif;
-  font-weight: bold;
-  color: #333;
+  font-weight: 200;
+  color: #fff;
+  margin: 1.2em 0;
+  text-shadow: 1px 1px 1px black;
+}
+
+a{
+  color: #f70;
 }
 
 *{
@@ -25,8 +32,19 @@ h1,h2,h3,h4,h5{
 }
 
 header{
-  background: linear-gradient(#555, #666);
+  background: linear-gradient(darken(#333, 5%), #333);
   box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+
+  a{
+    background: #222;
+    border-radius: 3px;
+    color: #f70;
+    text-shadow: 0 0 2px darken(#f70, 20%);
+    padding: 5px;
+    font-size: 18px;
+    text-decoration: none;
+    margin-right: 5px;
+  }
 
   h3{
     color: white;
@@ -34,14 +52,23 @@ header{
     margin: 0 auto;
     max-width: $width;
     padding: 10px 0;
+    font-size: 14px;
+    font-weight: normal;
   }
+}
+
+code{
+  color: #f70;
+  font-family: Monaco, monospace;
+  font-size: 0.9em;
 }
 
 pre{
   font-size: 0.9em;
   margin: 10px 10px 10px 10px;
   padding: 10px;
-  background: #ffc;
+  background: #181818;
+  border-radius: $radius;
 }
 
 h1{
@@ -54,8 +81,12 @@ h2{
 
 .wrapper{
   max-width: $width;
+  border-radius: $radius;
+  line-height: 150%;
+  min-height: 640px;
   border-radius: 2px;
-  background: white;
+  background: #222;
+  color: #aaa;
   box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
   margin: 0 auto 40px auto;
   padding: 0 20px;
@@ -79,7 +110,7 @@ h2{
   }
 
   ul{
-    border-top: 1px solid #999;
+    border-top: 1px solid #555;
   }
 
   li{
@@ -88,9 +119,9 @@ h2{
 
     a{
       display: block;
-      border-bottom: 1px solid #999;
+      border-bottom: 1px solid #555;
       text-decoration: none;
-      color: #333;
+      color: #f70;
       padding: 0 5px;
       line-height: 30px;
     }

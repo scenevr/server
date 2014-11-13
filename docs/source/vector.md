@@ -17,13 +17,13 @@ You can act on Vector components directly:
 
     box.position.x += 10.5;
 
-When setting a vector attribute on an element, we clone the vector. This means if you work on your original copy the changes will be ignored. eg:
+When setting a vector attribute on an element, we clone the vector. This means if you work on your original copy the changes will be ignored. eg this won't work:
 
     v = new Vector(1,2,3)
     box.position = v;
     v.x += 10.5;
 
-In the above case, the `box.position.x` will not be altered. Instead do this:
+Instead do this:
 
     v = new Vector(1,2,3)
     box.position = v;

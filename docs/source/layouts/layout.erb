@@ -16,7 +16,8 @@
   <body class="<%= page_classes %>">
     <header>
       <h3>
-        Scene-server documentation
+        <a href="//scenevr.com" class="logo">VR</a>
+        SceneVR documentation
       </h3>
     </header>
 
@@ -25,6 +26,8 @@
         <h3>Navigation</h3>
         
         <ul>
+          <li><a href="/">Home</a></li>
+          
       <% sitemap.where(:primary_navigation => true).order_by(:title).all.each do |resource| %>
           <li<% if resource.url == current_page.url %> class="active"<% end %>>
               <%= link_to resource.metadata[:page]["title"], resource.url %>

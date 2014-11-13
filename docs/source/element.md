@@ -5,7 +5,7 @@ primary_navigation: true
 
 # Element
 
-An Element is the base class for 3d objects in the scene. You can't instantiate an element directly. Element inherits from node. Elements can be nested inside each other, but none of the current primitives support that.
+An Element is the base class for 3d objects in the scene. You can't instantiate an element directly, instead use `document.createElement(tagName)`. Element inherits from node. Elements can be nested inside each other, but none of the current primitives support that.
 
 # Sample XML
 
