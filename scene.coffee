@@ -29,8 +29,9 @@ Scene.load = (filename, callback) ->
   doc = new Element "document"
   doc.innerXML = fs.readFileSync(filename).toString()
 
-  # Fixme - find the <scene /> node
-  scene = doc.lastChild
+  for node in doc.childNodes
+    if node.nodeName == 'scene'
+      scene = node
 
   for script in scene.getElementsByTagName("script")
     # lol
