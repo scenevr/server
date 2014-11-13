@@ -1,7 +1,7 @@
 {
-  "name": "scene-server",
+  "name": "scenevr",
   "description" : "Create multiuser 3d environments using html-like tags and javascript",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "dependencies": {
     "websocket": "1.0.8",
     "three": "0.66.2",
