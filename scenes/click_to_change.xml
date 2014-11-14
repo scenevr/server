@@ -1,9 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
  
 <scene>
-  <spawn position="5 0 10" />
-  <box id="one" color="#ff00aa" position='0.5 0.5 -10.5' />
-  <box id="two" color="#0033aa" position='0.5 0.5 -20.5' />
+  <spawn position="2 0 5" />
+  <box id="one" color="#ff00aa" position='0.5 0.5 -5.5' />
+  <box id="two" color="#0033aa" position='0.5 0.5 -10.5' />
+
+  <billboard id="bill" position="-2 1 0">
+    <![CDATA[
+      <center style="line-height: 256px; font-size: 30px; color: #555;">
+        Click to remove.
+      </center>
+    ]]>
+  </billboard>
+
   <script>
     function randomColor(){
       return '#' + (0x100000 + ~~(Math.random() * 0xEFFFFF)).toString(16);
@@ -18,6 +27,10 @@
     scene.addEventListener("ready", function(event) {
       changeOnClick(scene.getElementById("one"));
       changeOnClick(scene.getElementById("two"));
+
+      scene.getElementById("bill").addEventListener("click", function(e){
+        scene.removeChild(scene.getElementById("bill"));
+      });
     });
   </script>
 </scene>
