@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+<scene>
+  <spawn position="0 0 5" />
+
+  <billboard position="-2 1 0">
+    <![CDATA[
+      <center style="color: #777; font-size: 10px; padding: 2px; margin: 0;">
+        <img src="/images/storm.jpg" style="width: 100%" />
+        <br /><br /><br />Gods Eraser
+      </center>
+    ]]>
+  </billboard>
+
+  <billboard position="-2 1 -4">
+    <![CDATA[
+      <center style="color: #777; font-size: 10px; padding: 2px; margin: 0;">
+        <img src="/images/montana.jpg" style="width: 100%" />
+        <br /><br /><br />Glacier National Park, Montana
+      </center>
+    ]]>
+  </billboard>
+
+</scene>
