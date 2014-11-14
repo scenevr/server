@@ -1,6 +1,6 @@
 {
   "name": "scenevr",
-  "description" : "Create multiuser 3d environments using html-like tags and javascript",
+  "description": "Create multiuser 3d environments using html-like tags and javascript",
   "version": "0.0.5",
   "dependencies": {
     "websocket": "1.0.8",
@@ -8,7 +8,9 @@
     "uuid": "~2.0.1",
     "color": "~0.7.3",
     "underscore": "~1.7.0",
-    "htmlparser2": "~3.8.2"
+    "htmlparser2": "~3.8.2",
+    "express": "~4.10.2",
+    "cors": "~2.5.2"
   },
   "devDependencies": {
     "jasmine-node": "1.14.3"
