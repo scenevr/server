@@ -28,9 +28,11 @@ class Reflector
     clearInterval(@interval)
 
     for ob in @observers
+      ob.socket.close()
       @removeObserver(ob)
       ob.player = null
-      ob.socket.close()
+
+    @observers = []
 
   tick: =>
     packets = []
