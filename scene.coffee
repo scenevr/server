@@ -23,6 +23,10 @@ _.extend Scene.prototype, {
 
   createElement: (tag) ->
     document.createElement tag
+
+  stop: ->
+    # todo - kill any running scripts (use domains?)
+    @childNodes = []
 }
 
 Scene.load = (filename, callback) ->

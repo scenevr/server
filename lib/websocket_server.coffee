@@ -29,6 +29,8 @@ class WebsocketServer
     @wsServer.on "request", @onRequest
 
   onRequest: (request) =>
+    return unless @reflector
+    
     # todo - check request.origin maybe?
     try
       connection = request.accept("scenevr", request.origin)

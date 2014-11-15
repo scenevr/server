@@ -2,6 +2,10 @@ class Reflector
   constructor: (@scene) ->
     @observers = []
 
+  sendAll: (xmlElement) ->
+    for observer in @observers
+      observer.socket.send("<packet>" + xmlElement + "</packet>")
+
   addObserver: (o) ->
     @observers.push(o)
 
@@ -18,7 +22,15 @@ class Reflector
       observer
 
   startTicking: ->
-    setInterval(@tick, 1000 / 5)
+    @interval = setInterval(@tick, 1000 / 5)
+
+  stop: ->
+    clearInterval(@interval)
+
+    for ob in @observers
+      @removeObserver(ob)
+      ob.player = null
+      ob.socket.close()
 
   tick: =>
     packets = []
