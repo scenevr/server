@@ -18,4 +18,6 @@
       </p>
     ]]>
   </billboard>
+  <!-- Link to next scene -->
+  <link href="/test.xml" position="3 4 5" />
 </scene>

@@ -4,6 +4,7 @@ Script = require('../elements/script.coffee')
 Box = require('../elements/box.coffee')
 Spawn = require('../elements/spawn.coffee')
 Model = require('../elements/model.coffee')
+Link = require('../elements/link.coffee')
 
 describe 'constructor', ->
   it 'should create', ->
@@ -55,4 +56,10 @@ describe 'all_tags', ->
       expect(scene.getElementsByTagName("model").length).toEqual 1
       expect(scene.getElementsByTagName("model")[0].src).toMatch /blah.obj/
       expect(scene.getElementsByTagName("model")[0] instanceof Model).toBeTruthy()
+
+  it 'should parse link', ->
+    Scene.load process.cwd() + '/spec/fixtures/all_tags.xml', (scene) ->
+      expect(scene.getElementsByTagName("link").length).toEqual 1
+      expect(scene.getElementsByTagName("link")[0].href).toMatch /test/
+      expect(scene.getElementsByTagName("link")[0] instanceof Link).toBeTruthy()
 

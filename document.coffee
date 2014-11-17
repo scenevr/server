@@ -7,6 +7,7 @@ Spawn = require("./elements/spawn")
 Player = require("./elements/player")
 Billboard = require("./elements/billboard")
 Model = require("./elements/model")
+Link = require("./elements/link")
 
 document = dom.document
 HTMLElement = dom.HTMLElement
@@ -27,6 +28,8 @@ document.createElement = (tag) ->
     node = new Player
   else if tag == "billboard"
     node = new Billboard
+  else if tag == "link"
+    node = new Link
   else if tag == "model"
     node = new Model
   else if tag == "spawn"
