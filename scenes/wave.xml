@@ -8,7 +8,7 @@
 
 <scene>
 
-  <spawn position="10 0 0" />
+  <spawn position="-5 0 0" />
   
   <script>
     scene.addEventListener("ready", function(event) {
@@ -19,7 +19,7 @@
         var el = scene.createElement("box");
 
         el.position = new Vector(0,0.5,-index * 2).add(startPosition);
-        el.color = "#f0a";
+        el.color = "#f70";
 
         scene.appendChild(el);
         boxes.push(el);

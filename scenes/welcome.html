@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+ 
+<scene>
+  <spawn position="0 0 10" />
+
+  <!-- Ground plane -->
+  <box id="home" color="#fff" position='0 0 0' rotation="0 0 0" scale="100 0.1 100" />
+
+  <!-- Boxes and their lighmap -->
+  <model src="/models/baking-demo.obj" position="2 0.1 2" style="lightmap: url(/lightmaps/baking-demo.jpg); color: white;" />
+
+  <!-- Collision models -->
+  <box color="#f0f" position='2 1 2' rotation="0 0 0" scale="2 2 2" style="visibility: hidden" />
+  <box color="#f0f" position='6 1.5 -3' rotation="0 0 0" scale="3 3 3" style="visibility: hidden" />
+  <box color="#f0f" position='3 1 8' rotation="0 0 0" scale="2 2 2" style="visibility: hidden" />
+
+  <billboard position="0 0.5 8" rotation="0 0.3 0" scale="1 1 0.1">
+    <![CDATA[
+      <h3>Welcome to SceneVR</h3>
+
+      <p>
+        There are two boxes for you to enjoy. One is <span style="color:#f70">orange</span> and one is <span style="color: #0af">aqua</span>.
+      </p>
+
+      <center>
+        Enjoy 
+        <span style="background: #333; padding: 5px; display: inline-block; color: #f70">VR</span>
+        !
+      </center>
+
+    ]]>
+  </billboard>
+</scene>
