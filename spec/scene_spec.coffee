@@ -3,6 +3,7 @@ Scene = require('../scene.coffee')
 Script = require('../elements/script.coffee')
 Box = require('../elements/box.coffee')
 Spawn = require('../elements/spawn.coffee')
+Model = require('../elements/model.coffee')
 
 describe 'constructor', ->
   it 'should create', ->
@@ -48,4 +49,10 @@ describe 'all_tags', ->
       expect(scene.getElementsByTagName("billboard").length).toEqual 1
       expect(scene.getElementsByTagName("billboard")[0].innerHTML).toMatch /<h1>Welcome/
       expect(scene.getElementsByTagName("billboard")[0].innerHTML).toMatch /stuff and things/
+
+  it 'should parse model', ->
+    Scene.load process.cwd() + '/spec/fixtures/all_tags.xml', (scene) ->
+      expect(scene.getElementsByTagName("model").length).toEqual 1
+      expect(scene.getElementsByTagName("model")[0].src).toMatch /blah.obj/
+      expect(scene.getElementsByTagName("model")[0] instanceof Model).toBeTruthy()
 

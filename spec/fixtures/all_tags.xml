@@ -3,6 +3,7 @@
 <scene>
   <spawn position="10 10 10" />
   <box id="home" color="#ff00aa" position='0 10 0' />
+  <model src="/blah.obj" position="1 2 3" />
   <script>
     scene.addEventListener("ready", function(event) {
       "Hello world";

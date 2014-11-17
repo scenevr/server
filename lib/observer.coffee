@@ -18,10 +18,11 @@ class Observer
         @player.position = element.getAttribute("position")
       else if element.nodeName == "event"
         if element.getAttribute("name") == "click"
-          document.getElementByUUID(element.getAttribute("uuid")).dispatchEvent 'click', {
-            player : @player
-            point : Vector.fromString(element.getAttribute("point"))
-          }
+          if document.getElementByUUID(element.getAttribute("uuid"))
+            document.getElementByUUID(element.getAttribute("uuid")).dispatchEvent 'click', {
+              player : @player
+              point : Vector.fromString(element.getAttribute("point"))
+            }
         else
           console.log "Unrecognized event element"
           console.log "  " + element.toString()
