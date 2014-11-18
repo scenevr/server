@@ -2,15 +2,16 @@
  
 <scene>
   <spawn position="0 0 5" />
+
   <box id="home" color="#555" position='2.5 0 3.5' rotation="0 0 0" scale="1 1 1" />
-  <model src="/models/cubes.obj" position="2 0.05 2" />
 
   <box color="#555" position='2 0 2' rotation="0 0 0" scale="0.9 0.9 0.9" />
   <box color="#555" position='2.5 0 3.5' rotation="0 0 0" scale="1 1 1" />
 
   <box color="#ff0" position='-1.5 1 5' rotation="0 0 0" scale="0.3 0.3 0.3" />
 
-  <!--box id="two" color="#00aaff" position='0.5 0.5 -10.5' /-->
+  <link href="/lightmap.xml" position="10 0 10" />
+
   <billboard position="-2 2 0" rotation="0 1.57 0" scale="4 4 0.5">
     <![CDATA[
       <h1>Welcome to SceneVR!!!</h1>
@@ -27,19 +28,4 @@
 
     ]]>
   </billboard>
-
-  <!--billboard position="-2 1 0">
-    <![CDATA[
-      <center style="margin-top: 28px">
-        <img src="/images/dickbutt.jpg" style="width: 200px; height: 200px" />
-      </center>
-    ]]>
-  </billboard-->
-
-
-  <script>
-    scene.addEventListener("ready", function(event) {
-      console.log("Color of #home is: " + scene.getElementById("home").getAttribute("color"));
-    });
-  </script>
 </scene>

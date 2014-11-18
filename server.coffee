@@ -18,35 +18,39 @@ class Server
 
     @webServer = express()
     @webServer.use(cors())
-    @webServer.use(express.static(path.dirname(@filename)))
+    @webServer.use(express.static("./scenes/"))
     @webServerHandle = @webServer.listen(8090)
 
     @restart = _.throttle(@restartServer, 1000)
-    Scene.load(@filename, @onLoaded)
-      
 
-  onLoaded: (scene) =>
-    fs.watch @filename, @restart
+    @scenes = []
 
-    @scene = scene
+    ["/lightmap.xml", "/index.xml"].forEach (filename) =>
+      Scene.load "./scenes" + filename, (scene) => 
+        @onLoaded(scene, filename)
+        fs.watch "./scenes/" + filename, @restart
+
+  onLoaded: (scene, filename) =>
+    console.log "[server] Loaded '#{filename}'"
 
     # The reflector handles sending updates to the scene to observers
-    @reflector = new Reflector(@scene)
+    reflector = new Reflector(scene, filename)
+
+    @websocketServer.reflectors[filename] = reflector
 
     # Set an interval to send world state out to clients
-    @reflector.startTicking()
+    reflector.startTicking()
 
-    @websocketServer.reflector = @reflector
 
   # Stop the server and restart it
   restartServer: =>
     console.log "[server] Restarting server on file change."
 
-    @reflector.sendAll('<event name="restart" />')
-    @reflector.stop()
-
-    @scene.stop()
-    delete @scene
+    for filename, reflector of @websocketServer.reflectors
+      reflector.sendAll('<event name="restart" />')
+      reflector.stop()
+      reflector.scene.stop()
+      delete reflector.scene
 
     # Gross
     setTimeout( => 

@@ -9,8 +9,9 @@ debug = (message) ->
   console.log (new Date()) + " " + message
 
 class WebsocketServer
-  constructor: (@reflector, @port) ->
+  constructor: (reflector, @port) ->
     # ...
+    @reflectors = {}
 
   listen: ->
     @httpServer = HTTP.createServer (request, response) ->
@@ -29,17 +30,24 @@ class WebsocketServer
     @wsServer.on "request", @onRequest
 
   onRequest: (request) =>
-    return unless @reflector
-    
     # todo - check request.origin maybe?
     try
       connection = request.accept("scenevr", request.origin)
     catch 
       # doesnt want scenevr - drop the client
       return
+
+    reflector = @reflectors[request.resource]
+
+    if !reflector
+      console.log "[server] 404 scene not found '#{request.resource}'"
+      request.reject()
+      return
+
+    console.log "[server] client requested '#{request.resource}'"
     
-    observer = new Observer(connection, @reflector)
-    @reflector.addObserver(observer)
+    observer = new Observer(connection, reflector)
+    reflector.addObserver(observer)
 
     connection.on "message", (message) =>
       if message.type is "utf8"
@@ -47,6 +55,6 @@ class WebsocketServer
 
     connection.on "close", (reasonCode, description) =>
       debug "Peer " + connection.remoteAddress + " disconnected."
-      @reflector.removeObserver(observer)
+      reflector.removeObserver(observer)
 
 module.exports = WebsocketServer
