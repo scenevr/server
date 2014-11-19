@@ -12,10 +12,13 @@ Contact [bnolan@gmail.com](mailto:bnolan@gmail.com).
 
 Prerequisites: make sure you have the latest version of Node and NPM installed.
 
+OS: Verified running on Windows 8 and Mac OS X.
+
 ### Running the scenevr server
 1. Clone this repo: https://github.com/bnolan/scenevr.git
 1. `cd scenevr`
 1. `npm install`
+1. `npm install -g coffee`
 1. `coffee server.coffee scenes/hello.xml` 
 
 Note: *you can replace hello.xml with any of the demo files*
