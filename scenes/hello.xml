@@ -3,6 +3,9 @@
 <scene>
   <spawn position="0 0 5" />
 
+  <!-- Boxes and their lighmap -->
+  <skybox src="/skyboxes/clouds_.jpg" />
+
   <box id="home" color="#f80" position='2 0.5 -2' rotation="0 0 0" scale="0.9 0.9 0.9" />
   <box color="#0af" position='2 0.5 -4' rotation="0 0 0" scale="1 1 1" />
 
@@ -25,7 +28,7 @@
 
   <billboard position="6 1 -4" rotation="0 -1.57 0" scale="2 2 0.25">
     <![CDATA[
-      <h1>What next?</h1>
+      <h1>What next?!</h1>
 
       <p>
         Try editing the <b>hello.xml</b> file. When you hit save, the browser will <b>automatically</b> reload your scene.

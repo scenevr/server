@@ -5,6 +5,7 @@ Box = require('../elements/box.coffee')
 Spawn = require('../elements/spawn.coffee')
 Model = require('../elements/model.coffee')
 Link = require('../elements/link.coffee')
+Skybox = require('../elements/skybox.coffee')
 
 describe 'constructor', ->
   it 'should create', ->
@@ -62,4 +63,10 @@ describe 'all_tags', ->
       expect(scene.getElementsByTagName("link").length).toEqual 1
       expect(scene.getElementsByTagName("link")[0].href).toMatch /test/
       expect(scene.getElementsByTagName("link")[0] instanceof Link).toBeTruthy()
+
+  it 'should parse skybox', ->
+    Scene.load process.cwd() + '/spec/fixtures/all_tags.xml', (scene) ->
+      expect(scene.getElementsByTagName("skybox").length).toEqual 1
+      expect(scene.getElementsByTagName("skybox")[0].src).toMatch /blah/
+      expect(scene.getElementsByTagName("skybox")[0] instanceof Skybox).toBeTruthy()
 
