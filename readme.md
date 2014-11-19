@@ -22,6 +22,7 @@ Note: *you can replace hello.xml with any of the demo files*
 
 ### Running the scnenevr-web client
 In a new console window, and in a new directory:
+
 1. Clone the scenevr-web repo: https://github.com/bnolan/scenevr-web.git
 1. `cd scenevr-web`
 1. `npm install`
