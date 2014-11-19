@@ -2,18 +2,13 @@
  
 <scene>
   <spawn position="0 0 5" />
-  <box id="home" color="#555" position='2.5 0 3.5' rotation="0 0 0" scale="1 1 1" />
-  <model src="/models/cubes.obj" position="2 0.05 2" />
 
-  <box color="#555" position='2 0 2' rotation="0 0 0" scale="0.9 0.9 0.9" />
-  <box color="#555" position='2.5 0 3.5' rotation="0 0 0" scale="1 1 1" />
+  <box id="home" color="#f80" position='2 0.5 -2' rotation="0 0 0" scale="0.9 0.9 0.9" />
+  <box color="#0af" position='2 0.5 -4' rotation="0 0 0" scale="1 1 1" />
 
-  <box color="#ff0" position='-1.5 1 5' rotation="0 0 0" scale="0.3 0.3 0.3" />
-
-  <!--box id="two" color="#00aaff" position='0.5 0.5 -10.5' /-->
   <billboard position="-2 2 0" rotation="0 1.57 0" scale="4 4 0.5">
     <![CDATA[
-      <h1>Welcome to SceneVR!!!</h1>
+      <h1>Welcome to SceneVR</h1>
 
       <p>
         There are two boxes for you to enjoy. One is <span style="color:#f70">orange</span> and one is <span style="color: #0af">aqua</span>.
@@ -28,14 +23,20 @@
     ]]>
   </billboard>
 
-  <!--billboard position="-2 1 0">
+  <billboard position="6 1 -4" rotation="0 -1.57 0" scale="2 2 0.25">
     <![CDATA[
-      <center style="margin-top: 28px">
-        <img src="/images/dickbutt.jpg" style="width: 200px; height: 200px" />
-      </center>
-    ]]>
-  </billboard-->
+      <h1>What next?</h1>
 
+      <p>
+        Try editing this file. When you hit save, the browser will <b>automatically</b> reload your scene.
+      </p>
+
+      <p>
+        Want more eye candy? Try the lightmap.xml demo. It's pretty.
+      </p>
+
+    ]]>
+  </billboard>
 
   <script>
     scene.addEventListener("ready", function(event) {
