@@ -30,6 +30,26 @@ Object.defineProperties Element.prototype, {
       #   @onChanged()
       # @onChanged()
   }
+  scale : {
+    get: -> @_scale ||= new Vector(1,1,1)
+
+    set: (value) ->
+      if value instanceof Vector
+        @_scale = value.clone()
+      else if typeof value == "string"
+        v = (new Vector).fromArray(value.split(' ').map(parseFloat))
+
+        if isFinite(v.length())
+          @_scale = v
+        else
+          throw "Invalid argument"
+      else
+        throw "Invalid argument"
+
+      # @_scale.onChanged = =>
+      #   @onChanged()
+      # @onChanged()
+  }
 }
 
 module.exports = Element
