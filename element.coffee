@@ -1,6 +1,7 @@
 UUID = require("uuid")
 dom = require("./vendor/dom-lite")
 Vector = require("./vector")
+Euler = require("./euler")
 
 class Element extends dom.HTMLElement
   removeChild: ->
@@ -47,6 +48,26 @@ Object.defineProperties Element.prototype, {
         throw "Invalid argument"
 
       # @_scale.onChanged = =>
+      #   @onChanged()
+      # @onChanged()
+  }
+  rotation : {
+    get: -> @_rotation ||= new Euler(0,0,0)
+
+    set: (value) ->
+      if value instanceof Euler
+        @_rotation = value.clone()
+      else if typeof value == "string"
+        v = (new Euler).fromArray(value.split(' ').map(parseFloat))
+
+        if isFinite(v.x) && isFinite(v.y) && isFinite(v.z)
+          @_rotation = v
+        else
+          throw "Invalid argument"
+      else
+        throw "Invalid argument"
+
+      # @_rotation.onChanged = =>
       #   @onChanged()
       # @onChanged()
   }
