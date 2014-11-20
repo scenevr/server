@@ -23,7 +23,7 @@ OS: Verified running on Windows 8 and Mac OS X.
 
 Note: *you can replace hello.xml with any of the demo files*
 
-### Running the scnenevr-web client
+### Running the scenevr-web client
 In a new console window, and in a new directory:
 
 1. Clone the scenevr-web repo: https://github.com/bnolan/scenevr-web.git
