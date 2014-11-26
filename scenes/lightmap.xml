@@ -3,8 +3,22 @@
 <scene>
   <spawn position="0 0 5" />
 
+  <skybox src='/skyboxes/clouds_.jpg' />
+
   <!-- Ground plane -->
-  <box id="home" color="#fff" position='0 0 0' rotation="0 0 0" scale="100 0.1 100" />
+  <box id="home" color="#aaa" position='0 0 0' rotation="0 0 0" scale="100 0.1 100" />
+
+  <box id="green" color="#0f0" position="0 0.5 0" scale="1 1 1" />
+
+  <script>
+    scene.addEventListener("ready", function(event) {
+      var green = scene.getElementById("green");
+
+      green.addEventListener("click", function(){
+        scene.removeChild(green);
+      });
+    });
+  </script>
 
   <!-- Boxes and their lighmap -->
   <model src="/models/baking-demo.obj" position="2 0.1 2" style="lightmap: url(/lightmaps/baking-demo.jpg); color: white;" />
