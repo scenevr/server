@@ -18,7 +18,7 @@ OS: Verified running on Windows 8 and Mac OS X.
 1. Clone this repo: https://github.com/bnolan/scenevr.git
 1. `cd scenevr`
 1. `npm install`
-1. `npm install -g coffee`
+1. `npm install -g coffee-script`
 1. `coffee server.coffee scenes/hello.xml` 
 
 Note: *you can replace hello.xml with any of the demo files*
