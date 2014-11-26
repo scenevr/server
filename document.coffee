@@ -8,6 +8,7 @@ Player = require("./elements/player")
 Billboard = require("./elements/billboard")
 Model = require("./elements/model")
 Link = require("./elements/link")
+Skybox = require("./elements/skybox")
 
 document = dom.document
 HTMLElement = dom.HTMLElement
@@ -34,6 +35,8 @@ document.createElement = (tag) ->
     node = new Model
   else if tag == "spawn"
     node = new Spawn
+  else if tag == "skybox"
+    node = new Skybox
   else
     node = new HTMLElement(tag)
   

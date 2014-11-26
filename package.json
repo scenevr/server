@@ -1,7 +1,11 @@
 {
   "name": "scenevr",
+  "version": "0.0.6",
   "description": "Create multiuser 3d environments using html-like tags and javascript",
-  "version": "0.0.5",
+  "repository" :
+    { "type" : "git"
+    , "url" : "git://github.com/bnolan/scenevr.git"
+    },
   "dependencies": {
     "websocket": "1.0.8",
     "three": "0.66.2",
