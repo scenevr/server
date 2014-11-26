@@ -1,6 +1,9 @@
+ChatChannel = require("./chat_channel")
+
 class Reflector
   constructor: (@scene) ->
     @observers = []
+    # @chatChannel = new ChatChannel(this)
 
   sendAll: (xmlElement) ->
     for observer in @observers
@@ -16,7 +19,10 @@ class Reflector
 
   removeObserver: (o) ->
     if o.player
-      @scene.removeChild o.player
+      try
+        @scene.removeChild o.player
+      catch e
+        console.log "[server] Unable to remove child"
 
     @observers = for observer in @observers when observer != o
       observer
