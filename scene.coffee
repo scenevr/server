@@ -31,7 +31,11 @@ _.extend Scene.prototype, {
 
 Scene.load = (filename, callback) ->
   doc = new Element "document"
-  doc.innerXML = fs.readFileSync(filename).toString()
+  
+  if filename.match(/</)
+    doc.innerXML = filename
+  else
+    doc.innerXML = fs.readFileSync(filename).toString()
 
   for node in doc.childNodes
     if node.nodeName == 'scene'

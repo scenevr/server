@@ -3,14 +3,16 @@ _ = require 'underscore'
 Reflector = require './lib/reflector'
 WebsocketServer = require './lib/websocket_server'
 Scene = require './scene'
+IndexScene = require './lib/index_scene'
 express = require 'express'
 cors = require('cors')
 path = require 'path'
 fs = require('fs')
+glob = require('glob')
 
 class Server
-  constructor: (@filename, @port) ->
-    console.log "Loading '#{@filename}'..."
+  constructor: (@folder, @port) ->
+    console.log "[server] Serving scenes in '#{@folder}'..."
 
     # Handles connections and messages from the websocket
     @websocketServer = new WebsocketServer(null, @port)
@@ -25,13 +27,22 @@ class Server
 
     @scenes = []
 
-    ["/lightmap.xml", "/index.xml"].forEach (filename) =>
-      Scene.load "./scenes" + filename, (scene) => 
-        @onLoaded(scene, filename)
-        fs.watch "./scenes/" + filename, @restart
+    glob "#{@folder}/*.xml", {}, (er, files) =>
+      # if !_.find(files, "#{@folder}/index.html")
+      indexXml = new IndexScene(files).toXml()
+
+      console.log indexXml
+      
+      Scene.load indexXml, (scene) => 
+        @onLoaded(scene, '/index.xml')
+
+      files.forEach (filename) =>
+        Scene.load filename, (scene) => 
+          @onLoaded(scene, '/' + path.basename(filename))
+          fs.watch filename, @restart
 
   onLoaded: (scene, filename) =>
-    console.log "[server] Loaded '#{filename}'"
+    console.log "[server]  * Loaded '#{filename}'"
 
     # The reflector handles sending updates to the scene to observers
     reflector = new Reflector(scene, filename)
@@ -57,4 +68,8 @@ class Server
       Scene.load(@filename, @onLoaded)
     , 250)
 
-new Server(_.last(process.argv), 8080)
+if process.argv.length == 2
+  console.log "Usage: scenevr [scenedirectory]"
+  process.exit()
+
+new Server(process.argv[2], 8080)
