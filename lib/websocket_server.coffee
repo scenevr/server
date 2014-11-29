@@ -15,12 +15,12 @@ class WebsocketServer
 
   listen: ->
     @httpServer = HTTP.createServer (request, response) ->
-      debug "Received request for " + request.url
+      console.log  "[server] Received request for " + request.url
       response.writeHead 404
       response.end()
 
     @httpServer.listen @port, =>
-      debug "Server is listening on port #{@port}"
+      console.log "[server] Server is listening on port #{@port}"
 
     @wsServer = new WSServer(
       httpServer : @httpServer
@@ -54,7 +54,7 @@ class WebsocketServer
         observer.recieveMessage(message.utf8Data)
 
     connection.on "close", (reasonCode, description) =>
-      debug "Peer " + connection.remoteAddress + " disconnected."
+      console.log "[server] Peer " + connection.remoteAddress + " disconnected."
       reflector.removeObserver(observer)
 
 module.exports = WebsocketServer
