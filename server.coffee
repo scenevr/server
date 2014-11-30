@@ -29,12 +29,9 @@ class Server
 
     glob "#{@folder}/*.xml", {}, (er, files) =>
       # if !_.find(files, "#{@folder}/index.html")
-      indexXml = new IndexScene(files).toXml()
-
-      console.log indexXml
-      
-      Scene.load indexXml, (scene) => 
-        @onLoaded(scene, '/index.xml')
+      # indexXml = new IndexScene(files).toXml()
+      # Scene.load indexXml, (scene) => 
+      #   @onLoaded(scene, '/index.xml')
 
       files.forEach (filename) =>
         Scene.load filename, (scene) => 
