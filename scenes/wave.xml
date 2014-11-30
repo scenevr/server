@@ -11,17 +11,17 @@
   <spawn position="-5 0 0" />
   
   <script>
-    scene.addEventListener("ready", function(event) {
+    document.addEventListener("ready", function(event) {
       var boxes = [],
         startPosition = new Vector(0,0,0);
 
       function addBox(index){
-        var el = scene.createElement("box");
+        var el = document.createElement("box");
 
         el.position = new Vector(0,0.5,-index * 2).add(startPosition);
         el.color = "#f70";
 
-        scene.appendChild(el);
+        document.scene.appendChild(el);
         boxes.push(el);
       }
 
@@ -31,8 +31,8 @@
 
       for(i=0;i!=20;i++){
         addBox(i);
-
       }
+      
       setInterval(function(){
         i = 0;
         t += 0.2;

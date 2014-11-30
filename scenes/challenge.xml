@@ -17,17 +17,17 @@
   </billboard>
 
   <script>
-    scene.addEventListener("ready", function(event) {
+    document.addEventListener("ready", function(event) {
       var clicks = {};
 
-      scene.getElementById("orange").addEventListener("click", function(){
+      document.getElementById("orange").addEventListener("click", function(){
         clicks['orange'] = true;
         if(Object.keys(clicks).length == 2){
           showResult()
         }
       });
 
-      scene.getElementById("pink").addEventListener("click", function(){
+      document.getElementById("pink").addEventListener("click", function(){
         clicks['pink'] = true;
         if(Object.keys(clicks).length == 2){
           showResult()
@@ -41,10 +41,10 @@
           b = document.createElement("billboard");
           b.position = "0 1 -15";
           b.innerXML = "Congratulations you pressed both the boxes! :)";
-          scene.appendChild(b);
+          document.scene.appendChild(b);
 
           setTimeout(function(){
-            scene.removeChild(b);
+            document.scene.removeChild(b);
             b = null;
             clicks= {};
           }, 5000);

@@ -24,12 +24,12 @@
       });
     }
 
-    scene.addEventListener("ready", function(event) {
-      changeOnClick(scene.getElementById("one"));
-      changeOnClick(scene.getElementById("two"));
+    document.addEventListener("ready", function(event) {
+      changeOnClick(document.getElementById("one"));
+      changeOnClick(document.getElementById("two"));
 
-      scene.getElementById("bill").addEventListener("click", function(e){
-        scene.removeChild(scene.getElementById("bill"));
+      document.getElementById("bill").addEventListener("click", function(e){
+        document.scene.removeChild(document.getElementById("bill"));
       });
     });
   </script>

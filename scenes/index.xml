@@ -49,10 +49,4 @@
 
     ]]>
   </billboard>
-
-  <script>
-    scene.addEventListener("ready", function(event) {
-      console.log("Color of #home is: " + scene.getElementById("home").getAttribute("color"));
-    });
-  </script>
 </scene>

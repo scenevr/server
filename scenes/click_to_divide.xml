@@ -21,7 +21,7 @@
         var newEl = document.createElement("box");
         newEl.position = el.position;
         newEl.color = "#ff00aa";
-        scene.appendChild(newEl);
+        document.scene.appendChild(newEl);
         addHandler(newEl);
 
         el.position.add(vector).add(sidewaysVector);
@@ -29,8 +29,8 @@
       });
     }
 
-    scene.addEventListener("ready", function(event) {
-      addHandler(scene.getElementById("scaredy"));
+    document.addEventListener("ready", function(event) {
+      addHandler(document.getElementById("scaredy"));
     });
   </script>
 </scene>

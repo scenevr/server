@@ -9,10 +9,10 @@
       return (0x100000 + ~~(Math.random() * 0xEFFFFF)).toString(16);
     }
 
-    scene.addEventListener("ready", function(event) {
+    document.addEventListener("ready", function(event) {
       setInterval(function(){
-        scene.getElementById("home").color = '#' + randomColor();
-        scene.getElementById("two").color = '#' + randomColor();
+        document.getElementById("home").color = '#' + randomColor();
+        document.getElementById("two").color = '#' + randomColor();
       }, 1000 / 10);
     });
   </script>

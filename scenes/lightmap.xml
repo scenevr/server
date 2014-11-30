@@ -11,11 +11,11 @@
   <box id="green" color="#0f0" position="0 0.5 0" scale="1 1 1" />
 
   <script>
-    scene.addEventListener("ready", function(event) {
-      var green = scene.getElementById("green");
+    document.addEventListener("ready", function(event) {
+      var green = document.getElementById("green");
 
       green.addEventListener("click", function(){
-        scene.removeChild(green);
+        document.scene.removeChild(green);
       });
     });
   </script>

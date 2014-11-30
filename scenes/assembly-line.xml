@@ -10,7 +10,7 @@
   <spawn position="5 0 10" />
 
   <script>
-    scene.addEventListener("ready", function(event) {
+    document.addEventListener("ready", function(event) {
       var boxes = [],
         startPosition = new Vector(0,0,0);
 
@@ -19,12 +19,12 @@
       }
 
       function addBox(index){
-        var el = scene.createElement("box");
+        var el = document.createElement("box");
 
         el.position = new Vector(0,0.5,-index * 5).add(startPosition);
         el.color = randomColor();
 
-        scene.appendChild(el);
+        document.scene.appendChild(el);
         boxes.push(el);
       }
 

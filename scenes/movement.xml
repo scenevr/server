@@ -9,7 +9,7 @@
   <box id="other-box" position='0 0 0' color="#f0f" />
 
   <script>
-    scene.addEventListener("ready", function(event) {
+    document.addEventListener("ready", function(event) {
       setInterval(function(){
         var t = new Date().getTime() / 10000.0
 
@@ -17,8 +17,8 @@
           Math.sin(t * 11) * 10, 0, Math.cos(t * 7) * 10
         );
 
-        scene.getElementById("my-box").position = v.setY(0.5);
-        scene.getElementById("other-box").position = v.negate().setY(0.5);
+        document.getElementById("my-box").position = v.setY(0.5);
+        document.getElementById("other-box").position = v.negate().setY(0.5);
       }, 1000 / 10);
     });
   </script>
