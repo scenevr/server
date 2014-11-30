@@ -6,6 +6,9 @@ dom = require("./vendor/dom-lite")
 Element = require("./node")
 Document = require("./document")
 
+Vector = require("./vector")
+Euler = require("./euler")
+
 Scene = dom.HTMLElement
 
 # fixme - these are added to all instances of htmlelement, not just the Scene
@@ -47,7 +50,13 @@ Scene.load = (filename, callback) ->
       continue
 
     try
-      script.runInThisContext()
+      script.runInNewContext { 
+        document : document
+        Vector : Vector
+        Euler : Euler
+        setInterval : setInterval
+        setTimeout : setTimeout
+      }
     catch e
       console.log "[server] #{filename}"
       console.log "  " + e.stack.split("\n").slice(0,2).join("\n  ")

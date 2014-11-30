@@ -1,10 +1,10 @@
 Node = require("../node")
 Vector = require("../vector.js")
-document = require("../document")
 
 class Observer
   constructor: (@socket, @reflector) ->
     @awareList = {}
+    @document = @reflector.scene.ownerDocument
 
   isAwareOf: (element) ->
     @awareList[element.uuid]
@@ -18,8 +18,8 @@ class Observer
         @player.position = element.getAttribute("position")
       else if element.nodeName == "event"
         if element.getAttribute("name") == "click"
-          if document.getElementByUUID(element.getAttribute("uuid"))
-            document.getElementByUUID(element.getAttribute("uuid")).dispatchEvent 'click', {
+          if @document.getElementByUUID(element.getAttribute("uuid"))
+            @document.getElementByUUID(element.getAttribute("uuid")).dispatchEvent 'click', {
               player : @player
               point : Vector.fromString(element.getAttribute("point"))
             }

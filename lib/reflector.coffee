@@ -12,7 +12,7 @@ class Reflector
   addObserver: (o) ->
     @observers.push(o)
 
-    o.player = @scene.createElement "player"
+    o.player = @scene.ownerDocument.createElement "player"
     @scene.appendChild(o.player)
 
     o.sendMessage "<event name=\"ready\" uuid=\"#{o.player.uuid}\" />"
