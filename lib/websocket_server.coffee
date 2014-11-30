@@ -13,6 +13,9 @@ class WebsocketServer
     # ...
     @reflectors = {}
 
+  clearReflectors: ->
+    @reflectors = {}
+
   listen: ->
     @httpServer = HTTP.createServer (request, response) ->
       console.log  "[server] Received request for " + request.url
@@ -30,6 +33,9 @@ class WebsocketServer
     @wsServer.on "request", @onRequest
 
   onRequest: (request) =>
+    console.log "[server] new request from"
+    console.log request.remoteAddress
+
     # todo - check request.origin maybe?
     try
       connection = request.accept("scenevr", request.origin)

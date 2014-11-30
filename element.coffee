@@ -23,9 +23,9 @@ Object.defineProperties Element.prototype, {
         if isFinite(v.length())
           @_position = v
         else
-          throw "Invalid argument"
+          throw "Invalid position argument"
       else
-        throw "Invalid argument"
+        throw "Invalid position argument"
 
       # @_position.onChanged = =>
       #   @onChanged()
@@ -43,9 +43,9 @@ Object.defineProperties Element.prototype, {
         if isFinite(v.length())
           @_scale = v
         else
-          throw "Invalid argument"
+          throw "Invalid scale argument"
       else
-        throw "Invalid argument"
+        throw "Invalid scale argument"
 
       # @_scale.onChanged = =>
       #   @onChanged()
@@ -63,9 +63,9 @@ Object.defineProperties Element.prototype, {
         if isFinite(v.x) && isFinite(v.y) && isFinite(v.z)
           @_rotation = v
         else
-          throw "Invalid argument"
+          throw "Invalid rotation argument"
       else
-        throw "Invalid argument"
+        throw "Invalid rotation argument"
 
       # @_rotation.onChanged = =>
       #   @onChanged()

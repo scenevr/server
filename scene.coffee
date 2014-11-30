@@ -14,8 +14,11 @@ Scene = dom.HTMLElement
 # fixme - these are added to all instances of htmlelement, not just the Scene
 _.extend Scene.prototype, {
   stop: ->
-    # todo - kill any running scripts (use domains?)
+    @clearTimeouts()
     @childNodes = []
+
+  clearTimeouts: ->
+    null
 }
 
 Scene.load = (filename, callback) ->
@@ -37,6 +40,19 @@ Scene.load = (filename, callback) ->
     console.log "[server] Couldn't find a <scene /> element in #{filename}"
     return
 
+  timeouts = []
+  intervals = []
+
+  document.scene.clearTimeouts = ->
+    for timeout in timeouts
+      clearTimeout(timeout)
+
+    for interval in intervals
+      clearInterval(interval)
+
+    timeouts = []
+    intervals = []
+
   # Fixme - this all requires lots of work and thought (do we run in a sandboxed content?) -
   # we should also wrap setTimeout and setInterval calls so that broken code doesn't bring
   # down the server.
@@ -54,8 +70,30 @@ Scene.load = (filename, callback) ->
         document : document
         Vector : Vector
         Euler : Euler
-        setInterval : setInterval
-        setTimeout : setTimeout
+
+        setInterval : (func, timeout) ->
+          handle = setInterval( ->
+            try
+              func()
+            catch e
+              console.log "[server] #{filename}:\n  #{e.toString()}"
+              clearInterval(handle)
+          , timeout)
+
+          intervals.push(handle)
+          handle
+
+        setTimeout : (func, timeout) ->
+          handle = setTimeout( ->
+            try
+              func()
+            catch e
+              console.log "[server] #{filename}:\n  #{e.toString()}"
+          , timeout)
+
+          timeouts.push(handle)
+          handle
+
         console : console
       }
     catch e

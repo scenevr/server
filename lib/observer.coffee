@@ -6,6 +6,10 @@ class Observer
     @awareList = {}
     @document = @reflector.scene.ownerDocument
 
+  drop: (reason) ->
+    console.log "[server] Dropped client for: #{reason}"
+    @socket.close()
+
   isAwareOf: (element) ->
     @awareList[element.uuid]
 
@@ -15,7 +19,11 @@ class Observer
   recieveMessage: (xml) ->
     for element in Node.packetParser(xml).childNodes
       if element.nodeName == "player"
-        @player.position = element.getAttribute("position")
+        try
+          @player.position = element.getAttribute("position")
+        catch e
+          @drop("Invalid position " + element.getAttribute("position"))
+        
       else if element.nodeName == "event"
         if element.getAttribute("name") == "click"
           if @document.getElementByUUID(element.getAttribute("uuid"))

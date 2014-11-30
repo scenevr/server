@@ -25,8 +25,9 @@ class Server
 
     @restart = _.throttle(@restartServer, 1000)
 
-    @scenes = []
+    @loadAllScenes()
 
+  loadAllScenes: ->
     glob "#{@folder}/*.xml", {}, (er, files) =>
       indexXml = new IndexScene(files).toXml()
       Scene.load indexXml, (scene) => 
@@ -61,7 +62,8 @@ class Server
 
     # Gross
     setTimeout( => 
-      Scene.load(@filename, @onLoaded)
+      @websocketServer.clearReflectors()
+      @loadAllScenes()
     , 250)
 
 if process.argv.length == 2
