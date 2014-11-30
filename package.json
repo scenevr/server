@@ -24,6 +24,6 @@
   "bin": "./server.js",
   "scripts": {
     "start": "coffee server.coffee",
-    "test": "jasmine-node --verbose --coffee spec/*_spec.coffee"
+    "test": "jasmine-node --verbose --captureExceptions --coffee spec/*_spec.coffee"
   }
 }
