@@ -1,5 +1,8 @@
 Node = require('../node')
 HTMLElement = require("../vendor/dom-lite").HTMLElement
+Document = require('../document')
+
+ownerDocument = Document.createDocument()
 
 describe 'constructor', ->
   it 'should create', ->
@@ -9,17 +12,20 @@ describe 'constructor', ->
 describe 'innerXML', ->
   it 'should set text', ->
     n = new Node
+    n.ownerDocument = ownerDocument
     n.innerXML = "hello world"
     expect(n.textContent).toEqual('hello world')
     
   it 'should create nodes', ->
     n = new Node
+    n.ownerDocument = ownerDocument
     n.innerXML = "<box id='dave' />"
     expect(n.firstChild.nodeName).toEqual('box')
     expect(n.firstChild.id).toEqual('dave')
 
   it 'should get xml', ->
     n = new Node
+    n.ownerDocument = ownerDocument
     n.innerXML = "<box id='dave' />"
     n.firstChild.id = 'mary'
     n.firstChild.setAttribute 'class', 'nothing'
@@ -28,6 +34,7 @@ describe 'innerXML', ->
 describe 'attributes', ->
   it 'should ignore underscored attributes', ->
     n = new Node
+    n.ownerDocument = ownerDocument
     n.innerXML = "<box />"
     n.firstChild._position = {
       toString: -> "1 2 3"

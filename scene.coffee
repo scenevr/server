@@ -1,52 +1,59 @@
 fs = require('fs')
 _ = require("underscore")
+vm = require('vm')
 
 dom = require("./vendor/dom-lite")
 Element = require("./node")
-document = require("./document")
+Document = require("./document")
 
 Scene = dom.HTMLElement
 
 # fixme - these are added to all instances of htmlelement, not just the Scene
 _.extend Scene.prototype, {
-  addEventListener: (event, callback) ->
-    (@eventTargets[event] ||= []).push callback
-
-  removeEventListener: (event) ->
-    @eventTargets[event] = for e in (@eventTargets[event] || []) when event != e
-      e
-
-  dispatchEvent: (event, arg) ->
-    if @eventTargets[event]
-      for handler in @eventTargets[event]
-        handler(arg)
-
-  createElement: (tag) ->
-    document.createElement tag
-
   stop: ->
     # todo - kill any running scripts (use domains?)
     @childNodes = []
 }
 
 Scene.load = (filename, callback) ->
-  doc = new Element "document"
+  document = Document.createDocument()
+
+  parsedScene = new Element "null"
+  parsedScene.ownerDocument = document
   
   if filename.match(/</)
-    doc.innerXML = filename
+    parsedScene.innerXML = filename
   else
-    doc.innerXML = fs.readFileSync(filename).toString()
+    parsedScene.innerXML = fs.readFileSync(filename).toString()
 
-  for node in doc.childNodes
+  for node in parsedScene.childNodes
     if node.nodeName == 'scene'
-      scene = node
+      document.scene = node
 
-  for script in scene.getElementsByTagName("script")
-    # lol
-    eval(script.textContent)
+  if !document.scene
+    console.log "[server] Couldn't find a <scene /> element in #{filename}"
+    return
 
-  scene.dispatchEvent("ready")
+  # Fixme - this all requires lots of work and thought (do we run in a sandboxed content?) -
+  # we should also wrap setTimeout and setInterval calls so that broken code doesn't bring
+  # down the server.
+  for scriptElement in document.getElementsByTagName("script")
+    script = null
 
-  callback(scene)
+    try
+      script = vm.createScript(scriptElement.textContent, filename)
+    catch e
+      console.log "[server] #{filename}:\n  #{e.toString()}"
+      continue
+
+    try
+      script.runInThisContext()
+    catch e
+      console.log "[server] #{filename}"
+      console.log "  " + e.stack.split("\n").slice(0,2).join("\n  ")
+
+  document.scene.dispatchEvent("ready")
+
+  callback(document.scene)
 
 module.exports = Scene

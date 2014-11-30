@@ -4,8 +4,8 @@
   <box id="home" color="#ff00aa" position='0 10 0' />
   <box id="two" color="#0033aa" position='0 20 0' />
   <script>
-    scene.addEventListener("ready", function(event) {
-      "Color of #home is: " + scene.getElementById("home").getAttribute("color");
+    document.addEventListener("ready", function(event) {
+      "Color of #home is: " + document.getElementById("home").getAttribute("color");
     });
   </script>
 </scene>

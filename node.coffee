@@ -1,7 +1,6 @@
 htmlparser = require('htmlparser2')
 
 dom = require("./vendor/dom-lite")
-document = require("./document")
 Node = dom.Node
 
 Script = require("./elements/script")
@@ -12,18 +11,20 @@ Object.defineProperty Node.prototype, 'innerXML', {
     Node.prototype.toString.call(this)
 
   set: (xml) ->
+    self = this
+
     addChildren = (root, nodes) ->
       for node in nodes
         # console.log node.type, node.data
 
         if node.type == 'text'
-          el = document.createTextNode(node.data)
+          el = self.ownerDocument.createTextNode(node.data)
         else if node.type == 'cdata'
-          el = document.createTextNode(node.children[0].data)
+          el = self.ownerDocument.createTextNode(node.children[0].data)
         else if node.type == 'comment'
-          el = document.createComment(node.data)
+          el = self.ownerDocument.createComment(node.data)
         else if node.type == 'tag' || node.type == "script"
-          el = document.createElement(node.name.toLowerCase())
+          el = self.ownerDocument.createElement(node.name.toLowerCase())
 
           for key,value of node.attribs
             el.setAttribute(key, value)

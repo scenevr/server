@@ -10,17 +10,17 @@ Model = require("./elements/model")
 Link = require("./elements/link")
 Skybox = require("./elements/skybox")
 
-document = dom.document
+Document = dom.Document
 HTMLElement = dom.HTMLElement
 
-document.markAsDead = (uuid) ->
+Document.prototype.markAsDead = (uuid) ->
   @deadNodes[uuid] = (new Date).valueOf()
   delete @nodeMap[uuid]
 
-document.getElementByUUID = (uuid) ->
+Document.prototype.getElementByUUID = (uuid) ->
   @nodeMap[uuid]
 
-document.createElement = (tag) ->
+Document.prototype.createElement = (tag) ->
   if tag == "script"
     node = new Script
   else if tag == "box"
@@ -50,7 +50,11 @@ document.createElement = (tag) ->
 
   node
 
-document.deadNodes = {}
-document.nodeMap = {}
+# Gross. Need to split dom-lite out into a bunch of stuff, and port all this to javascript
+Document.createDocument = ->
+  d = new Document
+  d.deadNodes = {}
+  d.nodeMap = {}
+  d
 
-module.exports = document
+module.exports = Document

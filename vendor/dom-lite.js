@@ -43,6 +43,30 @@ Node.prototype = {
   childNodes:      null,
   eventTargets:    null,
 
+  addEventListener: function(event, callback){
+    if(!this.eventTargets){
+      this.eventTargets = {};
+    }
+
+    if(!this.eventTargets[event]){
+      this.eventTargets[event] = [];
+    }
+
+    this.eventTargets[event].push(callback);
+  },
+
+  removeEventListener: function(event){
+    this.eventTargets[event] = null;
+  },
+
+  dispatchEvent: function(event, arg){
+    if(this.eventTargets[event]){
+      this.eventTargets[event].forEach(function(handler){
+        handler(arg);
+      });
+    }
+  },
+
   get textContent() {
     return this.hasChildNodes() ? this.childNodes.map(function(child){
       return child[ child.nodeType == 3 ? "data" : "textContent" ]
@@ -350,21 +374,20 @@ extend(Document, Node, {
     return own(this, new DocumentFragment())
   },
   getElementById: function(id) {
-    return this.body.getElementById(id)
+    return this.scene.getElementById(id)
   },
   getElementsByTagName: function(tag) {
-    return this.body.getElementsByTagName(tag)
+    return this.scene.getElementsByTagName(tag)
   },
   querySelector: function(sel) {
-    return this.body.querySelector(sel)
+    return this.scene.querySelector(sel)
   },
   querySelectorAll: function(sel) {
-    return this.body.querySelectorAll(sel)
+    return this.scene.querySelectorAll(sel)
   }
 })
 
 module.exports = {
-  document: new Document,
   Document: Document,
   HTMLElement: HTMLElement,
   Node: Node
