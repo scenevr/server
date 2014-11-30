@@ -60,7 +60,7 @@ Node.prototype = {
   },
 
   dispatchEvent: function(event, arg){
-    if(this.eventTargets[event]){
+    if((this.eventTargets) && (this.eventTargets[event])){
       this.eventTargets[event].forEach(function(handler){
         handler(arg);
       });

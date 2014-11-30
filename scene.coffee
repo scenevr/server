@@ -56,12 +56,13 @@ Scene.load = (filename, callback) ->
         Euler : Euler
         setInterval : setInterval
         setTimeout : setTimeout
+        console : console
       }
     catch e
       console.log "[server] #{filename}"
       console.log "  " + e.stack.split("\n").slice(0,2).join("\n  ")
 
-  document.scene.dispatchEvent("ready")
+  document.dispatchEvent("ready")
 
   callback(document.scene)
 
