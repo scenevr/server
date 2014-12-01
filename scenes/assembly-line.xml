@@ -9,26 +9,31 @@
 <scene>
   <spawn position="5 0 10" />
 
+  <skybox src="/skyboxes/dark_.png" />
+
   <script>
     document.addEventListener("ready", function(event) {
       var boxes = [],
-        startPosition = new Vector(0,0,0);
+        startPosition = new Vector(0,0,0),
+        scaleVector = new Vector(1.5,4,0.2);
 
       function randomColor(){
-        return '#' + (0x100000 + ~~(Math.random() * 0xEFFFFF)).toString(16);
+        var c = (0x10 + ~~(Math.random() * 0xEF)).toString(16);
+        return '#' + c + c + c;
       }
 
       function addBox(index){
         var el = document.createElement("box");
 
         el.position = new Vector(0,0.5,-index * 5).add(startPosition);
+        el.scale = scaleVector;
         el.color = randomColor();
 
         document.scene.appendChild(el);
         boxes.push(el);
       }
 
-      var speed = 5.0 / 10;
+      var speed = 10.0 / 10;
 
       setInterval(function(){
         boxes.forEach(function(box){
@@ -43,7 +48,7 @@
         }
 
         addBox(10);
-      }, 1000);
+      }, 500);
     });
   </script>
 
