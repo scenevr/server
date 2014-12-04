@@ -63,7 +63,11 @@ describe 'all_tags', ->
   it 'should parse billboard', ->
     Scene.load process.cwd() + '/spec/fixtures/all_tags.xml', (scene) ->
       expect(scene.getElementsByTagName("billboard").length).toEqual 1
+
+      console.log scene.getElementsByTagName("billboard")[0].innerHTML
+      
       expect(scene.getElementsByTagName("billboard")[0].innerHTML).toMatch /<h1>Welcome/
+      expect(scene.getElementsByTagName("billboard")[0].innerHTML).toMatch /<!\[CDATA\[/
       expect(scene.getElementsByTagName("billboard")[0].innerHTML).toMatch /stuff and things/
 
   it 'should parse model', ->

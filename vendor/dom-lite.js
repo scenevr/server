@@ -178,9 +178,15 @@ Node.prototype = {
     return node
   },
   toString: function() {
-    return this.hasChildNodes() ? this.childNodes.reduce(function (memo, node) {
-      return memo + node
-    }, "") : this.data || ""
+    if (this.hasChildNodes()){
+      return this.childNodes.reduce(function (memo, node) {
+        return memo + node
+      }, "");
+    }else if (this.nodeType == 4){
+      return "<![CDATA[" + this.data + "]]>";
+    }else{
+      return this.data || "";
+    }
   }
 }
 
@@ -337,6 +343,15 @@ extend(Text, Node, {
   nodeName: "#text"
 })
 
+function CData(data) {
+  this.data = data
+}
+
+extend(CData, Node, {
+  nodeType: 4,
+  nodeName: "#cdata"
+})
+
 function Comment(data) {
   this.data = data
 }
@@ -366,6 +381,9 @@ extend(Document, Node, {
   },
   createTextNode: function(value) {
     return own(this, new Text(value))
+  },
+  createCDataNode : function(value){
+    return own(this, new CData(value))
   },
   createComment: function(value) {
     return own(this, new Comment(value))

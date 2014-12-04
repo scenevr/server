@@ -20,7 +20,7 @@ Object.defineProperty Node.prototype, 'innerXML', {
         if node.type == 'text'
           el = self.ownerDocument.createTextNode(node.data)
         else if node.type == 'cdata'
-          el = self.ownerDocument.createTextNode(node.children[0].data)
+          el = self.ownerDocument.createCDataNode(node.children[0].data)
         else if node.type == 'comment'
           el = self.ownerDocument.createComment(node.data)
         else if node.type == 'tag' || node.type == "script"
