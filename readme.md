@@ -6,6 +6,8 @@ The scene server loads scene files in .xml format and listens for clients on a w
 
 Contact [bnolan@gmail.com](mailto:bnolan@gmail.com).
 
+![Screenshot](https://pbs.twimg.com/media/B2tuCOKCAAA7VQ7.png:large)
+
 ---
 
 ## Installation
