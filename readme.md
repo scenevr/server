@@ -20,8 +20,7 @@ OS: Verified running on Windows 8 and Mac OS X.
 1. Clone this repo: https://github.com/bnolan/scenevr.git
 1. `cd scenevr`
 1. `npm install`
-1. `npm install -g coffee-script`
-1. `coffee server.coffee scenes/hello.xml` 
+1. `node server.js scenes`
 
 Note: *you can replace hello.xml with any of the demo files*
 
@@ -33,7 +32,7 @@ In a new console window, and in a new directory:
 1. `npm install`
 1. `npm start`
 
-You should now be able to open `localhost:9000` in your browser to see `scenes/hello.xml`.
+You should now be able to open `localhost:9000` in your browser to see a list of scenes. You can edit these scenes in your favourite text editor, and when you hit save, the scene will automatically reload in your client.
 
 ---
 
