@@ -5,8 +5,10 @@
 
   <box id="home" color="#555" position='2.5 0 3.5' rotation="0 0 0" scale="1 1 1" />
 
+  <audio src="/sounds/drone-sweet.mp3" ambient="true" volume="0.5" />
+
   <!-- Boxes and their lighmap -->
-  <skybox style="color: #000" />
+  <skybox style="color: linear-gradient(#fff, #abf)" />
 
   <box id="home" color="#f80" position='2 0.5 -2' rotation="0 0 0" scale="0.9 0.9 0.9" />
   <box color="#0af" position='2 0.5 -4' rotation="0 0 0" scale="1 1 1" />
@@ -16,7 +18,7 @@
 
   <!--player position="0 0.75 0" /-->
 
-  <link href="/lightmap.xml" position="10 0 10" />
+  <link href="/challenge.xml" position="0 1 0" />
 
   <billboard position="-2 2 0" rotation="0 1.57 0" scale="4 4 0.5">
     <![CDATA[

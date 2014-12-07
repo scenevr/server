@@ -9,6 +9,7 @@ Billboard = require("./elements/billboard")
 Model = require("./elements/model")
 Link = require("./elements/link")
 Skybox = require("./elements/skybox")
+Audio = require("./elements/audio")
 
 Document = dom.Document
 HTMLElement = dom.HTMLElement
@@ -37,6 +38,8 @@ Document.prototype.createElement = (tag) ->
     node = new Spawn
   else if tag == "skybox"
     node = new Skybox
+  else if tag == "audio"
+    node = new Audio
   else
     node = new HTMLElement(tag)
   
