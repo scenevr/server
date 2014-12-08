@@ -56,12 +56,12 @@ Object.defineProperties Element.prototype, {
 
     set: (value) ->
       if value instanceof Euler
-        @_rotation = value.clone()
+        @_rotation = value.clone().clamp()
       else if typeof value == "string"
         v = (new Euler).fromArray(value.split(' ').map(parseFloat))
 
         if isFinite(v.x) && isFinite(v.y) && isFinite(v.z)
-          @_rotation = v
+          @_rotation = v.clamp()
         else
           throw "Invalid rotation argument"
       else

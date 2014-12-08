@@ -30,6 +30,17 @@ Euler.fromString = function(value){
   return v;
 }
 
+var fpModulus = function( value, divisor, upperBound ) {
+  if( value < 0 ) {
+    value += Math.ceil( (- value) / divisor ) * divisor;
+  }
+  else if( value >= divisor ) {
+    value -= Math.floor( value / divisor ) * divisor;
+  }
+
+  return value;
+}
+
 Euler.prototype = {
 
   constructor: Euler,
@@ -52,6 +63,14 @@ Euler.prototype = {
 
   toString: function(){
     return [this.x, this.y, this.z].join(" ");
+  },
+
+  clamp: function() {
+    // clamps to the range [ -Math.PI, Math.PI )
+    this._x = fpModulus( this._x + Math.PI, Math.PI * 2, true ) - Math.PI;
+    this._y = fpModulus( this._y + Math.PI, Math.PI * 2, true ) - Math.PI;
+    this._z = fpModulus( this._z + Math.PI, Math.PI * 2, true ) - Math.PI;
+    return this;
   },
 
   get x () {
