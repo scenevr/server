@@ -1,7 +1,8 @@
 {
   "name": "scenevr",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Create multiuser 3d environments using html-like tags and javascript",
+  "homepage" : "http://www.scenevr.com",
   "repository": {
     "type": "git",
     "url": "git://github.com/bnolan/scenevr.git"
@@ -23,7 +24,6 @@
   },
   "bin": "./server.js",
   "scripts": {
-    "start": "coffee server.coffee",
     "test": "jasmine-node --verbose --captureExceptions --coffee spec/"
   }
 }
