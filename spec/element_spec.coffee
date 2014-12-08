@@ -43,7 +43,7 @@ describe 'position', ->
 
   it 'throw', ->
     e = new Element "box"
-    expect(-> e.position = 'one two three').toThrow "Invalid argument"
+    expect(-> e.position = 'one two three').toThrow "Invalid position argument"
 
   it 'should get xml', ->
     e = new Element 'box'

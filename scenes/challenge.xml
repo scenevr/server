@@ -5,7 +5,9 @@
   <box id="orange" color="#f70" position='0.5 0.5 -5' />
   <box id="pink" color="#f0a" position='-0.5 0.5 -10' />
 
-  <billboard position="0 1 2.5">
+  <audio src="/sounds/drone-2.mp3" volume="0.5" ambient="true" />
+
+  <billboard position="-1 1 -2.5" rotation="0 1.57 0">
     <![CDATA[
       <h1>The Challenge</h1>
 

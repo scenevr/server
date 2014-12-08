@@ -4,7 +4,9 @@
 
 The scene server loads scene files in .xml format and listens for clients on a websocket connection. Any connected client gets a streamed version of the world sent to them. You can write scripts in javascript using <script /> tags in your scenefile to provide interactivity to connected clients.
 
-Contact [bnolan@gmail.com](mailto:bnolan@gmail.com).
+Contact [bnolan@gmail.com](mailto:bnolan@gmail.com). Follow development at [@scenevr](http://twitter.com/scenevr/).
+
+![Screenshot](https://pbs.twimg.com/media/B2tuCOKCAAA7VQ7.png:large)
 
 ---
 
@@ -18,8 +20,7 @@ OS: Verified running on Windows 8 and Mac OS X.
 1. Clone this repo: https://github.com/bnolan/scenevr.git
 1. `cd scenevr`
 1. `npm install`
-1. `npm install -g coffee-script`
-1. `coffee server.coffee scenes/hello.xml` 
+1. `node server.js scenes`
 
 Note: *you can replace hello.xml with any of the demo files*
 
@@ -31,7 +32,7 @@ In a new console window, and in a new directory:
 1. `npm install`
 1. `npm start`
 
-You should now be able to open `localhost:9000` in your browser to see `scenes/hello.xml`.
+You should now be able to open `localhost:9000` in your browser to see a list of scenes. You can edit these scenes in your favourite text editor, and when you hit save, the scene will automatically reload in your client.
 
 ---
 

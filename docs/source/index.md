@@ -5,7 +5,7 @@ primary_navigation: true
 
 # Home
 
-The scene server is a node.js app and requires npm to install dependencies. You'll need to install [node](//nodejs.org) and [npm](//npmjs.org) to get started. Scene server will probably only work on os x and linux at the moment, but we'd appreciate pull requests to get it running on Windows.
+The scene server is a node.js app and requires npm to install dependencies. You'll need to install [node](//nodejs.org) and [npm](//npmjs.org) to get started. Scene server works on Windows, OS X and Linux.
 
 # Getting Started 
 
@@ -23,7 +23,15 @@ Download the sample scenes.
 
 This will checkout the sample-scenes into a new folder. You can then launch some of these scenes.
 
-    cd sample-scenes
-    scene-server hello.xml
+    scene-server sample-scenes
 
-This will launch the scene server. You can then open a webbrowser to [localhost:4000](//localhost:4000) and view the scene. If you open a second browser window and re-open the same URL (or get a friend to connect to your computer), you will see two players in the scene at the same time.
+This will launch the scene server.
+
+## Install the web client
+
+    git clone git://github.com/bnolan/scenevr-web/
+    cd scenevr-web
+    npm install
+    npm start
+
+You can then open a webbrowser to [localhost:9000](//localhost:9000) and view the scene. If you open a second browser window and re-open the same URL (or get a friend to connect to your computer), you will see two players in the scene at the same time.

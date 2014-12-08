@@ -6,6 +6,7 @@ Spawn = require('../elements/spawn.coffee')
 Model = require('../elements/model.coffee')
 Link = require('../elements/link.coffee')
 Skybox = require('../elements/skybox.coffee')
+Audio = require('../elements/audio.coffee')
 
 describe 'constructor', ->
   it 'should create', ->
@@ -87,4 +88,10 @@ describe 'all_tags', ->
       expect(scene.getElementsByTagName("skybox").length).toEqual 1
       expect(scene.getElementsByTagName("skybox")[0].src).toMatch /blah/
       expect(scene.getElementsByTagName("skybox")[0] instanceof Skybox).toBeTruthy()
+
+  it 'should parse audio', ->
+    Scene.load process.cwd() + '/spec/fixtures/all_tags.xml', (scene) ->
+      expect(scene.getElementsByTagName("audio").length).toEqual 1
+      expect(scene.getElementsByTagName("audio")[0].src).toMatch /drone/
+      expect(scene.getElementsByTagName("audio")[0] instanceof Audio).toBeTruthy()
 
