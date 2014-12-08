@@ -1,37 +1,56 @@
 ---
-title: Getting Started
-primary_navigation: true
+title: Home
+primary_navigation: false
 ---
 
-# Home
+# SceneVR
 
-The scene server is a node.js app and requires npm to install dependencies. You'll need to install [node](//nodejs.org) and [npm](//npmjs.org) to get started. Scene server works on Windows, OS X and Linux.
+With SceneVR you can build multiuser 3d scenes using html-like tags and javascript. SceneVR scenes are viewed using a browser-powered viewer (powered by webGL). Chrome, firefox and IE are supported. The server is powered by node.js and runs on Windows, Mac OS and Linux.
 
-# Getting Started 
+Server: [github.com/bnolan/scenevr](http://github.com/bnolan/scenevr)
 
-## Installing
+Web client: [github.com/bnolan/scenevr-web](http://github.com/bnolan/scenevr-web)
 
-    npm install -g scenevr
+<iframe width="730" height="440" src="//www.youtube.com/embed/xEE0PXy8Xfk?rel=0" frameborder="0" allowfullscreen></iframe>
 
-This will take a little while while the npm dependencies are downloaded. The `scenevr` executable will then be installed globally.
+# Features
 
-## Download sample scenes
+## Multi-user
 
-Download the sample scenes.
+Your SceneVR scene is multi-user from the get go. Just share the URL to your scene and your friends can join you. Each user is represented by a peg-man character. When a user interacts with the scene (by clicking a button for example), everyone sees the change that happens to the scene. You can use this to write **multi-user games** using just xml and javascript.
 
-    git clone git://github.com/bnolan/sample-scenes
+## Javascript API
 
-This will checkout the sample-scenes into a new folder. You can then launch some of these scenes.
+Script your scene with a **simple javascript API** that is modelled on the DOM. The javascript code is run on the server, and changes are reflected to all connected clients. You can change element attributes, create elements, remove elements.
 
-    scene-server sample-scenes
+## Interpolation
 
-This will launch the scene server.
+Changes on the server are sent to the clients 5 times a second. On the frames in between, movement and rotation are interpolated, so your clients get a 60 (or 75) fps **silky smooth** experience.
 
-## Install the web client
+## Simple markup
 
-    git clone git://github.com/bnolan/scenevr-web/
-    cd scenevr-web
-    npm install
-    npm start
+The markup is straightforward and easy to learn. Use style attributes for styling, linear gradients on your skybox. Rotations are expressed in euler angles as radians (so `rotation="3.14 0 0"` rotates an element 180° around the x axis.) Positions are expressed in meters so `position="0 0 10"` is 10 meters in front of you.
 
-You can then open a webbrowser to [localhost:9000](//localhost:9000) and view the scene. If you open a second browser window and re-open the same URL (or get a friend to connect to your computer), you will see two players in the scene at the same time.
+## .obj model support
+
+Use the model tag (`<model src="/models/cat.obj" />`) to import obj models from your favourite modelling tool. You can also apply textures (that are normal shaded) or lightmaps (that are unlit) to your models.
+
+## Physics simulation
+
+We use [cannon.js](http://cannonjs.org/) so do collision detection on the client, so you can create platform games where you jump from box to box. We have a blender plugin under development to export collision models from that tool.
+
+# Under development
+
+SceneVR is still under heavy development, and some of these features are only available on branches of the scenevr-web client. Feel free to try them out and log issues and help contribute to development!
+
+## Oculus Rift support
+
+If you use a webVR browser ([firefox](http://mozvr.com/downloads.html) or [chrome](http://blog.tojicode.com/2014/07/bringing-vr-to-chrome.html)), you can use the oculus rift to experience the scenes in VR. Hit `F11` for fullscreen, and `R` to reset your viewport.
+
+## Mobile device support
+
+Your scenes work in modern webGL-enabled browsers like the ios 8 browser. Just turn your phone sideways, and use the two thumb joysticks to walk and look around the scene.
+
+## Portals
+
+When you click a link to the next scene, a portal opens and shows you the next scene. Just walk through the portal to visit the next scene.
