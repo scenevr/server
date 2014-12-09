@@ -1,5 +1,5 @@
-Node = require("../node")
-Vector = require("../vector.js")
+Node = require("./node")
+Vector = require("./vector.js")
 
 class Observer
   constructor: (@socket, @reflector) ->
