@@ -4,6 +4,7 @@ WSServer = require('websocket').server
 WSFrame  = require('websocket').frame
 WSRouter = require('websocket').router
 HTTP = require("http")
+MAX_CLIENTS = 8
 
 debug = (message) ->
   console.log (new Date()) + " " + message
@@ -12,6 +13,22 @@ class WebsocketServer
   constructor: (reflector, @port) ->
     # ...
     @reflectors = {}
+    @clients = []
+
+  addClient: (client) ->
+    @clients.push(client)
+
+  removeClient: (client) ->
+    if @clients.indexOf(client) >= 0
+      @clients.splice(@clients.indexOf(client), 1)
+
+  clientsAheadOf: (client) ->
+    index = @clients.indexOf(client)
+
+    if index < MAX_CLIENTS
+      -1
+    else
+      index - MAX_CLIENTS
 
   clearReflectors: ->
     @reflectors = {}
@@ -32,35 +49,65 @@ class WebsocketServer
 
     @wsServer.on "request", @onRequest
 
-  onRequest: (request) =>
-    console.log "[server] new request from"
-    console.log request.remoteAddress
+    setInterval @queueInterval, 1000
 
-    # todo - check request.origin maybe?
+  queueInterval: =>
+    index = 0
+
+    for client in @clients
+      if index < MAX_CLIENTS and !client.observer
+        @serveConnection(client)
+
+      if index >= MAX_CLIENTS
+        client.send "<packet><queue limit='#{MAX_CLIENTS}' position='#{index - MAX_CLIENTS}' /></packet>"
+
+      index++
+
+  onRequest: (request) =>
+    console.log "[server] new request from #{request.remoteAddress}"
+
     try
+      # todo - check request.origin maybe?
       connection = request.accept("scenevr", request.origin)
     catch 
       # doesnt want scenevr - drop the client
+      connection.close()
       return
 
-    reflector = @reflectors[request.resource]
+    connection.request = request
 
-    if !reflector
-      console.log "[server] 404 scene not found '#{request.resource}'"
-      request.reject()
-      return
-
-    console.log "[server] client requested '#{request.resource}'"
-    
-    observer = new Observer(connection, reflector)
-    reflector.addObserver(observer)
-
-    connection.on "message", (message) =>
-      if message.type is "utf8"
-        observer.recieveMessage(message.utf8Data)
+    @addClient(connection)
 
     connection.on "close", (reasonCode, description) =>
       console.log "[server] Peer " + connection.remoteAddress + " disconnected."
-      reflector.removeObserver(observer)
+      @removeClient(connection)
+
+    if @clientsAheadOf(connection) >= 0
+      @queueConnection(connection)
+    else
+      @serveConnection(connection)
+
+  queueConnection: (connection) ->
+    # Do nothing.. queueInterval calls serveConnection once you get far enough up the queue
+
+  serveConnection: (connection) ->
+    reflector = @reflectors[connection.request.resource]
+
+    if !reflector
+      console.log "[server] 404 scene not found '#{connection.request.resource}'"
+      connection.request.reject()
+      return
+
+    console.log "[server] client requested '#{connection.request.resource}'"
+    
+    connection.observer = new Observer(connection, reflector)
+    reflector.addObserver(connection.observer)
+
+    connection.on "message", (message) =>
+      if message.type is "utf8"
+        connection.observer.recieveMessage(message.utf8Data)
+
+    connection.on "close", (reasonCode, description) =>
+      reflector.removeObserver(connection.observer)
 
 module.exports = WebsocketServer
