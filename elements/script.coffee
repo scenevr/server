@@ -1,4 +1,4 @@
-HTMLElement = require("../vendor/dom-lite").HTMLElement
+HTMLElement = require("../lib/dom-lite").HTMLElement
 
 class Script extends HTMLElement
   constructor: ->

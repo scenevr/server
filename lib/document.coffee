@@ -1,15 +1,15 @@
-dom = require("./vendor/dom-lite")
+dom = require("../lib/dom-lite")
 UUID = require("uuid")
 
-Script = require("./elements/script")
-Box = require("./elements/box")
-Spawn = require("./elements/spawn")
-Player = require("./elements/player")
-Billboard = require("./elements/billboard")
-Model = require("./elements/model")
-Link = require("./elements/link")
-Skybox = require("./elements/skybox")
-Audio = require("./elements/audio")
+Script = require("../elements/script")
+Box = require("../elements/box")
+Spawn = require("../elements/spawn")
+Player = require("../elements/player")
+Billboard = require("../elements/billboard")
+Model = require("../elements/model")
+Link = require("../elements/link")
+Skybox = require("../elements/skybox")
+Audio = require("../elements/audio")
 
 Document = dom.Document
 HTMLElement = dom.HTMLElement
@@ -44,7 +44,6 @@ Document.prototype.createElement = (tag) ->
     node = new HTMLElement(tag)
   
   if node.reflect
-    # Fixme - use less bits (maybe an autoincrementing counter?)
     node.uuid = UUID.v4()
     @nodeMap[node.uuid] = node
 

@@ -1,5 +1,5 @@
 Color = require("color")
-Element = require("../element")
+Element = require("../lib/element")
 
 # fixme *properly*
 Color.prototype.toString = ->

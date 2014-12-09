@@ -1,9 +1,7 @@
 htmlparser = require('htmlparser2')
 
-dom = require("./vendor/dom-lite")
+dom = require("./dom-lite")
 Node = dom.Node
-
-Script = require("./elements/script")
 HTMLElement = dom.HTMLElement
 
 Object.defineProperty Node.prototype, 'innerXML', {

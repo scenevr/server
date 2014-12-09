@@ -1,4 +1,4 @@
-Element = require("../element")
+Element = require("../lib/element")
 
 class Link extends Element
   constructor: ->

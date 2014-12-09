@@ -1,7 +1,7 @@
 UUID = require("uuid")
-dom = require("./vendor/dom-lite")
-Vector = require("./vector")
-Euler = require("./euler")
+dom = require("../lib/dom-lite")
+Vector = require("../lib/vector")
+Euler = require("../lib/euler")
 
 class Element extends dom.HTMLElement
   removeChild: ->

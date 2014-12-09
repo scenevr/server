@@ -1,4 +1,4 @@
-Scene = require('../scene.coffee')
+Scene = require('../elements/scene.coffee')
 
 Script = require('../elements/script.coffee')
 Box = require('../elements/box.coffee')

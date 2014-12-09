@@ -1,6 +1,6 @@
-Element = require('../element')
-Vector = require('../vector')
-Euler = require('../euler')
+Element = require('../lib/element')
+Vector = require('../lib/vector')
+Euler = require('../lib/euler')
 
 xml = (e) ->
   s = new Element 'scene'
@@ -79,13 +79,15 @@ describe 'rotation', ->
 
   it 'should set rotation', ->
     e = new Element "box"
-    e.rotation = new Euler(0,Math.PI,0)
-    expect(e.rotation.y).toEqual(Math.PI)
+    e.rotation = new Euler(0,Math.PI / 2,0)
+    expect(e.rotation.y).toEqual(Math.PI / 2)
 
   it 'should set by attribute', ->
     e = new Element "box"
     e.setAttribute 'rotation', '0 1.001 2'
-    expect(e.rotation.toArray()).toEqual [0,1.001,2]
+    expect(e.rotation.x).toBeCloseTo 0
+    expect(e.rotation.y).toBeCloseTo 1.001
+    expect(e.rotation.z).toBeCloseTo 2
 
   it 'should get xml', ->
     e = new Element 'box'

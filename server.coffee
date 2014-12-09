@@ -2,7 +2,7 @@ _ = require 'underscore'
 
 Reflector = require './lib/reflector'
 WebsocketServer = require './lib/websocket_server'
-Scene = require './scene'
+Scene = require './elements/scene'
 IndexScene = require './lib/index_scene'
 express = require 'express'
 cors = require('cors')

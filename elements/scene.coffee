@@ -2,12 +2,12 @@ fs = require('fs')
 _ = require("underscore")
 vm = require('vm')
 
-dom = require("./vendor/dom-lite")
-Element = require("./node")
-Document = require("./document")
+dom = require("../lib/dom-lite")
+Element = require("../lib/node")
+Document = require("../lib/document")
 
-Vector = require("./vector")
-Euler = require("./euler")
+Vector = require("../lib/vector")
+Euler = require("../lib/euler")
 
 Scene = dom.HTMLElement
 
