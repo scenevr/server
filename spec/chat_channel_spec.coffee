@@ -1,4 +1,5 @@
 ChatChannel = require('../lib/chat_channel')
+Scene = require('../elements/scene')
 
 describe 'constructor', ->
   it 'should create', ->
@@ -7,5 +8,5 @@ describe 'constructor', ->
 
 describe 'sendMessage', ->
   it 'should send message', ->
-    c = new ChatChannel
-    expect(c.sendMessage { name : 'ben' }, 'hello world').toMatch /^<chat from="ben"/
+    c = new ChatChannel { scene : new Scene('scene') }
+    expect(c.sendMessage { broadcast : ( -> ), player : { name : 'ben' } }, 'hello world').toMatch /^<event.+chat/

@@ -16,6 +16,9 @@ class Observer
   makeAwareOf: (element) ->
     @awareList[element.uuid] = true
 
+  broadcast: (xmlMessage) ->
+    @reflector.broadcoast(self, xmlMessage)
+
   recieveMessage: (xml) ->
     for element in Node.packetParser(xml).childNodes
       if element.nodeName == "player"
@@ -32,8 +35,7 @@ class Observer
               point : Vector.fromString(element.getAttribute("point"))
             }
         else if element.getAttribute('name') is 'chat'
-          debugger
-          @reflector.chatChannel.sendMessage(@player, element.getAttribute('message'))
+          @reflector.chatChannel.sendMessage(@, element.getAttribute('message'))
         else
           console.log "Unrecognized event element"
           console.log "  " + element.toString()
