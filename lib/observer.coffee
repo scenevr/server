@@ -6,6 +6,9 @@ class Observer
     @awareList = {}
     @document = @reflector.scene.ownerDocument
 
+  setPlayer: (p) ->
+    @player = p
+
   drop: (reason) ->
     console.log "[server] Dropped client for: #{reason}"
     @socket.close()
@@ -17,7 +20,7 @@ class Observer
     @awareList[element.uuid] = true
 
   broadcast: (xmlMessage) ->
-    @reflector.broadcoast(self, xmlMessage)
+    @reflector.broadcast(@, xmlMessage)
 
   recieveMessage: (xml) ->
     for element in Node.packetParser(xml).childNodes
