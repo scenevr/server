@@ -5,12 +5,10 @@ class ChatChannel
 
   sendMessage: (player, message) ->
     xml = builder.create('root')
-      .ele('chat', { from : player.name, message : message })
+      .ele('event', { name: 'chat', from : player.name || 'anonymous', message : message })
       .toString({ pretty: false })
 
-    console.log(xml)
-
-    # @reflector.sendAll "<chat from='#{player.name}'>"
-    # @reflector.scene.dispatchEvent 'chat', { player : player, message : message }
+    @reflector.sendAll xml
+    @reflector.scene.dispatchEvent 'chat', { player : player, message : message }
 
 module.exports = ChatChannel

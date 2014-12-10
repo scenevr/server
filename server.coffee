@@ -30,11 +30,11 @@ class Server
   loadAllScenes: ->
     glob "#{@folder}/*.xml", {}, (er, files) =>
       indexXml = new IndexScene(files).toXml()
-      Scene.load indexXml, (scene) => 
+      Scene.load indexXml, (scene) =>
         @onLoaded(scene, '/index.xml')
 
       files.forEach (filename) =>
-        Scene.load filename, (scene) => 
+        Scene.load filename, (scene) =>
           @onLoaded(scene, '/' + path.basename(filename))
           fs.watch filename, @restart
 
@@ -61,7 +61,7 @@ class Server
       delete reflector.scene
 
     # Gross
-    setTimeout( => 
+    setTimeout( =>
       @websocketServer.clearReflectors()
       @loadAllScenes()
     , 250)
