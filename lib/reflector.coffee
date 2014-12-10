@@ -3,7 +3,7 @@ ChatChannel = require("./chat_channel")
 class Reflector
   constructor: (@scene) ->
     @observers = []
-    # @chatChannel = new ChatChannel(this)
+    @chatChannel = new ChatChannel(this)
 
   sendAll: (xmlElement) ->
     for observer in @observers

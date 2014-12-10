@@ -4,7 +4,7 @@ WSServer = require('websocket').server
 WSFrame  = require('websocket').frame
 WSRouter = require('websocket').router
 HTTP = require("http")
-MAX_CLIENTS = 8
+MAX_CLIENTS = 16
 
 debug = (message) ->
   console.log (new Date()) + " " + message

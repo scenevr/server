@@ -5,6 +5,7 @@ class Observer
   constructor: (@socket, @reflector) ->
     @awareList = {}
     @document = @reflector.scene.ownerDocument
+    @player = { name : 'anonymous' }
 
   drop: (reason) ->
     console.log "[server] Dropped client for: #{reason}"
@@ -31,6 +32,8 @@ class Observer
               player : @player
               point : Vector.fromString(element.getAttribute("point"))
             }
+        else if element.getAttribute('name') is 'chat'
+          @reflector.chatChannel.sendMessage(@player, element.getAttribute('message'))
         else
           console.log "Unrecognized event element"
           console.log "  " + element.toString()
