@@ -5,14 +5,18 @@ class Reflector
     @observers = []
     @chatChannel = new ChatChannel(this)
 
-  sendAll: (xmlElement) ->
+  broadcast: (observer, xmlString) ->
+    for obs in @observers when observer isnt obs
+      obs.socket.send("<packet>" + xmlString + "</packet>")
+
+  emit: (xmlString) ->
     for observer in @observers
-      observer.socket.send("<packet>" + xmlElement + "</packet>")
+      observer.socket.send("<packet>" + xmlString + "</packet>")
 
   addObserver: (o) ->
     @observers.push(o)
 
-    o.player = @scene.ownerDocument.createElement "player"
+    o.setPlayer(@scene.ownerDocument.createElement "player")
     @scene.appendChild(o.player)
 
     o.sendMessage "<event name=\"ready\" uuid=\"#{o.player.uuid}\" />"

@@ -55,7 +55,7 @@ class Server
     console.log "[server] Restarting server on file change."
 
     for filename, reflector of @websocketServer.reflectors
-      reflector.sendAll('<event name="restart" />')
+      reflector.emit('<event name="restart" />')
       reflector.stop()
       reflector.scene.stop()
       delete reflector.scene
