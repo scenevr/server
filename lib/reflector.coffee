@@ -45,6 +45,8 @@ class Reflector
     @observers = []
 
   tick: =>
+    return if @observers.length == 0
+
     packets = []
 
     for element in @scene.childNodes when element.reflect
