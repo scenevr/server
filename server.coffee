@@ -20,7 +20,7 @@ class Server
 
     @webServer = express()
     @webServer.use(cors())
-    @webServer.use(express.static("./scenes/"))
+    @webServer.use(express.static(@folder))
     @webServerHandle = @webServer.listen(8090)
 
     @restart = _.throttle(@restartServer, 1000)
