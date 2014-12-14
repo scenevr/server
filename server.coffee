@@ -4,24 +4,28 @@ Reflector = require './lib/reflector'
 WebsocketServer = require './lib/websocket_server'
 Scene = require './elements/scene'
 IndexScene = require './lib/index_scene'
-express = require 'express'
-cors = require('cors')
 path = require 'path'
 fs = require('fs')
 glob = require('glob')
+express = require 'express'
+http = require("http")
+cors = require('cors')
+PORT = process.env.PORT || 8080
 
 class Server
   constructor: (@folder, @port) ->
-    console.log "[server] Serving scenes in '#{@folder}'..."
-
-    # Handles connections and messages from the websocket
-    @websocketServer = new WebsocketServer(null, @port)
-    @websocketServer.listen()
+    console.log "[server] Serving scenes in '#{@folder}' on port #{@port}..."
 
     @webServer = express()
     @webServer.use(cors())
     @webServer.use(express.static(@folder))
-    @webServerHandle = @webServer.listen(8090)
+
+    httpServer = http.createServer(@webServer)
+    httpServer.listen(port)
+
+    # Handles connections and messages from the websocket
+    @websocketServer = new WebsocketServer(httpServer)
+    @websocketServer.listen()
 
     @restart = _.throttle(@restartServer, 1000)
 
@@ -70,4 +74,4 @@ if process.argv.length == 2
   console.log "Usage: scenevr [scenedirectory]"
   process.exit()
 
-new Server(process.argv[2], 8080)
+new Server(process.argv[2], PORT)

@@ -1,16 +1,14 @@
 Observer = require './observer'
 
-WSServer = require('websocket').server
-WSFrame  = require('websocket').frame
-WSRouter = require('websocket').router
-HTTP = require("http")
+WSServer = require("ws").Server
+
 MAX_CLIENTS = 16
 
 debug = (message) ->
   console.log (new Date()) + " " + message
 
 class WebsocketServer
-  constructor: (reflector, @port) ->
+  constructor: (@httpServer) ->
     # ...
     @reflectors = {}
     @clients = []
@@ -34,20 +32,19 @@ class WebsocketServer
     @reflectors = {}
 
   listen: ->
-    @httpServer = HTTP.createServer (request, response) ->
-      console.log  "[server] Received request for " + request.url
-      response.writeHead 404
-      response.end()
+    # @httpServer = HTTP.createServer (request, response) ->
+    #   console.log  "[server] Received request for " + request.url
+    #   response.writeHead 404
+    #   response.end()
 
-    @httpServer.listen @port, =>
-      console.log "[server] Server is listening on port #{@port}"
+    # @httpServer.listen @port, =>
+    #   console.log "[server] Server is listening on port #{@port}"
 
     @wsServer = new WSServer(
-      httpServer : @httpServer
-      autoAcceptConnections : false
+      server : @httpServer
     )
 
-    @wsServer.on "request", @onRequest
+    @wsServer.on "connection", @onConnection
 
     setInterval @queueInterval, 1000
 
@@ -63,23 +60,13 @@ class WebsocketServer
 
       index++
 
-  onRequest: (request) =>
-    console.log "[server] new request from #{request.remoteAddress}"
-
-    try
-      # todo - check request.origin maybe?
-      connection = request.accept("scenevr", request.origin)
-    catch 
-      # doesnt want scenevr - drop the client
-      connection.close()
-      return
-
-    connection.request = request
+  onConnection: (connection) =>
+    console.log "[server] new request"
 
     @addClient(connection)
 
     connection.on "close", (reasonCode, description) =>
-      console.log "[server] Peer " + connection.remoteAddress + " disconnected."
+      console.log "[server] Peer disconnected."
       @removeClient(connection)
 
     if @clientsAheadOf(connection) >= 0
@@ -91,14 +78,14 @@ class WebsocketServer
     # Do nothing.. queueInterval calls serveConnection once you get far enough up the queue
 
   serveConnection: (connection) ->
-    reflector = @reflectors[connection.request.resource]
+    reflector = @reflectors[connection.upgradeReq.url]
 
     if !reflector
-      console.log "[server] 404 scene not found '#{connection.request.resource}'"
+      console.log "[server] 404 scene not found '#{connection.upgradeReq.url}'"
       connection.request.reject()
       return
 
-    console.log "[server] client requested '#{connection.request.resource}'"
+    console.log "[server] client requested '#{connection.upgradeReq.url}'"
     
     connection.observer = new Observer(connection, reflector)
     reflector.addObserver(connection.observer)
