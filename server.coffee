@@ -70,10 +70,10 @@ class Server
       @loadAllScenes()
     , 250)
 
-path = process.argv[2] || process.env.SCENE_PATH
+scenePath = process.argv[2] || process.env.SCENE_PATH
 
-if !path
+if !scenePath
   console.log "Usage: scenevr [scenedirectory]"
   process.exit()
 
-new Server(path, PORT)
+new Server(scenePath, PORT)
