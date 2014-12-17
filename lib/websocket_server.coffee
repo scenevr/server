@@ -90,9 +90,9 @@ class WebsocketServer
     connection.observer = new Observer(connection, reflector)
     reflector.addObserver(connection.observer)
 
-    connection.on "message", (message) =>
-      if message.type is "utf8"
-        connection.observer.recieveMessage(message.utf8Data)
+    connection.on "message", (data, flags) =>
+      if !flags.binary
+        connection.observer.recieveMessage(data)
 
     connection.on "close", (reasonCode, description) =>
       reflector.removeObserver(connection.observer)

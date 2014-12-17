@@ -31,12 +31,15 @@ class Observer
           @drop("Invalid position " + element.getAttribute("position"))
 
       else if element.nodeName == "event"
-        if element.getAttribute("name") == "click"
-          if @document.getElementByUUID(element.getAttribute("uuid"))
+        if element.getAttribute('name') is "click"
+          if @document.getElementByUUID(element.getAttribute('uuid'))
             @document.getElementByUUID(element.getAttribute("uuid")).dispatchEvent 'click', {
               player : @player
               point : Vector.fromString(element.getAttribute("point"))
             }
+          else
+            console.log "Couldnt find element with uuid #{element.getAttribute('uuid')}"
+
         else if element.getAttribute('name') is 'chat'
           @reflector.chatChannel.sendMessage(@, element.getAttribute('message'))
         else

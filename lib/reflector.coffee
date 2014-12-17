@@ -64,7 +64,10 @@ class Reflector
     # console.log "<packet>" + packets.join("\n") + "</packet>"
 
     for observer in @observers
-      observer.socket.send("<packet>" + packets.join("\n") + "</packet>")
+      try
+        observer.socket.send("<packet>" + packets.join("\n") + "</packet>")
+      catch e
+        console.log "[server] Tried to write to dead socket"
 
     null
 
