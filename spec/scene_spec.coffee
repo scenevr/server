@@ -1,12 +1,12 @@
-Scene = require('../elements/scene.coffee')
+Scene = require('../elements/scene')
 
-Script = require('../elements/script.coffee')
-Box = require('../elements/box.coffee')
-Spawn = require('../elements/spawn.coffee')
-Model = require('../elements/model.coffee')
-Link = require('../elements/link.coffee')
-Skybox = require('../elements/skybox.coffee')
-Audio = require('../elements/audio.coffee')
+Script = require('../elements/script')
+Box = require('../elements/box')
+Spawn = require('../elements/spawn')
+Model = require('../elements/model')
+Link = require('../elements/link')
+Skybox = require('../elements/skybox')
+Audio = require('../elements/audio')
 
 describe 'constructor', ->
   it 'should create', ->
