@@ -31,19 +31,22 @@ class Observer
           @drop("Invalid position " + element.getAttribute("position"))
 
       else if element.nodeName == "event"
-        if element.getAttribute('name') is "click"
-          if @document.getElementByUUID(element.getAttribute('uuid'))
-            @document.getElementByUUID(element.getAttribute("uuid")).dispatchEvent 'click', {
-              player : @player
-              point : Vector.fromString(element.getAttribute("point"))
-            }
-          else
-            console.log "Couldnt find element with uuid #{element.getAttribute('uuid')}"
+        el = element.getAttribute('uuid') && @document.getElementByUUID(element.getAttribute('uuid'))
 
+        if el && (element.getAttribute('name') is "click")
+          el.dispatchEvent 'click', {
+            player : @player
+            point : Vector.fromString(element.getAttribute("point"))
+          }
+        else if el && (element.getAttribute('name') is "collide")
+          el.dispatchEvent 'click', {
+            player : @player
+            normal : Vector.fromString(element.getAttribute("normal"))
+          }
         else if element.getAttribute('name') is 'chat'
           @reflector.chatChannel.sendMessage(@, element.getAttribute('message'))
         else
-          console.log "Unrecognized event element"
+          console.log "Unrecognized event element or element not found"
           console.log "  " + element.toString()
       else
         console.log "Unrecognized packet element"
