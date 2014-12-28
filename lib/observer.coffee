@@ -39,7 +39,7 @@ class Observer
             point : Vector.fromString(element.getAttribute("point"))
           }
         else if el && (element.getAttribute('name') is "collide")
-          el.dispatchEvent 'click', {
+          el.dispatchEvent 'collide', {
             player : @player
             normal : Vector.fromString(element.getAttribute("normal"))
           }
