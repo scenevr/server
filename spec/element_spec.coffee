@@ -1,4 +1,5 @@
 Element = require('../lib/element')
+Document = require('../lib/document')
 Vector = require('../lib/vector')
 Euler = require('../lib/euler')
 
@@ -6,6 +7,12 @@ xml = (e) ->
   s = new Element 'scene'
   s.appendChild(e)
   s.innerXML
+
+parseXml = (xml) ->
+  document = Document.createDocument()
+  scene = document.createElement("scene")
+  scene.innerXML = xml
+  scene.firstChild
 
 describe 'constructor', ->
   it 'should create', ->
@@ -101,3 +108,16 @@ describe "attributes", ->
     expect(e.src).toMatch /..something/
     expect(e.getAttribute("src")).toMatch /..something/
     expect(xml(e)).toMatch /src="..something"/
+
+describe "style", ->
+  it "should parse", ->
+    e = parseXml("<box style='color: red' />")
+    expect(e.style.color).toEqual 'red'
+    e.style.color = 'blue'
+    expect(xml(e)).toMatch /color: blue/
+
+  it "should parse hyphenated tags", ->
+    e = parseXml("<box style='texture-map: url(/blah.png)' />")
+    expect(e.style.textureMap).toEqual 'url(/blah.png)'
+    e.style.textureMap = 'url(/boop.png)'
+    expect(xml(e)).toMatch /texture-map: url..boop.png./
