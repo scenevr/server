@@ -69,7 +69,7 @@ Server = (function() {
     console.log("[server]  * Loaded '" + filename + "'");
     reflector = new Reflector(scene, filename);
     this.websocketServer.reflectors[filename] = reflector;
-    return reflector.startTicking();
+    reflector.start();
   };
 
   Server.prototype.restartServer = function() {

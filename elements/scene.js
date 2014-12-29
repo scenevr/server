@@ -30,30 +30,13 @@ _.extend(Scene.prototype, {
   }
 });
 
-Scene.load = function(filename, callback) {
-  var document, e, intervals, node, parsedScene, script, scriptElement, timeouts, _i, _j, _len, _len1, _ref, _ref1;
-  document = Document.createDocument();
-  parsedScene = new Element("null");
-  parsedScene.ownerDocument = document;
-  if (filename.match(/</)) {
-    parsedScene.innerXML = filename;
-  } else {
-    parsedScene.innerXML = fs.readFileSync(filename).toString();
-  }
-  _ref = parsedScene.childNodes;
-  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-    node = _ref[_i];
-    if (node.nodeName === 'scene') {
-      document.scene = node;
-    }
-  }
-  if (!document.scene) {
-    console.log("[server] Couldn't find a <scene /> element in " + filename);
-    return;
-  }
-  timeouts = [];
-  intervals = [];
-  document.scene.clearTimeouts = function() {
+Scene.prototype.start = function(reflector){
+  var document = this.ownerDocument;
+
+  var timeouts = [];
+  var intervals = [];
+
+  this.clearTimeouts = function() {
     var interval, timeout, _j, _k, _len1, _len2;
     for (_j = 0, _len1 = timeouts.length; _j < _len1; _j++) {
       timeout = timeouts[_j];
@@ -71,22 +54,34 @@ Scene.load = function(filename, callback) {
   // we should also wrap setTimeout and setInterval calls so that broken code doesn't bring
   // down the server.
 
-  _ref1 = document.getElementsByTagName("script");
-  for (_j = 0, _len1 = _ref1.length; _j < _len1; _j++) {
-    scriptElement = _ref1[_j];
-    script = null;
+  var self = this;
+
+  document.getElementsByTagName("script").map(function(scriptElement){
+    var script = null;
+
     try {
-      script = vm.createScript(scriptElement.textContent, filename);
-    } catch (_error) {
-      e = _error;
-      console.log("[server] " + filename + ":\n  " + (e.toString()));
-      continue;
+      script = vm.createScript(scriptElement.textContent, document.filename);
+    } catch (e) {
+      console.log("[server] " + document.filename + ":\n  " + (e.toString()));
+      return;
     }
+
     try {
+
+      // Run a script. Wrap setInterval and setTimeout so that errors in callbacks don't
+      // kill the server.
+
       script.runInNewContext({
         document: document,
         Vector: Vector,
         Euler: Euler,
+
+        channel : {
+          sendMessage : function(message){
+            reflector.chatChannel.sendMessage(self, message)
+          }
+        },
+
         setInterval: function(func, timeout) {
           var handle;
           handle = setInterval(function() {
@@ -94,13 +89,14 @@ Scene.load = function(filename, callback) {
               return func();
             } catch (_error) {
               e = _error;
-              console.log("[server] " + filename + ":\n  " + (e.toString()));
+              console.log("[server] " + document.filename + ":\n  " + (e.toString()));
               return clearInterval(handle);
             }
           }, timeout);
           intervals.push(handle);
           return handle;
         },
+
         setTimeout: function(func, timeout) {
           var handle;
           handle = setTimeout(function() {
@@ -108,7 +104,7 @@ Scene.load = function(filename, callback) {
               return func();
             } catch (_error) {
               e = _error;
-              return console.log("[server] " + filename + ":\n  " + (e.toString()));
+              return console.log("[server] " + document.filename + ":\n  " + (e.toString()));
             }
           }, timeout);
           timeouts.push(handle);
@@ -118,12 +114,44 @@ Scene.load = function(filename, callback) {
       });
     } catch (_error) {
       e = _error;
-      console.log("[server] " + filename);
+      console.log("[server] " + document.filename);
       console.log("  " + e.stack.split("\n").slice(0, 2).join("\n  "));
     }
-  }
+  });
+
   document.dispatchEvent("ready");
-  return callback(document.scene);
+}
+
+Scene.load = function(filename, callback) {
+  var document, e, intervals, node, parsedScene, script, scriptElement, timeouts, _i, _j, _len, _len1, _ref, _ref1;
+
+  document = Document.createDocument();
+  
+  parsedScene = new Element("null");
+  parsedScene.ownerDocument = document;
+
+  if (filename.match(/</)) {
+    parsedScene.innerXML = filename;
+  } else {
+    parsedScene.innerXML = fs.readFileSync(filename).toString();
+  }
+
+  _ref = parsedScene.childNodes;
+  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+    node = _ref[_i];
+    if (node.nodeName === 'scene') {
+      document.scene = node;
+    }
+  }
+
+  if (!document.scene) {
+    console.log("[server] Couldn't find a <scene /> element in " + filename);
+    return;
+  }
+
+  document.filename = filename;
+
+  callback(document.scene);
 };
 
 module.exports = Scene;
