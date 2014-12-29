@@ -36,7 +36,7 @@ describe 'scene', ->
       expect(script instanceof Script).toBeTruthy()
       expect(script.textContent).toMatch /10 < 20/
 
-describe 'compartmentalization', ->
+xdescribe 'compartmentalization', ->
   xml1 = "<scene><script>document.foo = 'bar';</script></scene>"
   xml2 = "<scene><script>console.dump(document.foo)</script></scene>"
 
