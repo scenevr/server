@@ -3,25 +3,13 @@
 <scene>
   <spawn position="0 0 5" />
 
-  <skybox src='/skyboxes/clouds_.jpg' />
+  <skybox style="color: linear-gradient(#888, #fff)" />
 
   <!-- Ground plane -->
-  <box id="home" color="#aaa" position='0 0 0' rotation="0 0 0" scale="100 0.1 100" />
-
-  <box id="green" color="#0f0" position="0 0.5 0" scale="1 1 1" />
-
-  <script>
-    document.addEventListener("ready", function(event) {
-      var green = document.getElementById("green");
-
-      green.addEventListener("click", function(){
-        document.scene.removeChild(green);
-      });
-    });
-  </script>
+  <box id="home" style="color: #bbb" position='0 0 0' rotation="0 0 0" scale="1000 0.1 1000" />
 
   <!-- Boxes and their lighmap -->
-  <model src="/models/baking-demo.obj" position="2 0.1 2" style="lightmap: url(/lightmaps/baking-demo.jpg); color: white;" />
+  <model src="/models/baking-demo.obj" position="2 0.1 2" style="light-map: url(/lightmaps/baking-demo.jpg); collision: none;" />
 
   <!-- Collision models -->
   <box color="#f0f" position='2 1 2' rotation="0 0 0" scale="2 2 2" style="visibility: hidden" />

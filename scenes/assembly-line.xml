@@ -31,6 +31,10 @@
 
         document.scene.appendChild(el);
         boxes.push(el);
+
+        el.addEventListener("collide", function(){
+          console.log("Player collided with a box");
+        });
       }
 
       var speed = 10.0 / 10;

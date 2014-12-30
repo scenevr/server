@@ -119,7 +119,12 @@ Scene.prototype.start = function(reflector){
     }
   });
 
-  document.dispatchEvent("ready");
+  try{
+    document.dispatchEvent("ready");
+  }catch(e){
+    console.log("[server] " + document.filename);
+    console.log("  " + e.stack.split("\n").slice(0, 2).join("\n  "));
+  }
 }
 
 Scene.load = function(filename, callback) {
