@@ -1,17 +1,43 @@
 ---
 title: Home
 primary_navigation: false
+position: 1
 ---
 
 # SceneVR
 
 With SceneVR you can build multiuser 3d scenes using html-like tags and javascript. SceneVR scenes are viewed using a browser-powered viewer (powered by webGL). Chrome, firefox and IE are supported. The server is powered by node.js and runs on Windows, Mac OS and Linux.
 
+BSD Licensed.
+
+## Try now: [client.scenevr.com](http://client.scenevr.com)
+
 Server: [github.com/bnolan/scenevr](http://github.com/bnolan/scenevr)
 
 Web client: [github.com/bnolan/scenevr-web](http://github.com/bnolan/scenevr-web)
 
-<iframe width="730" height="440" src="//www.youtube.com/embed/xEE0PXy8Xfk?rel=0" frameborder="0" allowfullscreen></iframe>
+<iframe width="730" height="440" src="//www.youtube.com/embed/0safeTYH_WM?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<small style="opacity: 0.5">Soundtrack from <a href="https://soundcloud.com/tvfreemusic">soundcloud.com/tvfreemusic</a></small>
+# Feature comparison
+
+SceneVR can be most closely compared to [JanusVR](//janusvr.com) and [Glam](//glamjs.org). There have been some brief discussions with glam and janus about creating a common markup, so that the three projects can interchange content between each other. To give you an idea of the features of each project:
+
+<p class="feature-comparison" />
+
+Feature | Glam | JanusVR | SceneVR
+--------|------|---------|--------
+Simple html-like markup | ✓ | ✓ | ✓
+Javascript scripting support | ✓ | ✓ | ✓
+Physics model | - | ✓ | ✓
+Multiplayer server | - | ✓ | ✓
+HTML Billboards | - | ✓ | ✓
+Runs in your browser | ✓ | - | ✓
+Opensource licence | ✓ | - | ✓
+Mobile support | - | - | ✓
+Server maintains world state | - | - | ✓
+
+The biggest difference between Janus and SceneVR is that in Janus, the world is described in a static html file that is sent to each client, and then scripts run locally. In SceneVR, the scene file is loaded by a [node.js](//nodejs.org) server that simulates the world on the server, and all clients see the exact same world. This means you can write multiplayer games where each player interacts with the same world, which is currently not possible in Janus.
 
 # Features
 
@@ -22,6 +48,10 @@ Your SceneVR scene is multi-user from the get go. Just share the URL to your sce
 ## Javascript API
 
 Script your scene with a **simple javascript API** that is modelled on the DOM. The javascript code is run on the server, and changes are reflected to all connected clients. You can change element attributes, create elements, remove elements.
+
+## Mobile device support
+
+Your scenes work in modern webGL-enabled browsers like the ios 8 browser. Just turn your phone sideways, and use the two thumb joysticks to walk and look around the scene.
 
 ## Interpolation
 
@@ -46,10 +76,6 @@ SceneVR is still under heavy development, and some of these features are only av
 ## Oculus Rift support
 
 If you use a webVR browser ([firefox](http://mozvr.com/downloads.html) or [chrome](http://blog.tojicode.com/2014/07/bringing-vr-to-chrome.html)), you can use the oculus rift to experience the scenes in VR. Hit `F11` for fullscreen, and `R` to reset your viewport.
-
-## Mobile device support
-
-Your scenes work in modern webGL-enabled browsers like the ios 8 browser. Just turn your phone sideways, and use the two thumb joysticks to walk and look around the scene.
 
 ## Portals
 

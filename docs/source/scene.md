@@ -25,39 +25,14 @@ Most of the dom level 2 methods should be available (we utilise [dom-lite](https
 
 Adds a node to the scene. 
 
-## removeChild(node)
+### removeChild(node)
 
 Removes a node from the scene. The node will be removed from the scene, and from all connected clients.
 
-## addEventListener(event, listener)
-
-Add an event listener for the named event.
-
-## removeEventListener(event, listener)
-
-Removes the event listeners for the named event.
-
-## createElement(nodeName)
+### createElement(nodeName)
 
 Create an element for adding to the scene. 
 
-## getElementById(id)
+### getElementById(id)
 
 Fetch an element by id. Note that elements also a `uuid`, but this is used internally to reflect changes to the client and shouldn't be referred to in scripts.
-
-## close
-
-Terminates the server.
-
-# Events
-
-Only one event at the moment.
-
-## ready
-
-Fired when the scene has loaded and you can start scripting it.
-
-    scene.addEventListener("ready", function(event) {
-      console.log("Scene has loaded");
-    });
-    

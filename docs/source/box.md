@@ -7,16 +7,24 @@ primary_navigation: true
 
 A box is a simple cube. It inherits from [Element](/element.html).
 
-# Sample XML
+## Sample XML
 
-    <box id="cubey" position="1 2 3" color="#f70" />
+```xml
+<box id="cubey" position="1 2 3" scale="1 1 1" style="color: #f07" />
+```
 
-# Attributes
+## Screenshot
 
-## color
+<img src="/images/box.png" class="screenshot" />
 
-The color of the box. Can be set using hexadecimal code. When accessed programatically, the color is an instance of the [Color](/color.html) class.
+## Styles
 
-    scene.getElementsByTagName("box").forEach(function(box){
-        box.color = new Color(255,0,0);
-    });
+### color
+
+The color of the box. Can be set using hexadecimal code or color names. For example to set every box to be red, use the following code.
+
+```javascript
+document.getElementsByTagName("box").forEach(function(box){
+    box.style.color = '#ff0000';
+});
+```

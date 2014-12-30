@@ -26,8 +26,16 @@
         <h3>Navigation</h3>
         
         <ul>
-          <li><a href="/">Home</a></li>
-          
+      <% sitemap.where(:primary_navigation => false).order_by(:position).all.each do |resource| %>
+          <li<% if resource.url == current_page.url %> class="active"<% end %>>
+              <%= link_to resource.metadata[:page]["title"], resource.url %>
+          </li>
+      <% end %>
+      </ul>
+
+      <h3>API Docs</h3>
+
+      <ul>
       <% sitemap.where(:primary_navigation => true).order_by(:title).all.each do |resource| %>
           <li<% if resource.url == current_page.url %> class="active"<% end %>>
               <%= link_to resource.metadata[:page]["title"], resource.url %>

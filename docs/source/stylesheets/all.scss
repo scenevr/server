@@ -32,6 +32,12 @@ a{
   box-sizing: border-box;
 }
 
+img.screenshot{
+  margin-left: 10px;
+  border-radius: 2px;
+  box-shadow: 1px 1px 3px black;
+}
+
 header{
   background: linear-gradient(darken(#333, 5%), #333);
   box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
@@ -87,6 +93,12 @@ h3{
   color: #ccc;
 }
 
+h4{
+  font-size: 1.0em;
+  font-weight: normal;
+  color: #ccc;
+}
+
 .wrapper{
   max-width: $width;
   border-radius: $radius;
@@ -117,6 +129,10 @@ h3{
     margin-bottom: 20px;
   }
 
+  ul + h3{
+    margin-top: 15px;
+  }
+
   ul{
     border-top: 1px solid #555;
   }
@@ -139,4 +155,29 @@ h3{
 section.content{
   margin: 20px 0 0 140px;
   padding: 1px 0;
+}
+
+.feature-comparison + table{
+  border-top: 1px solid #555;
+  margin-left: 10px;
+
+  th,td{
+    border-bottom: 1px solid #555;
+    line-height: 1.75em;
+    width: 80px;
+    text-align: center;
+  }
+
+  th{
+    color: #777;
+    font-weight: normal;
+    text-transform: uppercase;
+    font-size: 0.85em;
+  }
+
+  td:nth-child(1),th:nth-child(1){
+    width: 300px;
+    text-align: left;
+    padding-left: 10px;
+  }
 }
