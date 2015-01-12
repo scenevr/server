@@ -1,13 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" ?>
  
- <!--
-
+<!--
     Scene with an animated row of boxes.
-
 -->
 
 <scene>
-  <spawn position="5 0 10" />
+  <spawn position="0 0 10" />
+
+  <billboard position="-1 1 2" rotation="0 1.57 0" scale="2 2 0.25">
+    <![CDATA[
+      <h1>The assembly line</h1>
+
+      <p>
+        This is a line of boxes that are spawned, animated and removed using javascript. You can try
+        run into the boxes to see how the physics model works with animated boxes.
+      </p>
+
+      <center>
+        When you're finished, click the globe below to go to the next scene.
+      </center>
+    ]]>
+  </billboard>
+
+  <link href="/challenge.xml" position="-0.8 1 2" rotation="0 1.57 0" />
 
   <skybox src="/skyboxes/dark_.png" />
 
@@ -27,7 +42,7 @@
 
         el.position = new Vector(0,0.5,-index * 5).add(startPosition);
         el.scale = scaleVector;
-        el.color = randomColor();
+        el.style.color = randomColor();
 
         document.scene.appendChild(el);
         boxes.push(el);

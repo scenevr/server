@@ -57,10 +57,17 @@ Scene.prototype.start = function(reflector){
   var self = this;
 
   document.getElementsByTagName("script").map(function(scriptElement){
-    var script = null;
+    var script = null,
+      code = null;
+
+    if(scriptElement.innerXML.match(/<!\[CDATA\[/)){
+      code = scriptElement.innerXML.replace(/^[\n\r\s]+<!\[CDATA\[/, '').replace(/\]\]>[\n\r\s]+$/,'');
+    }else{
+      code = scriptElement.textContent;
+    }
 
     try {
-      script = vm.createScript(scriptElement.textContent, document.filename);
+      script = vm.createScript(code, document.filename);
     } catch (e) {
       console.log("[server] " + document.filename + ":\n  " + (e.toString()));
       return;
@@ -77,7 +84,7 @@ Scene.prototype.start = function(reflector){
         Euler: Euler,
 
         channel : {
-          sendMessage : function(message){
+          log : function(message){
             reflector.chatChannel.sendMessage(self, message)
           }
         },

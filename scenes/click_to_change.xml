@@ -2,13 +2,17 @@
  
 <scene>
   <spawn position="2 0 5" />
-  <box id="one" color="#ff00aa" position='0.5 0.5 -5.5' />
-  <box id="two" color="#0033aa" position='0.5 0.5 -10.5' />
+  <box id="one" style="color: #ff00aa" position='0.5 0.5 -5.5' />
+  <box id="two" style="color: #0033aa" position='0.5 0.5 -10.5' />
+
+  <link href="/click_to_chase.xml" position="2 1.0 -14" />
+
+  <skybox style="color: #ddd" />
 
   <billboard id="bill" position="-2 1 0">
     <![CDATA[
-      <center style="line-height: 256px; font-size: 30px; color: #555;">
-        Click to remove.
+      <center style="margin-top: 180px; color: #555; font-size: 30px">
+        Click these boxes to make them change color.
       </center>
     ]]>
   </billboard>
@@ -20,17 +24,13 @@
 
     function changeOnClick(element){
       element.addEventListener("click", function(){
-        element.color = randomColor();
+        element.style.color = randomColor();
       });
     }
 
     document.addEventListener("ready", function(event) {
       changeOnClick(document.getElementById("one"));
       changeOnClick(document.getElementById("two"));
-
-      document.getElementById("bill").addEventListener("click", function(e){
-        document.scene.removeChild(document.getElementById("bill"));
-      });
     });
   </script>
 </scene>

@@ -6,15 +6,26 @@
 
 <scene>
   <spawn position="0 0 10" />
-  <box id="scaredy" color="#ff00aa" position='0 0.5 0' />
+  <box id="scaredy" style="color: #ff7700" position='0 0.5 0' />
+  <skybox style="color: linear-gradient(#fff, #abf)" />
+
+  <billboard id="bill" position="-2 1 0">
+    <![CDATA[
+      <center style="margin-top: 180px; color: #555; font-size: 30px">
+        This box is scared of being touched. Click it to chase it away.
+      </center>
+    ]]>
+  </billboard>
+
   <script>
     document.addEventListener("ready", function(event) {
       var el = document.getElementById("scaredy");
 
       el.addEventListener("click", function(e){
-        var vector = e.player.position.clone().sub(el.position).normalize().multiplyScalar(-1.0);
+        var vector = e.player.position.clone().sub(el.position).normalize().multiplyScalar(-5.0);
         vector.setY(0);
         el.position.add(vector);
+        channel.log("The box is scared and runs away!");
       });
     });
   </script>

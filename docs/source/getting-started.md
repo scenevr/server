@@ -26,11 +26,9 @@ Start the server:
 
     scenevr ./scenes/
 
-## Install the web client
+## Launch the webclient
 
-    git clone git://github.com/bnolan/scenevr-web/
-    cd scenevr-web
-    npm install
-    npm start
+Open the webclient and load the files served from your localhost:
 
-You can then open a webbrowser to [localhost:9000](//localhost:9000) and view the scene. If you open a second browser window and re-open the same URL (or get a friend to connect to your computer), you will see two players in the scene at the same time.
+### &raquo; Open [client.scenevr.com](http://client.scenevr.com/?connect=localhost:8080/index.xml) for local files
+
