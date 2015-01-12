@@ -3,54 +3,56 @@
 <scene>
   <spawn position="0 0 5" />
 
-  <skybox style="color: linear-gradient(#fff, #ff8)" />
+  <skybox style="color: linear-gradient(#fff, #abf)" />
 
-  <box scale="20 0.2 1" position="0 0 -10" color="white" />
-  <box scale="20 0.2 1" position="-10 0 0" rotation="0 1.57 0" color="white" />
-  <box scale="20 0.2 1" position="0 0 10" color="white" />
-  <box scale="20 0.2 1" position="10 0 0" rotation="0 1.57 0" color="white" />
+  <box scale="40 6 1" position="0 3 -20" style="color: white" />
+  <box scale="40 6 1" position="-20 3 0" rotation="0 1.57 0" style="color: white" />
+  <box scale="40 6 1" position="0 3 20" style="color: white" />
+  <box scale="40 6 1" position="20 3 0" rotation="0 1.57 0" style="color: white" />
+
+  <link href="/hello.xml" position="10 1 0" rotation="0 1.57 0" />
 
   <billboard position="-2 1 0" rotation="0 0.5 0">
     <![CDATA[
-      <center style="color: #777; font-size: 10px; padding: 2px; margin: 0;">
+      <center style="color: #777; font-size: 30px; padding: 2px; margin: 0;">
         <img src="/images/dockery.jpg" style="width: 100%" />
-        <br /><br /><br />Michelle Dockery
+        <br />Michelle Dockery
       </center>
     ]]>
   </billboard>
 
   <billboard position="1 1 -2" rotation="0 0.2 0">
     <![CDATA[
-      <center style="color: #777; font-size: 10px; padding: 2px; margin: 0;">
+      <center style="color: #777; font-size: 30px; padding: 2px; margin: 0;">
         <img src="/images/montana.jpg" style="width: 100%" />
-        <br /><br /><br />Glacier National Park, Montana
+        <br />Glacier National Park, Montana
       </center>
     ]]>
   </billboard>
 
   <billboard position="6 1 -4">
     <![CDATA[
-      <center style="color: #777; font-size: 10px; padding: 2px; margin: 0;">
-        <img src="/images/bears.jpg" style="height: 180px" />
-        <br /><br /><br />Polar bears
+      <center style="color: #777; font-size: 30px; padding: 2px; margin: 0;">
+        <img src="/images/bears.jpg" style="height: 360px" />
+        <br />Polar bears
       </center>
     ]]>
   </billboard>
 
   <billboard position="5 1 5" rotation="0 3.14 0">
     <![CDATA[
-      <center style="color: #777; font-size: 10px; padding: 2px; margin: 0;">
+      <center style="color: #777; font-size: 30px; padding: 2px; margin: 0;">
         <img src="/images/spider.jpg" style="width: 100%" />
-        <br /><br /><br />Ferrari 360
+        <br />Ferrari 360
       </center>
     ]]>
   </billboard>
 
   <billboard position="-6 4 3" scale="8 8 0.5" rotation="0 1.57 0">
     <![CDATA[
-      <center style="color: #777; font-size: 10px; padding: 2px; margin: 0;">
+      <center style="color: #777; font-size: 30px; padding: 2px; margin: 80px 0 0 0;">
         <img src="/images/storm.jpg" style="width: 100%" />
-        <br /><br /><br />Gods Eraser
+        <br />Gods Eraser
       </center>
     ]]>
   </billboard>

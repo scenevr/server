@@ -6,7 +6,31 @@
 
 <scene>
   <spawn position="0 0 10" />
-  <box id="scaredy" color="#ff00aa" position='0 0.5 0' />
+  <box id="pregnant" style="color: #ff00aa" position='0 0.5 0' />
+
+  <skybox style="color: linear-gradient(#fff, #abf)" />
+
+  <billboard position="-2 1 0">
+    <![CDATA[
+      <center style="margin-top: 40px; color: #555; font-size: 30px">
+        This box is pregnant. <b>Click it to make more boxes!</b>. Don't create too many
+        boxes.
+      </center>
+    ]]>
+  </billboard>
+
+  <billboard position="5 1 0">
+    <![CDATA[
+      <center style="margin-top: 40px; color: #555; font-size: 30px">
+        Note that boxes can move through other boxes. This is because we don't simulate
+        physics on the server, only on the client, so impossible things like boxes moving through
+        other boxes is possible.
+      </center>
+    ]]>
+  </billboard>
+
+  <link href="/color-change.xml" position="-2 1 0.3" />
+
   <script>
     function addHandler(el){
       el.addEventListener("click", function(e){
@@ -20,7 +44,7 @@
 
         var newEl = document.createElement("box");
         newEl.position = el.position;
-        newEl.color = "#ff00aa";
+        newEl.style.color = (el.style.color == "#ff00aa" ? "#0077ff" : "#ff00aa");
         document.scene.appendChild(newEl);
         addHandler(newEl);
 
@@ -30,7 +54,7 @@
     }
 
     document.addEventListener("ready", function(event) {
-      addHandler(document.getElementById("scaredy"));
+      addHandler(document.getElementById("pregnant"));
     });
   </script>
 </scene>
