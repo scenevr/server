@@ -5,8 +5,12 @@
 -->
 
 <scene>
-  <box id="my-box" position='0 0 0' color="#0ff" />
-  <box id="other-box" position='0 0 0' color="#f0f" />
+  <spawn position="0 0 10" />
+
+  <skybox style="color: linear-gradient(#0ff, #f0f)" />
+  
+  <box id="my-box" position='0 0 0' style="color: #0ff" />
+  <box id="other-box" position='0 0 0' style="color: #f0f" />
 
   <script>
     document.addEventListener("ready", function(event) {
