@@ -3,6 +3,7 @@
 
 $width: 920px;
 $radius: 2px;
+$orange: #f70;
 
 html,body{
   margin: 0;
@@ -25,7 +26,7 @@ h1,h2,h3,h4,h5{
 }
 
 a{
-  color: #f70;
+  color: $orange;
 }
 
 *{
@@ -41,6 +42,7 @@ img.screenshot{
 header{
   background: linear-gradient(darken(#333, 5%), #333);
   box-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+  padding-left: 20px;
 
   a{
     background: #222;
@@ -155,6 +157,10 @@ h4{
 section.content{
   margin: 20px 0 0 140px;
   padding: 1px 0;
+
+  iframe{
+    max-width: 100%;
+  }
 }
 
 .feature-comparison + table{
@@ -180,4 +186,37 @@ section.content{
     text-align: left;
     padding-left: 10px;
   }
+}
+
+@media (max-width: 640px) {
+  #navigation{
+    display: block;
+    position: relative;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding-top: 20px;
+    height: 40px;
+    overflow: hidden;
+
+    h3:first-child:before{
+      content: "> ";
+    }
+
+    h3:first-child{
+      color: $orange;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+
+  #navigation.expanded{
+    height: auto;
+    overflow: visible;
+  }
+
+  section.content{
+    margin: 0;
+  }
+
 }
