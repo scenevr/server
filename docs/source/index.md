@@ -6,6 +6,59 @@ position: 1
 
 # SceneVR
 
+## Our Goal
+
+A platform for creating virtual reality scenes using tools web developers are experienced with.
+
+## An introduction
+
+Create scenes using **html like markup** and css:
+
+```xml
+<scene>
+  <box id="mycube" position="1 2 3" scale="1 1 1" style="color: #f07" />
+</scene>
+```
+
+**Add interaction** to these scenes using **javascript**:
+
+```javascript
+document.getElementById("mycube").addEventListener("click", function(e){
+  document.scene.removeChild(document.getElementById("mycube"));
+});
+```
+
+Play with friends with **multiplayer support** that is automatically enabled.
+
+```javascript
+var playerCount = 0;
+
+document.getElementById("mycube").addEventListener("click", function(e){
+  playerCount++;
+  console.log(e.player.name + " just clicked the cube");
+  console.log(playerCount + " players have clicked the cube");
+});
+```
+
+**Live edit scenes** in your favourite text editor and see changes in realtime. **Edit any file**, and when you hit save, the server will reload the changes and everyone viewing the scene will see the changes instantly. **Work collaboratively**. Make changes on your PC and share to your friends in realtime over the net.
+
+```
+$ scenevr myscenes/
+[server] Serving scenes in 'myscenes/' on port 8080...
+[server] Restarting server on file change.
+```
+
+**Get started in minutes**
+
+Install node.js for your platform (Windows, Linux or Mac) and then simply use npm to install the scene server in less than a minute.
+
+```
+$ npm install -g scenevr
+```
+
+
+# Overview
+
 With SceneVR you can build multiuser 3d scenes using html-like tags and javascript. SceneVR scenes are viewed using a browser-powered viewer (powered by webGL). Chrome, firefox and IE are supported. The server is powered by node.js and runs on Windows, Mac OS and Linux.
 
 BSD Licensed.
