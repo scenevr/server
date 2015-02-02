@@ -6,6 +6,7 @@ Spawn = require('../elements/spawn')
 Model = require('../elements/model')
 Link = require('../elements/link')
 Skybox = require('../elements/skybox')
+Fog = require('../elements/fog')
 Audio = require('../elements/audio')
 
 describe 'constructor', ->
@@ -90,4 +91,11 @@ describe 'all_tags', ->
       expect(scene.getElementsByTagName("audio").length).toEqual 1
       expect(scene.getElementsByTagName("audio")[0].src).toMatch /drone/
       expect(scene.getElementsByTagName("audio")[0] instanceof Audio).toBeTruthy()
+
+  it 'should parse fog', ->
+    Scene.load process.cwd() + '/spec/fixtures/all_tags.xml', (scene) ->
+      expect(scene.getElementsByTagName("fog").length).toEqual 1
+      expect(scene.getElementsByTagName("fog")[0].style.color).toMatch '#fff'
+      expect(scene.getElementsByTagName("fog")[0].near).toMatch '100'
+      expect(scene.getElementsByTagName("fog")[0] instanceof Fog).toBeTruthy()
 

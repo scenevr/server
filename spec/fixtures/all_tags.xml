@@ -22,5 +22,5 @@
   <link href="/test.xml" position="3 4 5" />
   <skybox src="/blah/blah" />
   <audio src="/sounds/drone-sweet.mp3" ambient="true" />
-  
+  <fog style="color: #fff" near="100" far="1000" />
 </scene>
