@@ -30,6 +30,8 @@ _.extend(Scene.prototype, {
   }
 });
 
+Scene.prototype.ticksPerSecond = 5;
+
 Scene.prototype.start = function(reflector){
   var document = this.ownerDocument;
 
