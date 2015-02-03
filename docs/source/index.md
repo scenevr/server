@@ -6,6 +6,12 @@ position: 1
 
 # SceneVR
 
+### Try now: [client.scenevr.com](http://client.scenevr.com)
+
+Server: [github.com/bnolan/scenevr](http://github.com/bnolan/scenevr)
+
+Web client: [github.com/bnolan/scenevr-web](http://github.com/bnolan/scenevr-web)
+
 ## Our Goal
 
 A platform for creating virtual reality scenes using tools web developers are experienced with.
@@ -56,22 +62,16 @@ Install node.js for your platform (Windows, Linux or Mac) and then simply use np
 $ npm install -g scenevr
 ```
 
-
 # Overview
+
+<iframe width="730" height="440" src="//www.youtube.com/embed/0safeTYH_WM?rel=0" frameborder="0" allowfullscreen></iframe>
+
+<small style="opacity: 0.5">Soundtrack from <a href="https://soundcloud.com/tvfreemusic">soundcloud.com/tvfreemusic</a></small>
 
 With SceneVR you can build multiuser 3d scenes using html-like tags and javascript. SceneVR scenes are viewed using a browser-powered viewer (powered by webGL). Chrome, firefox and IE are supported. The server is powered by node.js and runs on Windows, Mac OS and Linux.
 
 BSD Licensed.
 
-## Try now: [client.scenevr.com](http://client.scenevr.com)
-
-Server: [github.com/bnolan/scenevr](http://github.com/bnolan/scenevr)
-
-Web client: [github.com/bnolan/scenevr-web](http://github.com/bnolan/scenevr-web)
-
-<iframe width="730" height="440" src="//www.youtube.com/embed/0safeTYH_WM?rel=0" frameborder="0" allowfullscreen></iframe>
-
-<small style="opacity: 0.5">Soundtrack from <a href="https://soundcloud.com/tvfreemusic">soundcloud.com/tvfreemusic</a></small>
 # Feature comparison
 
 SceneVR can be most closely compared to [JanusVR](//janusvr.com) and [Glam](//glamjs.org). There have been some brief discussions with glam and janus about creating a common markup, so that the three projects can interchange content between each other. To give you an idea of the features of each project:
