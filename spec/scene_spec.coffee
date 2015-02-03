@@ -22,8 +22,6 @@ describe 'scene', ->
 
       box = scene.childNodes[1]
       expect(box instanceof Box).toBeTruthy()
-      expect(box.getAttribute("color")).toEqual "#FF00AA"
-      expect(box.color.red()).toEqual 255
       expect(box.position.y).toEqual 10.0
 
       script = scene.childNodes[5]

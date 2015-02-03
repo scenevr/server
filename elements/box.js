@@ -1,16 +1,8 @@
-var Box, Color, Element,
+var Box, Element,
   __hasProp = {}.hasOwnProperty,
   __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
 
-Color = require("color");
-
 Element = require("../lib/element");
-
-// fixme *properly*
-
-Color.prototype.toString = function() {
-  return this.hexString();
-};
 
 Box = (function(_super) {
   __extends(Box, _super);
@@ -24,16 +16,5 @@ Box = (function(_super) {
   return Box;
 
 })(Element);
-
-Object.defineProperties(Box.prototype, {
-  color: {
-    get: function() {
-      return this._color;
-    },
-    set: function(value) {
-      return this._color = Color(value);
-    }
-  }
-});
 
 module.exports = Box;
