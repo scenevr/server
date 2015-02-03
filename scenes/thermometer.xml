@@ -15,14 +15,12 @@
   <billboard position="-2 1 0" rotation="0 0.5 0">
     <![CDATA[
       <center style="color: #777; font-size: 30px; padding: 2px; margin: 0;">
-	The cubes color represents the current temperature of the laboratory. It spins each time a new reading is taken.
+		The cubes color represents the current temperature of the laboratory. It spins each time a new reading is taken.
       </center>
     ]]>
   </billboard>
 
 	<script>
-		// ui controls
-		//var temp_display = null; //document.getElementById('temp_display');
 		var temp_board = document.getElementById("tb");
 		
 		document.addEventListener("ready", function(event) {
