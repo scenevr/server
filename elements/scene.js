@@ -16,6 +16,9 @@ Vector = require("../lib/vector");
 
 Euler = require("../lib/euler");
 
+// jjg - xhr support
+XMLHttpRequest = require('xhr2');
+
 Scene = dom.HTMLElement;
 
 // fixme - these are added to all instances of htmlelement, not just the Scene
@@ -84,6 +87,7 @@ Scene.prototype.start = function(reflector){
         document: document,
         Vector: Vector,
         Euler: Euler,
+	XMLHttpRequest: XMLHttpRequest,
 
         channel : {
           log : function(message){
