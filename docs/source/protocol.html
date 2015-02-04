@@ -1,0 +1,68 @@
+<body>
+
+  <div id="messages">
+  </div>
+
+  <div id="notes">
+    This example disconnects after 2 seconds. Each update is a full scene update, but the next release
+    of scenevr will only send changed elements. The client should send this message to the server at 5hz
+    as the player moves around:
+    <br />
+    <br />
+    &lt;player position="1 2 3" /&gt;
+    <br />
+    <br />
+    When the player clicks on an element - send:
+    <br />
+    <br />
+    &lt;event type="click" uuid="1234-1234-1234-1234" /&gt;
+  </div>
+
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?autoload=false"></script>
+  <script src="/javascripts/jquery.js"></script>
+
+  <script>
+    var socket = new WebSocket("ws://scenevr-demo.herokuapp.com/hello.xml", "scenevr");
+
+    $("<div />").text("Connecting...").appendTo('#messages');
+
+    socket.onmessage = function(e){
+      $("<code class='prettyprint' '>").text(e.data).appendTo('#messages');
+      prettyPrint();
+
+      setTimeout(function(){
+      $("<div />").text("Disconnected.").appendTo('#messages');
+        socket.close();
+      }, 2000);
+    };
+
+  </script>
+
+  <style>
+    body{
+      font-family: sans-serif;
+      font-size: 0.9em;
+      background: #eee;
+    }
+    #notes{
+      margin: 20px 20px 20px 680px;
+      line-height: 150%;
+    }
+
+    #messages{
+      width: 640px;
+      height: 640px;
+      position: absolute;
+      border: 1px solid #ccc;
+      overflow: auto;
+      box-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+      padding: 10px;
+      background: white;
+    }
+    #messages div, #messages code{
+      border-bottom: 1px solid #ccc;
+      display: block;
+      padding: 10px 0;
+    }
+  </style>
+</body>
