@@ -1,43 +1,4 @@
 <body>
-
-  <div id="messages">
-  </div>
-
-  <div id="notes">
-    This example disconnects after 2 seconds. Each update is a full scene update, but the next release
-    of scenevr will only send changed elements. The client should send this message to the server at 5hz
-    as the player moves around:
-    <br />
-    <br />
-    &lt;player position="1 2 3" /&gt;
-    <br />
-    <br />
-    When the player clicks on an element - send:
-    <br />
-    <br />
-    &lt;event type="click" uuid="1234-1234-1234-1234" /&gt;
-  </div>
-
-  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?autoload=false"></script>
-  <script src="/javascripts/jquery.js"></script>
-
-  <script>
-    var socket = new WebSocket("ws://scenevr-demo.herokuapp.com/hello.xml", "scenevr");
-
-    $("<div />").text("Connecting...").appendTo('#messages');
-
-    socket.onmessage = function(e){
-      $("<code class='prettyprint' '>").text(e.data).appendTo('#messages');
-      prettyPrint();
-
-      setTimeout(function(){
-      $("<div />").text("Disconnected.").appendTo('#messages');
-        socket.close();
-      }, 2000);
-    };
-
-  </script>
-
   <style>
     body{
       font-family: sans-serif;
@@ -65,4 +26,53 @@
       padding: 10px 0;
     }
   </style>
+
+  <div id="messages">
+  </div>
+
+  <div id="notes">
+    This example disconnects after 1000ms. Each update is a full scene update, but the next release
+    of scenevr will only send changed elements. The client should send this message to the server at 5hz
+    as the player moves around:
+    <br />
+    <br />
+    &lt;player position="1 2 3" /&gt;
+    <br />
+    <br />
+    When the player clicks on an element - send:
+    <br />
+    <br />
+    &lt;event type="click" uuid="1234-1234-1234-1234" /&gt;
+    <br />
+    <br />
+    These packets are send by the server to indicate an element / player that is no longer in the scene
+    and should be removed from the local scenegraph:
+    <br />
+    <br />
+    &lt;dead uuid="1234-1234-1234-1234" /&gt;
+  </div>
+
+  <script src="https://google-code-prettify.googlecode.com/svn/loader/run_prettify.js?autoload=false"></script>
+  <script src="/javascripts/jquery.js"></script>
+
+  <script>
+    var socket = new WebSocket("ws://scenevr-demo.herokuapp.com/hello.xml", "scenevr");
+
+    $("<div />").text("Connecting to ws://scenevr-demo.herokuapp.com/hello.xml...").appendTo('#messages');
+
+    socket.onopen = function(){
+      $("<div />").text("Connected.").appendTo('#messages');
+
+      setTimeout(function(){
+        socket.close();
+        $("<div />").text("Disconnected.").appendTo('#messages');
+      }, 1000);
+    }
+
+    socket.onmessage = function(e){
+      $("<code class='prettyprint' >").text(e.data).appendTo('#messages');
+      PR.prettyPrint();
+    };
+
+  </script>
 </body>
