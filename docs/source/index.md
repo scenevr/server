@@ -90,7 +90,7 @@ Opensource licence | ✓ | - | ✓
 Mobile support | - | - | ✓
 Server maintains world state | - | - | ✓
 
-The biggest difference between Janus and SceneVR is that in Janus, the world is described in a static html file that is sent to each client, and then scripts run locally. In SceneVR, the scene file is loaded by a [node.js](//nodejs.org) server that simulates the world on the server, and all clients see the exact same world. This means you can write multiplayer games where each player interacts with the same world, which is currently not possible in Janus.
+The biggest difference between Janus and SceneVR is that in Janus, the world is described in a static html file that is sent to each client, and then scripts run locally. In SceneVR, the scene file is loaded by a [node.js](//nodejs.org) server that simulates the world on the server, and all clients see the exact same world.
 
 # Features
 

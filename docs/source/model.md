@@ -7,6 +7,10 @@ primary_navigation: true
 
 A 3d model loaded from an external model file. It inherits from [Element](/element.html). Currently only wavefront .obj files are supported.
 
+## Notes
+
+Models should be correctly world sized (1 unit = 1 metre), using the OpenGL coordinate system, and centered at the origin. Models that are not centered at the origin will not have their bounding boxes correctly calculated for collision purposes.
+
 ## Sample XML
 
 ```xml
