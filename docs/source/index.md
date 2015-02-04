@@ -74,23 +74,27 @@ BSD Licensed.
 
 # Feature comparison
 
-SceneVR can be most closely compared to [JanusVR](//janusvr.com) and [Glam](//glamjs.org). There have been some brief discussions with glam and janus about creating a common markup, so that the three projects can interchange content between each other. To give you an idea of the features of each project:
+SceneVR can be used to create multiplayer 3d scenes in a similair way to Unity or Second Life. SceneVR is way younger than either of these projects, so SceneVR isn't as powerful, but there are some things that SceneVR does well.
 
 <p class="feature-comparison" />
 
-Feature | Glam | JanusVR | SceneVR
+Feature | SL | Unity | SceneVR
 --------|------|---------|--------
-Simple html-like markup | ✓ | ✓ | ✓
-Javascript scripting support | ✓ | ✓ | ✓
-Physics model | - | ✓ | ✓
-Multiplayer server | - | ✓ | ✓
-HTML Billboards | - | ✓ | ✓
-Runs in your browser | ✓ | - | ✓
-Opensource licence | ✓ | - | ✓
-Mobile support | - | - | ✓
-Server maintains world state | - | - | ✓
+Simple html-like markup | - | - | ✓
+Javascript scripting support | - | ✓ | ✓
+Physics model | ✓ | ✓ | ✓
+Baked in multiplayer | ✓ | - | ✓
+HTML Billboards | ✓ | - | ✓
+Runs in your browser | - | ✓ | ✓
+Opensource licence | - | - | ✓
+Free to develop and host | - | - | ✓
+.OBJ model support | - | ✓ | ✓
+Live reload support | ✓ | - | ✓
+Mobile support | - | ✓ | ✓
 
-The biggest difference between Janus and SceneVR is that in Janus, the world is described in a static html file that is sent to each client, and then scripts run locally. In SceneVR, the scene file is loaded by a [node.js](//nodejs.org) server that simulates the world on the server, and all clients see the exact same world.
+Unity is much more fully featured than SceneVR, but with each release SceneVR becomes more capable, and the fact that all scenes have baked-in multiplayer support is a strong advantage, plus the fact that you don't need to learn the Unity IDE, you can just develop using your current modelling tools and text editor.
+
+There are another two projects that use similair markup to SceneVR, [JanusVR](//janusvr.com) and [GLAM](//glamjs.org).
 
 # Features
 
