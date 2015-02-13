@@ -78,4 +78,14 @@ Allow spheres, potentially with `subdivision` count as an attribute.
 
 Allow point lights and ambient light to be set as an element.
 
+## Performance
 
+SceneVR is written in pure javascript at the moment, with a few node.js binary modules on platforms that support them. The client, server and scripts are all written in javascript. Earlier in the lifecycle of SceneVR, I wrote a server in c++, that embedded v8. And I have also worked on various native viewers for the SceneVR protocol. As the project progresses, there is no reason that parts of the client or server cannot be replaced by close-to-the-metal components, with a native fallback for cases where ultra-performance isn't required.
+
+For example, cannon.js can be augmented with bullet. The websocket protocol can be augmented by raknet. The dom-lite implementation could be augmented with the dom implmenetation in webkit or firefox. The client can be rewritten in unity, unreal, jmonkeyengine or ogre. Some of these libraries already have node.js bindings, others would need new bindings written, but with node-gyp, it's relatively straightforward to create bindings to existing libraries. It would even be possible to write the entire server in c++, embedding v8, although this would prevent people extending their scenes with custom node modules.
+
+In summary, there is a long path ahead for optimisations to SceneVR, but we won't be taking any steps until we are forced to by performance bottlenecks.
+
+In the words of [Donald Knuth](http://c2.com/cgi/wiki?PrematureOptimization):
+
+ "Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: **premature optimization is the root of all evil**. Yet we should not pass up our opportunities in that critical 3%."
