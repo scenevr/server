@@ -30,7 +30,7 @@
         var vector = e.player.position.clone().sub(el.position).normalize().multiplyScalar(-4);
         vector.setY(0);
         el.position.add(vector);
-        channel.log("The box is scared and runs away!");
+        console.log("The box is scared and runs away!");
       });
     });
   </script>
