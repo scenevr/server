@@ -31,8 +31,12 @@ function Server(folder, port) {
   httpServer.listen(port);
   this.websocketServer = new WebsocketServer(httpServer);
   this.websocketServer.listen();
-  this.restart = _.throttle(this.restartServer, 1000);
+  this.restart = _.throttle(this.restartServer, 1000, {trailing: false});
   this.loadAllScenes();
+
+  require('dns').lookup(require('os').hostname(), function (err, add, fam) { 
+    console.log('\nOpen the following url to view your scenes:\n\thttp://client.scenevr.com/?connect=' + add + ':8080/index.xml\n'); 
+  })
 }
 
 Server.prototype.loadAllScenes = function() {
