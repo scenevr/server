@@ -8,75 +8,13 @@ Contact [bnolan@gmail.com](mailto:bnolan@gmail.com). Follow development at [@sce
 
 ![Screenshot](https://pbs.twimg.com/media/B2tuCOKCAAA7VQ7.png:large)
 
+See [the protocol in action](http://www.scenevr.com/protocol.html).
+
 ---
 
 ## Installation
 
-Prerequisites: make sure you have the latest version of Node and NPM installed.
-
-OS: Verified running on Windows 8 and Mac OS X.
-
-### Running the scenevr server
-1. Clone this repo: https://github.com/bnolan/scenevr.git
-1. `cd scenevr`
-1. `npm install`
-1. `node server.js scenes`
-
-Note: *you can replace hello.xml with any of the demo files*
-
-### Running the scenevr-web client
-In a new console window, and in a new directory:
-
-1. Clone the scenevr-web repo: https://github.com/bnolan/scenevr-web.git
-1. `cd scenevr-web`
-1. `npm install`
-1. `npm start`
-
-You should now be able to open `localhost:9000` in your browser to see a list of scenes. You can edit these scenes in your favourite text editor, and when you hit save, the scene will automatically reload in your client.
-
----
-
-## Credits
-
-Credits:
-========
-
-### Knight, SUV and Beardie models
-
-@mikelovesrobots
-https://github.com/mikelovesrobots/mmmm
-
-### Baking demo and cubes models
-
-@bnolan
-
-### Gallery
-
-[Modified use](http://forums.sketchup.com/t/contact-license-problem/2082/10) off a sketchup warehouse model by Jeff Park.
-https://3dwarehouse.sketchup.com/model.html?id=f1feb84e82b7f43479b47ca83eb27537
-
-### Clouds skybox
-
-"free skyboxes"
-http://www.redsorceress.com/skybox.html
-
-### Miramar Skybox
-
-By Jockum Skoglund aka hipshot
-hipshot@zfight.com
-www.zfight.com
-Stockholm, 2005 08 25
-
-"Modify however you like, just cred me for my work, maybe link to my page."
-
-### Skyrender and dark skyboxes
-
-by Roel Reijerse
-http://reije081.home.xs4all.nl/skyboxes/
-
-"This work is licensed under a Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License. If that license does not fit to your purposes, please contact me. And if you create something beautiful with them that you would like to share, I'll be glad to receive a message :)"
-
----
+See the installation instructions at [scenevr.com](http://www.scenevr.com).
 
 ## License
 
