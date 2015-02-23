@@ -1,20 +1,15 @@
 var Document, Element, Euler, Scene, Vector, dom, fs, vm, _;
 
 fs = require('fs');
-
 _ = require("underscore");
-
 vm = require('vm');
-
 dom = require("../lib/dom-lite");
-
 Element = require("../lib/node");
-
 Document = require("../lib/document");
-
 Vector = require("../lib/vector");
-
 Euler = require("../lib/euler");
+
+var path = require('path');
 
 // jjg - xhr support
 XMLHttpRequest = require('xhr2');
@@ -55,18 +50,66 @@ Scene.prototype.start = function(reflector){
     return intervals = [];
   };
 
-  // Fixme - this all requires lots of work and thought (do we run in a sandboxed content?) -
-  // we should also wrap setTimeout and setInterval calls so that broken code doesn't bring
-  // down the server.
+  // Wrap setInterval and setTimeout so that errors in callbacks don't
+  // kill the server.
 
-  var self = this;
+  var self = this,
+    sandbox = {
+      document: document,
+      Vector: Vector,
+      Euler: Euler,
+      XMLHttpRequest: XMLHttpRequest,
+      setInterval: function(func, timeout) {
+        var handle;
+        handle = setInterval(function() {
+          try {
+            func();
+          } catch (_error) {
+            e = _error;
+            console.log("[server] " + document.filename + ":\n  " + (e.toString()));
+            clearInterval(handle);
+          }
+        }, timeout);
+        intervals.push(handle);
+        return handle;
+      },
+
+      setTimeout: function(func, timeout) {
+        var handle;
+        handle = setTimeout(function() {
+          try {
+            func();
+          } catch (_error) {
+            e = _error;
+            console.log("[server] " + document.filename + ":\n  " + (e.toString()));
+          }
+        }, timeout);
+        timeouts.push(handle);
+        return handle;
+      },
+      console: {
+        log : function(){
+          var message = Array.prototype.slice.call(arguments).join(" ");
+          console.log("[log] " + message);
+          reflector.chatChannel.sendMessage(self, message);
+        }
+      }
+    };
+
+  // One sandbox for all script contexts
+  sandbox = vm.createContext(sandbox);
 
   document.getElementsByTagName("script").map(function(scriptElement){
     var script = null,
-      code = null;
+      code = null,
+      cdata = _.detect(scriptElement.childNodes, function(node){
+        return node.nodeName == '#cdata';
+      });
 
-    if(scriptElement.innerXML.match(/<!\[CDATA\[/)){
-      code = scriptElement.innerXML.replace(/^[\n\r\s]+<!\[CDATA\[/, '').replace(/\]\]>[\n\r\s]+$/,'');
+    if(scriptElement.src){
+      code = fs.readFileSync(path.resolve(path.dirname(document.filename), scriptElement.src));
+    }else if (cdata){
+      code = cdata.data;
     }else{
       code = scriptElement.textContent;
     }
@@ -79,52 +122,8 @@ Scene.prototype.start = function(reflector){
     }
 
     try {
-
-      // Run a script. Wrap setInterval and setTimeout so that errors in callbacks don't
-      // kill the server.
-
-      script.runInNewContext({
-        document: document,
-        Vector: Vector,
-        Euler: Euler,
-	XMLHttpRequest: XMLHttpRequest,
-
-        channel : {
-          log : function(message){
-            reflector.chatChannel.sendMessage(self, message)
-          }
-        },
-
-        setInterval: function(func, timeout) {
-          var handle;
-          handle = setInterval(function() {
-            try {
-              return func();
-            } catch (_error) {
-              e = _error;
-              console.log("[server] " + document.filename + ":\n  " + (e.toString()));
-              return clearInterval(handle);
-            }
-          }, timeout);
-          intervals.push(handle);
-          return handle;
-        },
-
-        setTimeout: function(func, timeout) {
-          var handle;
-          handle = setTimeout(function() {
-            try {
-              return func();
-            } catch (_error) {
-              e = _error;
-              return console.log("[server] " + document.filename + ":\n  " + (e.toString()));
-            }
-          }, timeout);
-          timeouts.push(handle);
-          return handle;
-        },
-        console: console
-      });
+      // Run a script.
+      script.runInContext(sandbox);
     } catch (_error) {
       e = _error;
       console.log("[server] " + document.filename);
