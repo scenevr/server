@@ -23,4 +23,5 @@
   <skybox src="/blah/blah" />
   <audio src="/sounds/drone-sweet.mp3" ambient="true" />
   <fog style="color: #fff" near="100" far="1000" />
+  <plane style="texture-map: url(/images/grid.png); texture-repeat: 100 100;" scale="100 100 0", position="0 0 0" rotation="0 1.57 0" />
 </scene>

@@ -2,6 +2,7 @@ Scene = require('../elements/scene')
 
 Script = require('../elements/script')
 Box = require('../elements/box')
+Plane = require('../elements/plane')
 Spawn = require('../elements/spawn')
 Model = require('../elements/model')
 Link = require('../elements/link')
@@ -96,4 +97,10 @@ describe 'all_tags', ->
       expect(scene.getElementsByTagName("fog")[0].style.color).toMatch '#fff'
       expect(scene.getElementsByTagName("fog")[0].near).toMatch '100'
       expect(scene.getElementsByTagName("fog")[0] instanceof Fog).toBeTruthy()
+
+  it 'should parse plane', ->
+    Scene.load process.cwd() + '/spec/fixtures/all_tags.xml', (scene) ->
+      expect(scene.getElementsByTagName("plane").length).toEqual 1
+      expect(scene.getElementsByTagName("plane")[0].style.textureMap).toMatch 'url'
+      expect(scene.getElementsByTagName("plane")[0] instanceof Plane).toBeTruthy()
 
