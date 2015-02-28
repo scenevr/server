@@ -2,19 +2,26 @@
 title: Home
 primary_navigation: false
 position: 1
+pageable: false
+per_page: 10
 ---
 
 # SceneVR
 
 ### Try now: [client.scenevr.com](http://client.scenevr.com)
 
-Server: [github.com/bnolan/scenevr](http://github.com/bnolan/scenevr)
-
-Web client: [github.com/bnolan/scenevr-web](http://github.com/bnolan/scenevr-web)
-
 ## Our Goal
 
 A platform for creating virtual reality scenes using tools web developers are experienced with.
+
+## News
+
+<% page_articles.each_with_index do |article, i| %>
+  <div class="news-summary">
+    <h3><%= link_to article.title, article %> <small><%= article.date.strftime('%b %e') %></small></h3>
+    <%= article.summary(250) %>
+  </div>
+<% end %>
 
 ## An introduction
 
@@ -71,6 +78,10 @@ $ npm install -g scenevr
 With SceneVR you can build multiuser 3d scenes using html-like tags and javascript. SceneVR scenes are viewed using a browser-powered viewer (powered by webGL). Chrome, firefox and IE are supported. The server is powered by node.js and runs on Windows, Mac OS and Linux.
 
 BSD Licensed.
+
+Server: [github.com/bnolan/scenevr](http://github.com/bnolan/scenevr)
+
+Web client: [github.com/bnolan/scenevr-web](http://github.com/bnolan/scenevr-web)
 
 # Feature comparison
 

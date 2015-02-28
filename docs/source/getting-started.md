@@ -1,7 +1,7 @@
 ---
 title: Getting Started
 primary_navigation: false
-position: 2
+position: 3
 ---
 
 # Home
