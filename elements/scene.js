@@ -117,7 +117,7 @@ Scene.prototype.start = function(reflector){
     try {
       script = vm.createScript(code, document.filename);
     } catch (e) {
-      console.log("[server] " + document.filename + ":\n  " + (e.toString()));
+      console.log("[server] Syntax error in " + document.filename + ":\n  " + (e.toString()));
       return;
     }
 
@@ -126,8 +126,8 @@ Scene.prototype.start = function(reflector){
       script.runInContext(sandbox);
     } catch (_error) {
       e = _error;
-      console.log("[server] " + document.filename);
-      console.log("  " + e.stack.split("\n").slice(0, 2).join("\n  "));
+      console.log("[server] Runtime error in " + document.filename);
+      console.log(e.toString());
     }
   });
 
