@@ -7,19 +7,22 @@
     "type": "git",
     "url": "git://github.com/bnolan/scenevr.git"
   },
-  "engines" : { "node" : ">=0.12.0" },
+  "engines": {
+    "node": ">=0.12.0"
+  },
   "dependencies": {
-    "ws": "~0.6.3",
-    "three": "0.66.2",
-    "uuid": "~2.0.1",
-    "underscore": "~1.7.0",
-    "htmlparser2": "~3.8.2",
-    "express": "~4.10.2",
-    "cors": "~2.5.2",
     "coffee-script": "~1.8.0",
+    "cors": "~2.5.2",
+    "express": "~4.10.2",
     "glob": "~4.2.1",
-    "xmlbuilder": "~2.4.5",
-    "xhr2":"*"
+    "htmlparser2": "~3.8.2",
+    "json-web-token": "^1.4.3",
+    "three": "0.66.2",
+    "underscore": "~1.7.0",
+    "uuid": "~2.0.1",
+    "ws": "~0.6.3",
+    "xhr2": "*",
+    "xmlbuilder": "~2.4.5"
   },
   "devDependencies": {
     "jasmine-node": "1.14.3"
