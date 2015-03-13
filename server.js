@@ -16,9 +16,12 @@ express = require('express');
 http = require("http");
 cors = require('cors');
 
-var Env = require('./lib/env');
+var Blink = require("./lib/blink"),
+  Env = require('./lib/env');
 
 function Server(folder, port) {
+  var self = this;
+
   this.folder = folder;
   this.port = port;
   this.restartServer = __bind(this.restartServer, this);
@@ -35,6 +38,11 @@ function Server(folder, port) {
 
   this.websocketServer = new WebsocketServer(httpServer);
   this.websocketServer.listen();
+
+  this.blinkServer = new Blink(this.websocketServer.reflectors);
+  setTimeout(function(){
+    self.blinkServer.listen();
+  }, 2000);
 
   if(Env.supportsAutoReload()){
     this.restart = _.throttle(this.restartServer, 1000, {trailing: false});
