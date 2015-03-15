@@ -12,4 +12,6 @@ function Script() {
   Script.__super__.constructor.call(this, "script");
 }
 
+Script.prototype.reflect = false;
+
 module.exports = Script;
