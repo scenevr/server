@@ -171,6 +171,4 @@ Scene.load = function(filename, callback) {
   callback(document.scene);
 };
 
-Scene.prototype.reflect = false;
-
 module.exports = Scene;
