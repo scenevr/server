@@ -1,20 +1,13 @@
-var Element, Spawn,
-  __hasProp = {}.hasOwnProperty,
-  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+var util = require('util');
+var Element = require("../lib/element");
+var Spawn;
 
-Element = require("../lib/element");
+function Spawn() {
+  Element.call(this, 'spawn');
+}
 
-Spawn = (function(_super) {
-  __extends(Spawn, _super);
+util.inherits(Skybox, Element);
 
-  function Spawn() {
-    Spawn.__super__.constructor.call(this, "spawn");
-  }
-
-  Spawn.prototype.reflect = true;
-
-  return Spawn;
-
-})(Element);
+Spawn.prototype.reflect = true;
 
 module.exports = Spawn;

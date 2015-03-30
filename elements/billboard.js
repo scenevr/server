@@ -1,20 +1,13 @@
-var Billboard, Element,
-  __hasProp = {}.hasOwnProperty,
-  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+var util = require('util');
+var Element = require("../lib/element");
+var Billboard;
 
-Element = require("../lib/element");
+function Billboard() {
+  Element.call(this, 'billboard');
+}
 
-Billboard = (function(_super) {
-  __extends(Billboard, _super);
+util.inherits(Billboard, Element);
 
-  function Billboard() {
-    Billboard.__super__.constructor.call(this, "billboard");
-  }
-
-  Billboard.prototype.reflect = true;
-
-  return Billboard;
-
-})(Element);
+Billboard.prototype.reflect = true;
 
 module.exports = Billboard;

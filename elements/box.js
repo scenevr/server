@@ -1,20 +1,13 @@
-var Box, Element,
-  __hasProp = {}.hasOwnProperty,
-  __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor(); child.__super__ = parent.prototype; return child; };
+var util = require('util');
+var Element = require('../lib/element');
+var Box;
 
-Element = require("../lib/element");
+function Box() {
+  Element.call(this, 'box');
+}
 
-Box = (function(_super) {
-  __extends(Box, _super);
+util.inherits(Box, Element);
 
-  function Box() {
-    Box.__super__.constructor.call(this, "box");
-  }
-
-  Box.prototype.reflect = true;
-
-  return Box;
-
-})(Element);
+Box.prototype.reflect = true;
 
 module.exports = Box;
