@@ -26,10 +26,11 @@
     "xmlbuilder": "~2.4.5"
   },
   "devDependencies": {
-    "jasmine-node": "1.14.3"
+    "semistandard": "^4.0.1",
+    "tape": "^3.5.0"
   },
   "bin": "./server.js",
   "scripts": {
-    "test": "jasmine-node --verbose --captureExceptions --coffee spec/"
+    "test": "semistandard *.js elements/*.js lib/*.js test/*.js && tap test/*.js"
   }
 }
