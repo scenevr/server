@@ -28,7 +28,7 @@ function Server(folder, port) {
 
   this.webServer = express();
   this.webServer.use(cors());
-  this.webServer.use(express["static"](this.folder));
+  this.webServer.use(express.static(this.folder));
 
   var httpServer = http.createServer(this.webServer);
   httpServer.listen(port);
@@ -45,7 +45,7 @@ function Server(folder, port) {
   if(Env.isDevelopment()){
     require('dns').lookup(require('os').hostname(), function (err, add, fam) { 
       console.log('\nOpen the following url to view your scenes:\n\thttp://client.scenevr.com/?connect=' + add + ':' + port + '/index.xml\n'); 
-    })
+    });
   }
 }
 
@@ -54,7 +54,7 @@ Server.prototype.loadAllScenes = function() {
 
   glob(this.folder + "/*.xml", {}, function(er, files){
 
-    if(files.length == 0){
+    if(files.length === 0){
       console.log("[server] Error. No scene files found in " + _this.folder);
       if(Env.isDevelopment()){
         process.exit(-1);
