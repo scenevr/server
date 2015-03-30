@@ -1,7 +1,8 @@
 var fs = require('fs');
 var _ = require('underscore');
 var vm = require('vm');
-var Element = require('../lib/node');
+var Element = require('../lib/element');
+var Node = require('../lib/node');
 var Document = require('../lib/document');
 var Vector = require('../lib/vector');
 var Euler = require('../lib/euler');
@@ -9,6 +10,13 @@ var path = require('path');
 var XMLHttpRequest = require('xhr2');
 var dom = require('../lib/dom-lite');
 var Scene = dom.HTMLElement;
+var util = require('util');
+
+function Scene () {
+  Node.call(this, 'scene');
+}
+
+util.inherits(Scene, Node);
 
 // fixme - these are added to all instances of htmlelement, not just the Scene
 

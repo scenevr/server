@@ -1,3 +1,5 @@
+// fixme - make a wrapper for htmlelement, because this reads weird...
+
 var util = require('util');
 var HTMLElement = require('../lib/dom-lite').HTMLElement;
 var Script;

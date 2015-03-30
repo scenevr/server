@@ -26,11 +26,12 @@
     "xmlbuilder": "~2.4.5"
   },
   "devDependencies": {
+    "almost-equal": "0.0.0",
     "semistandard": "^4.0.1",
     "tape": "^3.5.0"
   },
   "bin": "./server.js",
   "scripts": {
-    "test": "semistandard *.js elements/*.js lib/*.js test/*.js && tap test/*.js"
+    "test": "semistandard *.js elements/*.js lib/*.js test/*.js && tape test/*.js"
   }
 }
