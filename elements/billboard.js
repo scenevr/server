@@ -1,8 +1,8 @@
 var util = require('util');
-var Element = require("../lib/element");
+var Element = require('../lib/element');
 var Billboard;
 
-function Billboard() {
+function Billboard () {
   Element.call(this, 'billboard');
 }
 

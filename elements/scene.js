@@ -1,53 +1,43 @@
-var Document, Element, Euler, Scene, Vector, dom, fs, vm, _;
-
-fs = require('fs');
-_ = require("underscore");
-vm = require('vm');
-dom = require("../lib/dom-lite");
-Element = require("../lib/node");
-Document = require("../lib/document");
-Vector = require("../lib/vector");
-Euler = require("../lib/euler");
-
+var fs = require('fs');
+var _ = require('underscore');
+var vm = require('vm');
+var Element = require('../lib/node');
+var Document = require('../lib/document');
+var Vector = require('../lib/vector');
+var Euler = require('../lib/euler');
 var path = require('path');
-
-// jjg - xhr support
-XMLHttpRequest = require('xhr2');
-
-Scene = dom.HTMLElement;
+var XMLHttpRequest = require('xhr2');
+var dom = require('../lib/dom-lite');
+var Scene = dom.HTMLElement;
 
 // fixme - these are added to all instances of htmlelement, not just the Scene
 
 _.extend(Scene.prototype, {
-  stop: function() {
+  stop: function () {
     this.clearTimeouts();
-    return this.childNodes = [];
+    this.childNodes = [];
   },
-  clearTimeouts: function() {
+  clearTimeouts: function () {
     return null;
   }
 });
 
 Scene.prototype.ticksPerSecond = 5;
 
-Scene.prototype.start = function(reflector){
+Scene.prototype.start = function (reflector) {
   var document = this.ownerDocument;
-
   var timeouts = [];
   var intervals = [];
 
-  this.clearTimeouts = function() {
-    var interval, timeout, _j, _k, _len1, _len2;
-    for (_j = 0, _len1 = timeouts.length; _j < _len1; _j++) {
-      timeout = timeouts[_j];
-      clearTimeout(timeout);
-    }
-    for (_k = 0, _len2 = intervals.length; _k < _len2; _k++) {
-      interval = intervals[_k];
-      clearInterval(interval);
-    }
+  this.clearTimeouts = function () {
+    timeouts.forEach(function (t) {
+      clearTimeout(t);
+    });
+    intervals.forEach(function (i) {
+      clearInterval(i);
+    });
     timeouts = [];
-    return intervals = [];
+    intervals = [];
   };
 
   // Wrap setInterval and setTimeout so that errors in callbacks don't
@@ -59,14 +49,12 @@ Scene.prototype.start = function(reflector){
       Vector: Vector,
       Euler: Euler,
       XMLHttpRequest: XMLHttpRequest,
-      setInterval: function(func, timeout) {
-        var handle;
-        handle = setInterval(function() {
+      setInterval: function (func, timeout) {
+        var handle = setInterval(function () {
           try {
             func();
-          } catch (_error) {
-            e = _error;
-            console.log("[server] " + document.filename + ":\n  " + (e.toString()));
+          } catch (e) {
+            console.log('[server] ' + document.filename + ':\n  ' + (e.toString()));
             clearInterval(handle);
           }
         }, timeout);
@@ -74,23 +62,21 @@ Scene.prototype.start = function(reflector){
         return handle;
       },
 
-      setTimeout: function(func, timeout) {
-        var handle;
-        handle = setTimeout(function() {
+      setTimeout: function (func, timeout) {
+        var handle = setTimeout(function () {
           try {
             func();
-          } catch (_error) {
-            e = _error;
-            console.log("[server] " + document.filename + ":\n  " + (e.toString()));
+          } catch (e) {
+            console.log('[server] ' + document.filename + ':\n  ' + (e.toString()));
           }
         }, timeout);
         timeouts.push(handle);
         return handle;
       },
       console: {
-        log : function(){
-          var message = Array.prototype.slice.call(arguments).join(" ");
-          console.log("[log] " + message);
+        log: function () {
+          var message = Array.prototype.slice.call(arguments).join(' ');
+          console.log('[log] ' + message);
           reflector.chatChannel.sendMessage(self, message);
         }
       }
@@ -99,52 +85,50 @@ Scene.prototype.start = function(reflector){
   // One sandbox for all script contexts
   sandbox = vm.createContext(sandbox);
 
-  document.getElementsByTagName("script").map(function(scriptElement){
+  document.getElementsByTagName('script').map(function (scriptElement) {
     var script = null,
       code = null,
-      cdata = _.detect(scriptElement.childNodes, function(node){
-        return node.nodeName == '#cdata';
+      cdata = _.detect(scriptElement.childNodes, function (node) {
+        return node.nodeName === '#cdata';
       });
 
-    if(scriptElement.src){
+    if (scriptElement.src) {
       code = fs.readFileSync(path.resolve(path.dirname(document.filename), scriptElement.src));
-    }else if (cdata){
+    } else if (cdata) {
       code = cdata.data;
-    }else{
+    } else {
       code = scriptElement.textContent;
     }
 
     try {
       script = vm.createScript(code, document.filename);
     } catch (e) {
-      console.log("[server] Syntax error in " + document.filename + ":\n  " + (e.toString()));
+      console.log('[server] Syntax error in ' + document.filename + ':\n  ' + (e.toString()));
       return;
     }
 
     try {
       // Run a script.
       script.runInContext(sandbox);
-    } catch (_error) {
-      e = _error;
-      console.log("[server] Runtime error in " + document.filename);
+    } catch (e) {
+      console.log('[server] Runtime error in ' + document.filename);
       console.log(e.toString());
     }
   });
 
-  try{
-    document.dispatchEvent("ready");
-  }catch(e){
-    console.log("[server] " + document.filename);
-    console.log("  " + e.stack.split("\n").slice(0, 2).join("\n  "));
+  try {
+    document.dispatchEvent('ready');
+  } catch(e) {
+    console.log('[server] ' + document.filename);
+    console.log('  ' + e.stack.split('\n').slice(0, 2).join('\n  '));
   }
-}
+};
 
-Scene.load = function(filename, callback) {
-  var document, e, intervals, node, parsedScene, script, scriptElement, timeouts, _i, _j, _len, _len1, _ref, _ref1;
+Scene.load = function (filename, callback) {
+  var document = Document.createDocument();
 
-  document = Document.createDocument();
-  
-  parsedScene = new Element("null");
+  // fixme: gross
+  var parsedScene = new Element('null');
   parsedScene.ownerDocument = document;
 
   if (filename.match(/</)) {
@@ -153,13 +137,11 @@ Scene.load = function(filename, callback) {
     parsedScene.innerXML = fs.readFileSync(filename).toString();
   }
 
-  _ref = parsedScene.childNodes;
-  for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-    node = _ref[_i];
+  parsedScene.childNodes.forEach(function (node) {
     if (node.nodeName === 'scene') {
       document.scene = node;
     }
-  }
+  });
 
   if (!document.scene) {
     console.log("[server] Couldn't find a <scene /> element in " + filename);

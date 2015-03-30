@@ -6,7 +6,7 @@ var Audio;
 // audio track is at, so that we can sync up clients, and people can make
 // audio-synced visualizations.
 
-function Audio() {
+function Audio () {
   Element.call(this, 'audio');
 }
 

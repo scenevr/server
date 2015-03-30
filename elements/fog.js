@@ -2,7 +2,7 @@ var util = require('util');
 var Element = require('../lib/element');
 var Fog;
 
-function Fog() {
+function Fog () {
   Element.call(this, 'fog');
 }
 

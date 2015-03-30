@@ -2,7 +2,7 @@ var util = require('util');
 var Element = require('../lib/element');
 var Model;
 
-function Model() {
+function Model () {
   Element.call(this, 'model');
 }
 

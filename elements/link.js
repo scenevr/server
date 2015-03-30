@@ -2,7 +2,7 @@ var util = require('util');
 var Element = require('../lib/element');
 var Link;
 
-function Link() {
+function Link () {
   Element.call(this, 'link');
 }
 

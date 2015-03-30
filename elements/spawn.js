@@ -1,12 +1,12 @@
 var util = require('util');
-var Element = require("../lib/element");
+var Element = require('../lib/element');
 var Spawn;
 
-function Spawn() {
+function Spawn () {
   Element.call(this, 'spawn');
 }
 
-util.inherits(Skybox, Element);
+util.inherits(Spawn, Element);
 
 Spawn.prototype.reflect = true;
 

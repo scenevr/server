@@ -2,7 +2,7 @@ var util = require('util');
 var Element = require('../lib/element');
 var Box;
 
-function Box() {
+function Box () {
   Element.call(this, 'box');
 }
 
