@@ -12,7 +12,7 @@ var Audio = require('../elements/audio');
 
 test('should create', function (t) {
   var s;
-  s = new Scene('scene');
+  s = new Scene();
   t.ok(s instanceof Scene);
   t.equal(s.nodeName, 'scene');
   t.end();
@@ -49,6 +49,7 @@ test('all_tags', function (t) {
   t.test('should load', function (t) {
     Scene.load(process.cwd() + '/test/fixtures/all_tags.xml', function (scene) {
       t.ok(scene.childNodes.length > 3);
+      t.ok(scene instanceof Scene);
       t.end();
     });
   });

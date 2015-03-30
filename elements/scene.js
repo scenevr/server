@@ -3,14 +3,12 @@ var _ = require('underscore');
 var vm = require('vm');
 var Element = require('../lib/element');
 var Node = require('../lib/node');
-var Document = require('../lib/document');
 var Vector = require('../lib/vector');
 var Euler = require('../lib/euler');
 var path = require('path');
 var XMLHttpRequest = require('xhr2');
-var dom = require('../lib/dom-lite');
-var Scene = dom.HTMLElement;
 var util = require('util');
+var Scene;
 
 function Scene () {
   Node.call(this, 'scene');
@@ -18,17 +16,18 @@ function Scene () {
 
 util.inherits(Scene, Node);
 
-// fixme - these are added to all instances of htmlelement, not just the Scene
+module.exports = Scene;
 
-_.extend(Scene.prototype, {
-  stop: function () {
-    this.clearTimeouts();
-    this.childNodes = [];
-  },
-  clearTimeouts: function () {
-    return null;
-  }
-});
+var Document = require('../lib/document');
+
+Scene.prototype.stop = function () {
+  this.clearTimeouts();
+  this.childNodes = [];
+};
+
+Scene.prototype.clearTimeouts = function () {
+  return null;
+};
 
 Scene.prototype.ticksPerSecond = 5;
 
@@ -146,7 +145,7 @@ Scene.load = function (filename, callback) {
   }
 
   parsedScene.childNodes.forEach(function (node) {
-    if (node.nodeName === 'scene') {
+    if (node instanceof Scene) {
       document.scene = node;
     }
   });
@@ -160,5 +159,3 @@ Scene.load = function (filename, callback) {
 
   callback(document.scene);
 };
-
-module.exports = Scene;
