@@ -26,11 +26,14 @@
   },
   "devDependencies": {
     "almost-equal": "0.0.0",
-    "semistandard": "^4.0.1",
+    "semistandard": "^4.0.2",
     "tape": "^3.5.0"
   },
   "bin": "./server.js",
   "scripts": {
-    "test": "semistandard *.js elements/*.js lib/*.js test/*.js && tape test/*.js"
+    "test": "semistandard && tape test/*.js"
+  },
+  "semistandard": {
+    "ignore": "forks/**"
   }
 }
