@@ -12,9 +12,10 @@
   },
   "dependencies": {
     "cors": "~2.5.2",
+    "exposefs": "0.0.2",
     "express": "~4.10.2",
     "glob": "~4.2.1",
-    "htmlparser2": "~3.8.2",
+    "htmlparser2": "^3.8.2",
     "json-web-token": "^1.4.3",
     "opentok": "^2.2.5",
     "three": "0.66.2",
@@ -26,7 +27,7 @@
   },
   "devDependencies": {
     "almost-equal": "0.0.0",
-    "semistandard": "^4.0.2",
+    "semistandard": "^4.0.3",
     "tape": "^3.5.0"
   },
   "bin": "./server.js",

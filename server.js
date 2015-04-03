@@ -11,10 +11,11 @@ var glob = require('glob');
 var express = require('express');
 var http = require('http');
 var cors = require('cors');
+var exposefs = require('exposefs');
 var Env = require('./lib/env');
 
 function Server (folder, port) {
-  this.folder = folder;
+  this.folder = path.join(process.cwd(), folder);
   this.port = port;
 }
 
@@ -26,6 +27,7 @@ Server.prototype.start = function () {
   this.webServer = express();
   this.webServer.use(cors());
   this.webServer.use(express.static(this.folder));
+  this.webServer.use('/fs', exposefs({basepath: this.folder}));
 
   var httpServer = http.createServer(this.webServer);
   httpServer.listen(this.port);
