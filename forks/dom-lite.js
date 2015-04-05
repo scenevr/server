@@ -256,7 +256,7 @@ function HTMLElement(tag) {
         var attrs = []
         , self = this
         for(key in self){
-          if(self.hasAttribute(key)){
+          if( (self.hasAttribute(key)) && (typeof self[key] !== 'function')){
             attrs.push(key.replace(/^_/,''));
           }
         }
