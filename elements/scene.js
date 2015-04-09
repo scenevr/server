@@ -1,6 +1,7 @@
 var fs = require('fs');
 var _ = require('underscore');
 var vm = require('vm');
+var Env = require('env');
 var Element = require('../lib/element');
 var Node = require('../lib/node');
 var Vector = require('../lib/vector');
@@ -29,7 +30,7 @@ Scene.prototype.clearTimeouts = function () {
   return null;
 };
 
-Scene.prototype.ticksPerSecond = 5;
+Scene.prototype.ticksPerSecond = Env.getTickHertz();
 
 Scene.prototype.start = function (reflector) {
   var document = this.ownerDocument;
