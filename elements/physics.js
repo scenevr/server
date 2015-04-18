@@ -4,6 +4,7 @@
  */
 
 var CANNON = require('cannon');
+var MutationObserver = require('../lib/mutation_observer');
 var Euler = require('../forks/euler');
 var Vector = require('../forks/vector');
 
@@ -23,16 +24,23 @@ function Physics (scene) {
   this.interval = null;
   this.world = null;
 
-  var $p = this;
-  var $s = scene;
+  this.addMutationObserver();
+}
 
-  // Monkey patch the scene to listen to changes
-  var __scene_appendChild = this.scene.appendChild;
-  this.scene.appendChild = function (el) {
-    var response = __scene_appendChild.apply($s, [el]);
-    $p.onAppendChild(el);
-    return response;
-  };
+Physics.prototype.addMutationObserver = function () {
+  var self = this;
+
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'childList') {
+        mutation.addedNodes.forEach(function (node) {
+          self.onAppendChild(node);
+        });
+      } 
+    });    
+  });
+
+  observer.observe(this.scene);
 }
 
 Physics.prototype.start = function () {
