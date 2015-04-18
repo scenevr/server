@@ -27,6 +27,14 @@ Scene.prototype.stop = function () {
   this.childNodes = [];
 };
 
+Scene.prototype.insertBefore = function (el, ref) {
+  Node.prototype.insertBefore.apply(this, [el, ref]);
+
+  if (this.ownerDocument.mutationObserver) {
+    this.ownerDocument.mutationObserver.addInsertEvent(el);
+  }
+};
+
 Scene.prototype.clearTimeouts = function () {
   return null;
 };
