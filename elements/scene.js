@@ -10,6 +10,7 @@ var path = require('path');
 var XMLHttpRequest = require('xhr2');
 var util = require('util');
 var Scene;
+var Physics = require('./physics');
 
 function Scene () {
   Node.call(this, 'scene');
@@ -130,6 +131,11 @@ Scene.prototype.start = function (reflector) {
     console.log('[server] ' + document.filename);
     console.log('  ' + e.stack.split('\n').slice(0, 2).join('\n  '));
   }
+
+  // Get physical!
+  var p = new Physics(this);
+  p.start();
+
 };
 
 Scene.load = function (filename, callback) {
