@@ -10,7 +10,7 @@ test('should create', function (t) {
 });
 
 test('should send message', function (t) {
-  t.plan(1);
+  t.plan(2);
 
   var c = new ChatChannel({
     scene: new Scene('scene')
@@ -18,8 +18,9 @@ test('should send message', function (t) {
 
   var xml = c.sendMessage({
     broadcast: function () {},
-    player: { name: 'ben' }
+    player: { name: 'ben', uuid: '1234...' }
   }, 'hello world');
 
   t.ok(/^<event.+chat/.test(xml));
+  t.ok(/uuid=.1234/.test(xml));
 });
