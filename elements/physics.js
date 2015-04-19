@@ -62,23 +62,32 @@ Physics.prototype.start = function () {
   // Start the world loop
   var lastTime = null;
   var world = this.world;
-  this.interval = setInterval(function () {
-    var time = new Date().valueOf();
 
-    var fixedTimeStep = 1.0 / 60.0; // seconds
-    var maxSubSteps = 3;
+  var frameRate = 50.0; // fps
+  var fixedTimeStep = 1.0 / frameRate; // seconds
+  var maxSubSteps = 3;
+
+  function loop() {
+    var time = new Date().valueOf();
 
     if (lastTime !== null) {
       var dt = (time - lastTime) / 1000;
-      world.step(fixedTimeStep);
+      lastTime = time;
 
+      world.step(fixedTimeStep, dt, maxSubSteps);
       world.bodies.forEach(function (body) {
         if (body.updateScene) body.updateScene();
       });
-    }
 
-    lastTime = time;
-  }, 16);
+      // This measures actual framerate; was 5-10 on Sam's rMBP, which is concerning
+      // console.log(dt*1000);
+
+    } else {
+      lastTime = time;
+    }
+  }
+
+  this.interval = setInterval(loop, fixedTimeStep*1000);
 };
 
 /**
@@ -113,19 +122,25 @@ Physics.prototype.buildNode = function (el) {
     // To do: replace this with a DOM Mutation Observer
     el.setX = function(x) {
       el.position.x = body.position.x = x;
-    }
+    };
     el.setY = function(y) {
       el.position.y = body.position.y = y;
-    }
+    };
     el.setZ = function(z) {
       el.position.z = body.position.z = z;
-    }
+    };
 
     body.updateScene = function () {
-      var r = new Euler();
-      r.setFromQuaternion(body.quaternion);
-      el.rotation = r;
-      el.position = vrVec(body.position);
+      if(body.sleepState !== CANNON.Body.SLEEPING) {
+        var r = new Euler();
+        r.setFromQuaternion(body.quaternion);
+        // LOLHACKS
+        r.distanceToSquared = Vector.prototype.distanceToSquared;
+        var v = vrVec(body.position);
+
+        if(v.distanceToSquared(el.position) > 0.01) el.position = v;
+        if(r.distanceToSquared(el.rotation) > 0.01) el.rotation = r;
+      }
     };
 
     break;
