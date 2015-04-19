@@ -24,3 +24,18 @@ test('should send message', function (t) {
   t.ok(/^<event.+chat/.test(xml));
   t.ok(/uuid=.1234/.test(xml));
 });
+
+test('should send message from scene', function (t) {
+  t.plan(2);
+
+  var s = new Scene('scene');
+  var c = new ChatChannel({
+    scene: s,
+    emit: function () {}
+  });
+
+  var xml = c.sendMessage(s, 'debug log');
+
+  t.ok(/^<event.+chat/.test(xml));
+  t.ok(!(/uuid=.1234/.test(xml)));
+});
