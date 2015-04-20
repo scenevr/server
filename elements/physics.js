@@ -30,18 +30,18 @@ function Physics (scene) {
 Physics.prototype.addMutationObserver = function () {
   var self = this;
 
-  var observer = new MutationObserver(function(mutations) {
-    mutations.forEach(function(mutation) {
+  var observer = new MutationObserver(function (mutations) {
+    mutations.forEach(function (mutation) {
       if (mutation.type === 'childList') {
         mutation.addedNodes.forEach(function (node) {
           self.onAppendChild(node);
         });
-      } 
-    });    
+      }
+    });
   });
 
   observer.observe(this.scene);
-}
+};
 
 Physics.prototype.start = function () {
   var $p = this;
@@ -75,7 +75,7 @@ Physics.prototype.start = function () {
   var fixedTimeStep = 1.0 / frameRate; // seconds
   var maxSubSteps = 3;
 
-  function loop() {
+  function loop () {
     var time = new Date().valueOf();
 
     if (lastTime !== null) {
@@ -89,13 +89,12 @@ Physics.prototype.start = function () {
 
       // This measures actual framerate; was 5-10 on Sam's rMBP, which is concerning
       // console.log(dt*1000);
-
     } else {
       lastTime = time;
     }
   }
 
-  this.interval = setInterval(loop, fixedTimeStep*1000);
+  this.interval = setInterval(loop, fixedTimeStep * 1000);
 };
 
 /**
@@ -128,26 +127,26 @@ Physics.prototype.buildNode = function (el) {
     this.world.addBody(body);
 
     // To do: replace this with a DOM Mutation Observer
-    el.setX = function(x) {
+    el.setX = function (x) {
       el.position.x = body.position.x = x;
     };
-    el.setY = function(y) {
+    el.setY = function (y) {
       el.position.y = body.position.y = y;
     };
-    el.setZ = function(z) {
+    el.setZ = function (z) {
       el.position.z = body.position.z = z;
     };
 
     body.updateScene = function () {
-      if(body.sleepState !== CANNON.Body.SLEEPING) {
+      if (body.sleepState !== CANNON.Body.SLEEPING) {
         var r = new Euler();
         r.setFromQuaternion(body.quaternion);
         // LOLHACKS
         r.distanceToSquared = Vector.prototype.distanceToSquared;
         var v = vrVec(body.position);
 
-        if(v.distanceToSquared(el.position) > 0.01) el.position = v;
-        if(r.distanceToSquared(el.rotation) > 0.01) el.rotation = r;
+        if (v.distanceToSquared(el.position) > 0.01) el.position = v;
+        if (r.distanceToSquared(el.rotation) > 0.01) el.rotation = r;
       }
     };
 

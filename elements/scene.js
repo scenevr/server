@@ -143,7 +143,6 @@ Scene.prototype.start = function (reflector) {
   // Get physical!
   var p = new Physics(this);
   p.start();
-
 };
 
 Scene.load = function (filename, callback) {
