@@ -40,10 +40,27 @@ Scene.prototype.clearTimeouts = function () {
 
 Scene.prototype.ticksPerSecond = Env.getTickHertz();
 
+Scene.prototype.save = function () {
+  var xml = this.childNodes.filter(function (node) {
+    return (node.nodeType !== 1) || node.getPrivateAttribute('source');
+  }).map( function (node) {
+    if (node.nodeType === 1) {
+      // haha. i tried to clone node and removeattribute but didn't work.
+      return node.toString().replace(/uuid=".+?" */, '')
+    } else {
+      return node.toString();
+    }
+  }).join('');
+
+  console.log(xml);
+};
+
 Scene.prototype.start = function (reflector) {
   var document = this.ownerDocument;
   var timeouts = [];
   var intervals = [];
+
+  setInterval(this.save.bind(this), 1000);
 
   this.clearTimeouts = function () {
     timeouts.forEach(function (t) {
@@ -158,6 +175,12 @@ Scene.load = function (filename, callback) {
       document.scene = node;
     }
   });
+
+  document.scene.childNodes.forEach(function (node) {
+    if (node.nodeType === 1) {
+      node.setPrivateAttribute('source', true);
+    }
+  })
 
   if (!document.scene) {
     console.log("[server] Couldn't find a <scene /> element in " + filename);

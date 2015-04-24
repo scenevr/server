@@ -1,13 +1,13 @@
 // fixme - make a wrapper for htmlelement, because this reads weird...
 
 var util = require('util');
-var HTMLElement = require('../lib/dom-lite').HTMLElement;
+var Node = require('../lib/node');
 var Script;
 
 function Script () {
-  HTMLElement.call(this, 'script');
+  Node.call(this, 'script');
 }
 
-util.inherits(Script, HTMLElement);
+util.inherits(Script, Node);
 
 module.exports = Script;
