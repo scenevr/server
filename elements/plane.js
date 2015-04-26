@@ -1,12 +1,12 @@
 var util = require('util');
-var Element = require('../lib/element');
+var SpatialElement = require('./spatialElement');
 var Plane;
 
 function Plane () {
-  Element.call(this, 'plane');
+  SpatialElement.call(this, 'plane');
 }
 
-util.inherits(Plane, Element);
+util.inherits(Plane, SpatialElement);
 
 Plane.prototype.reflect = true;
 
