@@ -28,13 +28,7 @@ Server.prototype.start = function () {
   this.webServer.use(express.static(this.folder));
 
   this.webServer.get('/', function (req, res) {
-    var url = req.hostname;
-
-    if (self.port !== 80) {
-      url += ':' + self.port;
-    }
-
-    res.redirect('http://client.scenevr.com/?connect=' + url);
+    res.redirect('http://client.scenevr.com/?connect=' + req.get('host'));
   });
 
   var httpServer = http.createServer(this.webServer);
