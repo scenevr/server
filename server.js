@@ -15,7 +15,7 @@ var Env = require('./lib/env');
 
 function Server (folder, port) {
   this.folder = path.join(process.cwd(), folder);
-  this.port = port;
+  this.port = parseInt(port, 10);
 }
 
 Server.prototype.start = function () {
@@ -26,6 +26,16 @@ Server.prototype.start = function () {
   this.webServer = express();
   this.webServer.use(cors());
   this.webServer.use(express.static(this.folder));
+
+  this.webServer.get('/', function (req, res) {
+    var url = req.hostname;
+
+    if (self.port !== 80) {
+      url += ':' + self.port;
+    }
+
+    res.redirect('http://client.scenevr.com/?connect=' + url);
+  });
 
   var httpServer = http.createServer(this.webServer);
   httpServer.listen(this.port);
