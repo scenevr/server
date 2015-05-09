@@ -2,9 +2,9 @@
 
 var _ = require('underscore');
 var Reflector = require('./lib/reflector');
-var WebsocketServer = require('./lib/websocket_server');
+var WebsocketServer = require('./lib/websocket-server');
 var Scene = require('./elements/scene');
-var IndexScene = require('./lib/index_scene');
+var IndexScene = require('./lib/index-scene');
 var path = require('path');
 var fs = require('fs');
 var glob = require('glob');

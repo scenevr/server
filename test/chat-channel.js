@@ -1,5 +1,5 @@
 var test = require('tape');
-var ChatChannel = require('../lib/chat_channel');
+var ChatChannel = require('../lib/chat-channel');
 var Scene = require('../elements/scene');
 
 test('should create', function (t) {

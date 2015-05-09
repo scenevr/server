@@ -1,5 +1,5 @@
 var test = require('tape');
-var SpatialElement = require('../elements/spatialElement');
+var SpatialElement = require('../elements/spatial-element');
 var Document = require('../lib/document');
 var Vector = require('../lib/vector');
 var Euler = require('../lib/euler');

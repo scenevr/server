@@ -1,6 +1,6 @@
 var test = require('tape');
 var Reflector = require('../lib/reflector');
-var ChatChannel = require('../lib/chat_channel');
+var ChatChannel = require('../lib/chat-channel');
 var Document = require('../lib/document');
 
 function createObserver (name) {
