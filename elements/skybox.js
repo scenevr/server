@@ -1,5 +1,5 @@
 var util = require('util');
-var Element = require('../lib/element');
+var Element = require('./element');
 var Skybox;
 
 function Skybox () {

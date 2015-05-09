@@ -12,8 +12,6 @@ Euler = function ( x, y, z, order ) {
   this._y = y || 0;
   this._z = z || 0;
   this._order = order || Euler.DefaultOrder;
-  this._element = null;
-
 };
 
 Euler.RotationOrders = [ 'XYZ', 'YZX', 'ZXY', 'XZY', 'YXZ', 'ZYX' ];
@@ -126,9 +124,25 @@ Euler.prototype = {
 
   },
 
+  /**
+   * Add a callback to be called when the any property is changed
+   */
+  addChangeObserver: function (callback) {
+    if(typeof this._changeObserverList !== 'array') {
+      this._changeObserverList = [];
+    }
+    this._changeObserverList.push(callback);
+  },
+
+  /**
+   * Helper method called by internal methods whenever properties are changed
+   */
   onChanged: function(){
-    if(this._element){
-      this._element.markAsDirty();
+    // Change observers
+    if(this._changeObserverList) {
+      this._changeObserverList.forEach(function (callback) {
+        callback(this);
+      });
     }
   },
 
