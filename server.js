@@ -3,7 +3,7 @@
 var _ = require('underscore');
 var Reflector = require('./lib/reflector');
 var WebsocketServer = require('./lib/websocket-server');
-var Scene = require('./elements/scene');
+var Scene = require('scene-dom').Scene;
 var IndexScene = require('./lib/index-scene');
 var path = require('path');
 var fs = require('fs');
@@ -46,7 +46,7 @@ Server.prototype.start = function () {
   if (Env.isDevelopment()) {
     require('dns').lookup(require('os').hostname(), function (err, addr, fam) {
       var url = err ? 'localhost:' + self.port : addr + ':' + self.port;
-      console.log('\nOpen the following url to view your scenes:\n\thttp://client.scenevr.com/?connect=' + url + '/index.xml\n');
+      console.log('\n\thttp://' + url + '/\n');
     });
   }
 };

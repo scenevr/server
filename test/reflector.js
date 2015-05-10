@@ -1,7 +1,7 @@
 var test = require('tape');
 var Reflector = require('../lib/reflector');
 var ChatChannel = require('../lib/chat-channel');
-var Document = require('../lib/document');
+var Document = require('scene-dom').Document;
 
 function createObserver (name) {
   return {

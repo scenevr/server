@@ -1,6 +1,6 @@
 var test = require('tape');
 var ChatChannel = require('../lib/chat-channel');
-var Scene = require('../elements/scene');
+var Scene = require('scene-dom').Scene;
 
 test('should create', function (t) {
   t.plan(1);
@@ -12,8 +12,9 @@ test('should create', function (t) {
 test('should send message', function (t) {
   t.plan(2);
 
+  var s = new Scene();
   var c = new ChatChannel({
-    scene: new Scene('scene')
+    scene: s
   });
 
   var xml = c.sendMessage({
@@ -28,7 +29,7 @@ test('should send message', function (t) {
 test('should send message from scene', function (t) {
   t.plan(2);
 
-  var s = new Scene('scene');
+  var s = new Scene();
   var c = new ChatChannel({
     scene: s,
     emit: function () {}
