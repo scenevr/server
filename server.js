@@ -18,6 +18,9 @@ function Server (folder, port) {
   this.port = parseInt(port, 10);
 }
 
+/**
+ * Start the express server and the websocket server
+ */
 Server.prototype.start = function () {
   var self = this;
 
@@ -51,6 +54,9 @@ Server.prototype.start = function () {
   }
 };
 
+/**
+ * Load all the scenes to host from disk and into the websocket server
+ */
 Server.prototype.loadAllScenes = function () {
   var self = this;
 
@@ -87,7 +93,9 @@ Server.prototype.onLoaded = function (scene, filename) {
   this.websocketServer.reflectors[filename] = reflector;
   reflector.start();
 };
-
+/**
+ * Restart all documents in the server
+ */
 Server.prototype.restartServer = function () {
   var self = this;
 
