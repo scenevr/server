@@ -1,9 +1,8 @@
 #!/usr/bin/env node
 
 var _ = require('underscore');
-var Reflector = require('./lib/reflector');
 var WebsocketServer = require('./lib/websocket-server');
-var Scene = require('scene-dom').Scene;
+var SceneDOM = require('scene-dom');
 var IndexScene = require('./lib/index-scene');
 var path = require('path');
 var fs = require('fs');
@@ -18,6 +17,9 @@ function Server (folder, port) {
   this.port = parseInt(port, 10);
 }
 
+/**
+ * Start the express server and the websocket server
+ */
 Server.prototype.start = function () {
   var self = this;
 
@@ -51,6 +53,9 @@ Server.prototype.start = function () {
   }
 };
 
+/**
+ * Load all the scenes to host from disk and into the websocket server
+ */
 Server.prototype.loadAllScenes = function () {
   var self = this;
 
@@ -63,49 +68,43 @@ Server.prototype.loadAllScenes = function () {
     }
 
     var indexXml = new IndexScene(files).toXml();
+    var document = SceneDOM.createDocument().loadXML(indexXml);
 
-    Scene.load(indexXml, function (scene) {
-      self.onLoaded(scene, '/index.xml');
-    });
+    self.websocketServer.addDocument(document, '/index.xml');
 
     files.forEach(function (filename) {
-      Scene.load(filename, function (scene) {
-        self.onLoaded(scene, '/' + path.basename(filename));
+      try {
+        fs.readFile(filename, 'utf8', function (err, xml) {
+          if (err) throw new Error(err);
 
-        if (Env.supportsAutoReload()) {
-          fs.watch(filename, self.restart);
-        }
-      });
+          var document = SceneDOM.createDocument().loadXML(xml);
+          self.websocketServer.addDocument(document, '/' + path.basename(filename));
+          console.log('[server]  * Loaded \'' + filename + '\'');
+
+          if (Env.supportsAutoReload()) {
+            fs.watch(filename, self.restart);
+          }
+        });
+      } catch(e) {
+        console.log('[server] Could not load filename: ' + e);
+      }
     });
   });
 };
 
-Server.prototype.onLoaded = function (scene, filename) {
-  console.log('[server]  * Loaded \'' + filename + '\'');
-
-  var reflector = new Reflector(scene, filename);
-  this.websocketServer.reflectors[filename] = reflector;
-  reflector.start();
-};
-
+/**
+ * Restart all documents in the server
+ */
 Server.prototype.restartServer = function () {
   var self = this;
 
   console.log('[server] Restarting server on file change.');
 
-  var _ref = this.websocketServer.reflectors;
-  var filename;
-
-  for (filename in _ref) {
-    var reflector = _ref[filename];
-    reflector.emit('<event name="restart" />');
-    reflector.stop();
-    reflector.scene.stop();
-    delete reflector.scene;
-  }
+  this.websocketServer.getDocumentURLs().forEach(function (url) {
+    self.websocketServer.removeDocument(url);
+  });
 
   setTimeout(function () {
-    self.websocketServer.clearReflectors();
     self.loadAllScenes();
   }, 250);
 };
