@@ -72,12 +72,15 @@ Server.prototype.loadAllScenes = function () {
 
     self.websocketServer.addDocument(document, '/index.xml');
 
-    files.forEach(function (filename) {
+    files.forEach(function (match) {
+      var filename = path.resolve(__dirname, match);
+
       try {
         fs.readFile(filename, 'utf8', function (err, xml) {
           if (err) throw new Error(err);
 
           var document = SceneDOM.createDocument().loadXML(xml);
+          document.originalFilename = filename;
           self.websocketServer.addDocument(document, '/' + path.basename(filename));
           console.log('[server]  * Loaded \'' + filename + '\'');
 
