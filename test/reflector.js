@@ -2,6 +2,7 @@ var test = require('tape');
 var Reflector = require('../lib/reflector');
 var ChatChannel = require('../lib/chat-channel');
 var Document = require('scene-dom').Document;
+var Scene = require('scene-dom').Scene;
 
 function createObserver (name) {
   return {
@@ -15,14 +16,13 @@ function createObserver (name) {
 };
 
 var d = Document.createDocument();
-var s = d.createElement('scene');
 var o = createObserver('ben');
-var r = new Reflector(s);
+var r = new Reflector(d);
 
 test('ctor#create', function (t) {
   t.ok(r instanceof Reflector);
   t.ok(r.chatChannel instanceof ChatChannel);
-  t.equal(r.scene, s);
+  t.ok(r.scene instanceof Scene);
   t.end();
 });
 
