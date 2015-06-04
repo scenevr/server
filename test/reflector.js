@@ -13,7 +13,7 @@ function createObserver (name) {
     sendMessage: function () {},
     destroy: function () {}
   };
-};
+}
 
 var d = Document.createDocument();
 var o = createObserver('ben');
