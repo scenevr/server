@@ -1,6 +1,6 @@
 # SceneVR
 
-[![Build Status](https://travis-ci.org/scenevr/scenevr.svg?branch=master)](https://travis-ci.org/scenevr/scenevr)
+[![Build Status](https://travis-ci.org/scenevr/server.svg?branch=master)](https://travis-ci.org/scenevr/scenevr)
 [![Download count](https://img.shields.io/npm/dm/scenevr.svg?style=flat)](https://npmjs.org/package/scenevr)
 
 [![js-semistandard-style](https://cdn.rawgit.com/flet/semistandard/master/badge.svg)](https://github.com/flet/semistandard)
