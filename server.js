@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 var WebsocketServer = require('./lib/websocket-server');
-// var IndexScene = require('./lib/index-scene');
 var path = require('path');
 var express = require('express');
 var http = require('http');
@@ -27,7 +26,7 @@ Server.prototype.start = function () {
   this.webServer.use(express.static(this.folder));
 
   this.webServer.get('/', function (req, res) {
-    res.redirect('http://client.scenevr.com/?connect=' + req.get('host'));
+    res.redirect('http://www.scenevr.com/ws/' + req.get('host') + '/index.xml');
   });
 
   var httpServer = http.createServer(this.webServer);
