@@ -1,6 +1,6 @@
 {
   "name": "scenevr",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "Create multiuser 3d environments using markup and javascript",
   "homepage": "http://www.scenevr.com",
   "repository": {
