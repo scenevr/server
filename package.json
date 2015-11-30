@@ -17,7 +17,6 @@
     "glob": "~4.2.1",
     "htmlparser2": "^3.8.2",
     "json-web-token": "^1.4.3",
-    "opentok": "^2.2.5",
     "redis": "^0.12.1",
     "scene-dom": "1.2.3",
     "three": "0.66.2",
