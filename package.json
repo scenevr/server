@@ -33,6 +33,7 @@
   },
   "bin": "./server.js",
   "scripts": {
+    "preversion": "npm install --save scene-dom && git commit package.json -m 'Bump scene-dom.'",
     "test": "semistandard && tape test/*.js"
   },
   "semistandard": {
