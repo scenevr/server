@@ -19,7 +19,6 @@
     "json-web-token": "^1.4.3",
     "redis": "^0.12.1",
     "scene-dom": "^1.4.0",
-    "three": "0.66.2",
     "underscore": "~1.7.0",
     "uuid": "~2.0.1",
     "ws": "~0.6.3",
