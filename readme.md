@@ -20,4 +20,4 @@ See the installation instructions at [scenevr.com](http://www.scenevr.com).
 
 ## License
 
-BSD License.
+MIT License.
