@@ -6,7 +6,7 @@
 
 The scene server loads scene files in .html format and listens for clients on a websocket connection. Any connected client gets a streamed version of the world sent to them. You can write scripts in javascript using `<script />` tags in your scenefile to provide interactivity to connected clients. 
 
-SceneVR uses A-Frame as markup for scenes:
+SceneVR uses [A-Frame](https://aframe.io/docs/) as markup for scenes:
 
     <a-scene>
       <a-box position="1 2 3" material="color: blue"></a-box>
