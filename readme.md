@@ -14,14 +14,11 @@ SceneVR uses [A-Frame](https://aframe.io/docs/) as markup for scenes:
 
 Contact [bnolan@gmail.com](mailto:bnolan@gmail.com). Follow development at [@scenevr](http://twitter.com/scenevr/).
 
-![Screenshot](https://pbs.twimg.com/media/B2tuCOKCAAA7VQ7.png:large)
-
----
-
-## Installation
-
-See the installation instructions at [scenevr.com](http://www.scenevr.com).
-
 ## License
 
 MIT License.
+
+# Screenshot
+
+![Screenshot](https://pbs.twimg.com/media/B2tuCOKCAAA7VQ7.png:large)
+
