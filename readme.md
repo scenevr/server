@@ -18,7 +18,7 @@ Contact [bnolan@gmail.com](mailto:bnolan@gmail.com). Follow development at [@sce
 
 MIT License.
 
-# Screenshot
+## Screenshot
 
 ![Screenshot](https://pbs.twimg.com/media/B2tuCOKCAAA7VQ7.png:large)
 
