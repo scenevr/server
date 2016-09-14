@@ -1,3 +1,5 @@
+'use strict';
+
 const test = require('tape');
 const Reflector = require('../lib/reflector');
 const ChatChannel = require('../lib/chat-channel');
@@ -56,5 +58,19 @@ test('removeObserver', function (t) {
   t.ok(r.hasObserver(o));
   t.notOk(r.hasObserver(o2));
   t.notOk(r.empty);
-  t.end();
+
+  // Timeout to let the added observers be broadcast
+  setTimeout(() => {
+    t.end();
+  }, 250);
+});
+
+test('send diffs', function (t) {
+  r.broadcast = (message) => {
+    t.ok(message.match(/<a-cube/));
+    t.end();
+  };
+
+  var el = d.createElement('a-cube');
+  r.scene.appendChild(el);
 });
