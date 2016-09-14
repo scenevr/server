@@ -4,7 +4,6 @@ const test = require('tape');
 const Reflector = require('../lib/reflector');
 const ChatChannel = require('../lib/chat-channel');
 const microdom = require('micro-dom');
-
 const Document = microdom.Document;
 
 function createObserver (name) {
