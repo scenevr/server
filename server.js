@@ -1,12 +1,13 @@
 #!/usr/bin/env node
 
-var WebsocketServer = require('./lib/websocket-server');
-var path = require('path');
-var express = require('express');
-var http = require('http');
-var cors = require('cors');
-var Env = require('./lib/env');
-var fs = require('fs');
+const WebsocketServer = require('./lib/websocket-server');
+const path = require('path');
+const express = require('express');
+const browserify = require('browserify-middleware');
+const http = require('http');
+const cors = require('cors');
+const Env = require('./lib/env');
+const fs = require('fs');
 
 function Server (folder, port) {
   this.folder = path.join(process.cwd(), folder);
@@ -17,17 +18,25 @@ function Server (folder, port) {
  * Start the express server and the websocket server
  */
 Server.prototype.start = function () {
-  var self = this;
-
   console.log('[server] Serving scenes in \'' + this.folder + '\' on port ' + this.port + '...');
 
   this.webServer = express();
   this.webServer.use(cors());
-  this.webServer.use(express.static(this.folder));
 
-  this.webServer.get('/', function (req, res) {
-    res.redirect('http://www.scenevr.com/ws/' + req.get('host') + '/index.xml');
+  this.webServer.set('view engine', 'ejs');
+
+  this.webServer.use('/client.js', browserify(__dirname + '/client/index.js', {
+    transform: [
+      ['babelify', {presets: ['es2015']}]
+    ],
+    fullPaths: true
+  }));
+
+  this.webServer.get('/*.html', (req, res) => {
+    res.render('show');
   });
+
+  this.webServer.use(express.static(this.folder));
 
   var httpServer = http.createServer(this.webServer);
   httpServer.listen(this.port);
@@ -37,9 +46,9 @@ Server.prototype.start = function () {
   this.websocketServer.folder = this.folder;
 
   if (Env.supportsAutoReload()) {
-    fs.watch(this.folder, function (event, filename) {
+    fs.watch(this.folder, (event, filename) => {
       if (event === 'change') {
-        self.websocketServer.restartReflectorsByFilename(path.resolve(self.folder, filename));
+        this.websocketServer.restartReflectorsByFilename(path.resolve(this.folder, filename));
       }
     });
   }
@@ -47,8 +56,8 @@ Server.prototype.start = function () {
   // this.loadAllScenes();
 
   if (Env.isDevelopment()) {
-    require('dns').lookup(require('os').hostname(), function (err, addr, fam) {
-      var url = err ? 'localhost:' + self.port : addr + ':' + self.port;
+    require('dns').lookup(require('os').hostname(), (err, addr, fam) => {
+      var url = err ? 'localhost:' + this.port : addr + ':' + this.port;
       console.log('\n\thttp://' + url + '/\n');
     });
   }
